@@ -6,7 +6,7 @@ package tmnt.example.onedaily.util;
 
 public class Common {
 
-    public static final String DOUBAN_URL = "";
+    public static final String DOUBAN_MOVIE_URL = "https://api.douban.com/v2/";//movie/in_theaters
     public static final String GANK_URL = "http://gank.io/api/";
 
 

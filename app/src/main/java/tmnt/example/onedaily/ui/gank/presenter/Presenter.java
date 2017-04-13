@@ -1,4 +1,4 @@
-package tmnt.example.onedaily.ui.douban.presenter;
+package tmnt.example.onedaily.ui.gank.presenter;
 
 /**
  * Created by tmnt on 2017/4/12.

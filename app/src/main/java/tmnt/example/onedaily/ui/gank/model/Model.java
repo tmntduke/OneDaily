@@ -1,9 +1,4 @@
-package tmnt.example.onedaily.ui.douban.model;
-
-import java.util.Calendar;
-import java.util.List;
-
-import rx.Observable;
+package tmnt.example.onedaily.ui.gank.model;
 
 /**
  * Created by tmnt on 2017/4/12.

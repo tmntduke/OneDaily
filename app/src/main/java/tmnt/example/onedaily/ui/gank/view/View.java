@@ -1,4 +1,4 @@
-package tmnt.example.onedaily.ui.douban.view;
+package tmnt.example.onedaily.ui.gank.view;
 
 /**
  * Created by tmnt on 2017/4/12.

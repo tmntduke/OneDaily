@@ -1,8 +1,8 @@
-package tmnt.example.onedaily.ui.douban.presenter;
+package tmnt.example.onedaily.ui.gank.presenter;
 
 
-import tmnt.example.onedaily.ui.douban.model.Model;
-import tmnt.example.onedaily.ui.douban.view.View;
+import tmnt.example.onedaily.ui.gank.model.Model;
+import tmnt.example.onedaily.ui.gank.view.View;
 
 /**
  * Created by tmnt on 2017/4/12.

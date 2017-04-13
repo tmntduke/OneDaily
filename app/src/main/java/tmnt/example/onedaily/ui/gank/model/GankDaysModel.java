@@ -1,11 +1,10 @@
-package tmnt.example.onedaily.ui.douban.model;
+package tmnt.example.onedaily.ui.gank.model;
 
-import java.util.Calendar;
 import java.util.List;
 
 import rx.Observable;
 import tmnt.example.onedaily.api.Api;
-import tmnt.example.onedaily.api.gank.GankService;
+import tmnt.example.onedaily.api.GankService;
 import tmnt.example.onedaily.bean.GankDaysInfo;
 import tmnt.example.onedaily.util.Common;
 

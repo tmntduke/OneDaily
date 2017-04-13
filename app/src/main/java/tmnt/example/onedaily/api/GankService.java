@@ -1,4 +1,4 @@
-package tmnt.example.onedaily.api.gank;
+package tmnt.example.onedaily.api;
 
 import java.util.List;
 
