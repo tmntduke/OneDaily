@@ -1,3 +1,6 @@
+plugins {
+    id "me.tatarka.retrolambda" version "3.2.5"
+}
 apply plugin: 'com.android.application'
 
 android {
@@ -5,7 +8,7 @@ android {
     buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "tmnt.example.onedaily"
-        minSdkVersion 23
+        minSdkVersion 20
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -16,6 +19,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        targetCompatibility org.gradle.api.JavaVersion.VERSION_1_8
+        sourceCompatibility org.gradle.api.JavaVersion.VERSION_1_8
     }
 }
 
