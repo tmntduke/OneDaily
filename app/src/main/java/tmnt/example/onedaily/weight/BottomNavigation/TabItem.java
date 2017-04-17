@@ -1,7 +1,5 @@
 package tmnt.example.onedaily.weight.BottomNavigation;
 
-import android.app.ActionBar;
-import android.app.VoiceInteractor;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -12,16 +10,16 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import tmnt.example.onedaily.R;
-import tmnt.example.onedaily.util.Common;
+import tmnt.example.onedaily.util.DensityUtils;
+
 
 /**
  * Created by tmnt on 2017/4/14.
@@ -65,12 +63,20 @@ public class TabItem extends LinearLayout {
         view = LayoutInflater.from(context).inflate(R.layout.bottom_item_lay, null);
         bottomImg = (ImageView) view.findViewById(R.id.img_bottom);
         bottomTV = (TextView) view.findViewById(R.id.tv_bottom);
-        addView(view);
+        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT
+                , LayoutParams.MATCH_PARENT);
+        layoutParams.gravity = Gravity.CENTER;
+        addView(view, layoutParams);
     }
 
-    private void setTest(String text) {
+    private void setTest(String text, Context context) {
         Log.i(TAG, "setTest: " + text);
         if (TextUtils.isEmpty(text)) {
+//            LayoutParams layoutParams = new LayoutParams(DensityUtils.dp2px(context, 35)
+//                    , DensityUtils.dp2px(context, 35));
+            LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT
+                    , LayoutParams.MATCH_PARENT);
+            bottomImg.setLayoutParams(layoutParams);
             bottomTV.setVisibility(GONE);
         } else {
             bottomTV.setText(text);
@@ -96,7 +102,6 @@ public class TabItem extends LinearLayout {
     private Bitmap drawIcon(int color) {
         Bitmap bimap = ((BitmapDrawable) getResources().getDrawable(res)).getBitmap();
         Bitmap outBitmap = Bitmap.createBitmap(bimap.getWidth(), bimap.getHeight(), Bitmap.Config.ARGB_8888);
-
 
         Log.i(TAG, "drawIcon: " + bimap.getWidth() + "  " + bimap.getHeight());
         Bitmap alphaBitmap = bimap.extractAlpha();
@@ -155,19 +160,15 @@ public class TabItem extends LinearLayout {
             TabItem tabItem = new TabItem(mContext);
             tabItem.defaultColor = defaultColor;
             tabItem.selectColor = selectColor;
-            tabItem.setTest(test);
+            tabItem.setTest(test, mContext);
             tabItem.res = res;
             Log.i(TAG, "build: " + mObject);
             tabItem.setTag(mObject);
             // tabItem.addView(tabItem.view);
             tabItem.setIcon(false);
-            tabItem.setOnTouchListener(new OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    tabItem.mHandler.obtainMessage(2001, v.getTag()).sendToTarget();
-                    return true;
-                }
-            });
+            Log.i(TAG, "build: " + tabItem);
+            tabItem.setOnClickListener(v ->
+                    tabItem.mHandler.obtainMessage(2001, v.getTag()).sendToTarget());
             return tabItem;
 
         }

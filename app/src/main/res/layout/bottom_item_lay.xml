@@ -11,8 +11,7 @@
     <ImageView
         android:id="@+id/img_bottom"
         android:layout_width="25dp"
-        android:layout_height="25dp"
-        tools:src="@drawable/ic_home"/>
+        android:layout_height="25dp"/>
 
     <TextView
         android:id="@+id/tv_bottom"

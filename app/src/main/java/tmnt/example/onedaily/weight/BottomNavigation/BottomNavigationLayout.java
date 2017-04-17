@@ -1,7 +1,6 @@
 package tmnt.example.onedaily.weight.BottomNavigation;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
@@ -15,7 +14,6 @@ import java.util.List;
 import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.util.SharedPreferencesUtil;
 
-import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 /**
  * Created by tmnt on 2017/4/14.
@@ -30,6 +28,8 @@ public class BottomNavigationLayout extends LinearLayout {
     private static final String TAG = "BottomNavigationLayout";
 
     private int index;
+    private int width;
+    private int height;
 
     private SharedPreferencesUtil util;
 
@@ -60,6 +60,13 @@ public class BottomNavigationLayout extends LinearLayout {
 
     }
 
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        width = w;
+        height = h;
+    }
+
     public Controller create() {
         return new BaseController();
     }
@@ -84,15 +91,14 @@ public class BottomNavigationLayout extends LinearLayout {
 
         @Override
         public Controller build() {
-            LinearLayout.LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT,
-                    LayoutParams.WRAP_CONTENT, 1.0f);
+            LayoutParams layoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT,
+                    LayoutParams.MATCH_PARENT);
+            layoutParams.weight = 1.0f;
             layoutParams.gravity = Gravity.CENTER;
-
             for (TabItem tabItem : mTabItems) {
-
                 tabItem.setHandler(new BottomHanler());
                 tabItem.setLayoutParams(layoutParams);
-                BottomNavigationLayout.this.addView(tabItem);
+                BottomNavigationLayout.this.addView(tabItem, layoutParams);
             }
 
             setSelectBottom();
@@ -133,12 +139,12 @@ public class BottomNavigationLayout extends LinearLayout {
             super.handleMessage(msg);
             if (msg.what == 2001) {
                 mTag = msg.obj;
-                Log.i(TAG, "handleMessage: "+mTag);
+                Log.i(TAG, "handleMessage: " + mTag);
                 for (int i = 0; i < mTabItems.size(); i++) {
                     TabItem tabItem = mTabItems.get(i);
                     if (mTabItems.get(i).getTag().equals(mTag)) {
                         index = i;
-                        Log.i(TAG, "handleMessage: "+index);
+                        Log.i(TAG, "handleMessage: " + index);
                         mOnTabItemSelectListener.onSelected(index, mTag);
 
                         tabItem.setIcon(true);

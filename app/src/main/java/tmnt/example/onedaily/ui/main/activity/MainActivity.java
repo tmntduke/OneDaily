@@ -8,95 +8,83 @@ import android.widget.RelativeLayout;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
+import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.util.SharedPreferencesUtil;
 import tmnt.example.onedaily.weight.BottomNavigation.BottomNavigationLayout;
 import tmnt.example.onedaily.weight.BottomNavigation.Controller;
 import tmnt.example.onedaily.weight.BottomNavigation.OnTabItemSelectListener;
 import tmnt.example.onedaily.weight.BottomNavigation.TabItem;
 
-public class MainActivity extends AppCompatActivity {
-
-
-    @Bind(R.id.activity_main)
-    RelativeLayout mActivityMain;
+public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity";
     @Bind(R.id.bottom_na)
     BottomNavigationLayout mBottom;
 
+    private Controller controller;
+    private SharedPreferencesUtil util;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void initData() {
+        util = SharedPreferencesUtil.getInstance(this);
+    }
+
+    @Override
+    public void initView() {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-
         TabItem tabItem = new TabItem.Builder(this)
                 .setDefaultColor(0xFFACACAC)
-                .setSelectColor(getResources().getColor(R.color.colorAccent))
+                .setSelectColor(getResources().getColor(R.color.colorPrimary))
                 .setTest("首页")
-                .setRes(R.drawable.ic_home)
+                .setRes(R.drawable.ic_tab_home)
                 .setTag("home")
                 .build();
 
         TabItem tabItem1 = new TabItem.Builder(this)
                 .setDefaultColor(0xFFACACAC)
-                .setSelectColor(getResources().getColor(R.color.colorAccent))
-                .setTest("haha")
-                .setRes(R.drawable.lsv)
+                .setSelectColor(getResources().getColor(R.color.colorPrimary))
+                .setTest("影音")
+                .setRes(R.drawable.ic_tab_movie)
                 .setTag("rr")
                 .build();
 
         TabItem tabItem2 = new TabItem.Builder(this)
                 .setDefaultColor(0xFFACACAC)
-                .setSelectColor(getResources().getColor(R.color.colorAccent))
-                .setTest("ni")
-                .setRes(R.drawable.ic_home)
-                .setTag("ll")
+                .setSelectColor(getResources().getColor(R.color.colorPrimary))
+                .setRes(R.drawable.ic_tab_write)
+                .setTag("write")
                 .build();
 
         TabItem tabItem3 = new TabItem.Builder(this)
                 .setDefaultColor(0xFFACACAC)
-                .setSelectColor(getResources().getColor(R.color.colorAccent))
+                .setSelectColor(getResources().getColor(R.color.colorPrimary))
                 .setTest("wo")
-                .setRes(R.drawable.lsv)
-                .setTag("ja")
+                .setRes(R.drawable.ic_tab_notification)
+                .setTag("notification")
                 .build();
 
         TabItem tabItem4 = new TabItem.Builder(this)
                 .setDefaultColor(0xFFACACAC)
-                .setSelectColor(getResources().getColor(R.color.colorAccent))
-                .setTest("wo")
-                .setRes(R.drawable.lsv)
-                .setTag("la")
+                .setSelectColor(getResources().getColor(R.color.colorPrimary))
+                .setTest("我的")
+                .setRes(R.drawable.ic_tab_person)
+                .setTag("person")
                 .build();
 
-        //tabItem.setIcon(false);
-
-
-        Log.i(TAG, "onCreate: " + tabItem);
-        // mActivityMain.addView(tabItem);
-
-        SharedPreferencesUtil util = SharedPreferencesUtil.getInstance(this);
-
-        util.putData("hello", "hello");
-
-        String s = util.getData("hello");
-        Log.i(TAG, "onCreate: " + s);
-
-        util.putData("first", 3);
-        util.getData("h");
-
-        Log.i(TAG, "onCreate: " + util.getData("h"));
-
-
-        Controller controller = mBottom.create()
+        controller = mBottom.create()
                 .addTabItem(tabItem)
                 .addTabItem(tabItem1)
                 .addTabItem(tabItem2)
                 .addTabItem(tabItem3)
                 .addTabItem(tabItem4)
                 .build();
+
+    }
+
+    @Override
+    public void initOperation() {
 
         controller.setSelect(0);
         controller.addTabItemClickListener(new OnTabItemSelectListener() {
@@ -112,4 +100,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void loadData() {
+
+    }
 }

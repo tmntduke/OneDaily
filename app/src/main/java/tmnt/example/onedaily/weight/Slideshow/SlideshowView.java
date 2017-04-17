@@ -22,7 +22,8 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
-import tmnt.example.slideshow.R;
+import tmnt.example.onedaily.R;
+
 
 /**
  * Created by tmnt on 2017/4/15.
