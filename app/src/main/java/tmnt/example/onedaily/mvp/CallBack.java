@@ -1,4 +1,4 @@
-package tmnt.example.onedaily.ui.gank.presenter;
+package tmnt.example.onedaily.mvp;
 
 /**
  * Created by tmnt on 2017/4/12.

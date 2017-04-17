@@ -1,4 +1,4 @@
-package tmnt.example.onedaily.ui.gank.model;
+package tmnt.example.onedaily.mvp;
 
 /**
  * Created by tmnt on 2017/4/12.
@@ -6,7 +6,7 @@ package tmnt.example.onedaily.ui.gank.model;
 
 public interface Model<T> {
 
-    T getGankNews();
+    T getNews();
 
     T refresh();
 

@@ -5,7 +5,8 @@ import java.util.List;
 import rx.Observable;
 import tmnt.example.onedaily.api.Api;
 import tmnt.example.onedaily.api.GankService;
-import tmnt.example.onedaily.bean.GankDaysInfo;
+import tmnt.example.onedaily.bean.gank.GankDaysInfo;
+import tmnt.example.onedaily.mvp.Model;
 import tmnt.example.onedaily.util.Common;
 
 /**

@@ -5,8 +5,8 @@ import java.util.List;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import rx.Observable;
-import tmnt.example.onedaily.bean.GankDaysInfo;
-import tmnt.example.onedaily.bean.GankInfo;
+import tmnt.example.onedaily.bean.gank.GankDaysInfo;
+import tmnt.example.onedaily.bean.gank.GankInfo;
 
 /**
  * Created by tmnt on 2017/4/12.

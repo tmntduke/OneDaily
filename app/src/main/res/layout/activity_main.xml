@@ -13,7 +13,7 @@
         android:id="@+id/main_contain"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9.5"></FrameLayout>
+        android:layout_weight="12"></FrameLayout>
 
     <tmnt.example.onedaily.weight.BottomNavigation.BottomNavigationLayout
         android:id="@+id/bottom_na"

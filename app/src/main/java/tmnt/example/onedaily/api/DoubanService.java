@@ -4,9 +4,10 @@ import java.util.List;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import rx.Observable;
-import tmnt.example.onedaily.bean.DoubanMovieInfo;
-import tmnt.example.onedaily.bean.MovieDetailIInfo;
+import tmnt.example.onedaily.bean.movie.DoubanMovieInfo;
+import tmnt.example.onedaily.bean.book.DoubanBookInfo;
 
 /**
  * Created by tmnt on 2017/4/13.
@@ -15,9 +16,9 @@ import tmnt.example.onedaily.bean.MovieDetailIInfo;
 public interface DoubanService {
 
     @GET("movie/{category}")
-    Observable<List<DoubanMovieInfo>> getMovieList(@Path("category") String category);
+    Observable<List<DoubanMovieInfo>> getMovie(@Path("category") String category);
 
-    @GET("movie/{id}")
-    Observable<MovieDetailIInfo> getMovieDetail(@Path("id") String id);
+    @GET("book/search")
+    Observable<DoubanBookInfo> getBook(@Query("q") String q, @Query("start") String start, @Query("count") String count);
 
 }

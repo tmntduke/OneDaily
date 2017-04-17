@@ -60,8 +60,8 @@ public class MainActivity extends BaseActivity {
         TabItem tabItem3 = new TabItem.Builder(this)
                 .setDefaultColor(0xFFACACAC)
                 .setSelectColor(getResources().getColor(R.color.colorPrimary))
-                .setTest("wo")
-                .setRes(R.drawable.ic_tab_notification)
+                .setTest("聊天")
+                .setRes(R.drawable.ic_tab_chat)
                 .setTag("notification")
                 .build();
 
@@ -90,7 +90,7 @@ public class MainActivity extends BaseActivity {
         controller.addTabItemClickListener(new OnTabItemSelectListener() {
             @Override
             public void onSelected(int index, Object tag) {
-                Log.i(TAG, "onSelected: " + index + "   " + tag);
+
             }
 
             @Override

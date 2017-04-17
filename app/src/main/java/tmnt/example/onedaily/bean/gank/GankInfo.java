@@ -1,4 +1,4 @@
-package tmnt.example.onedaily.bean;
+package tmnt.example.onedaily.bean.gank;
 
 import java.util.List;
 
