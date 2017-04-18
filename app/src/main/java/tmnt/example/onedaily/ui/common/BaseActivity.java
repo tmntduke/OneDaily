@@ -20,7 +20,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseFunc
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mFragmentManager = getSupportFragmentManager();
-        initData();
+        initData(savedInstanceState);
         initView();
         initOperation();
         loadData();

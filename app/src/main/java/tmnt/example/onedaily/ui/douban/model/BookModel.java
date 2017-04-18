@@ -6,7 +6,7 @@ import tmnt.example.onedaily.mvp.Model;
  * Created by tmnt on 2017/4/17.
  */
 
-public class MovieModel implements Model<String> {
+public class BookModel implements Model<String> {
     @Override
     public String getNews() {
         return null;

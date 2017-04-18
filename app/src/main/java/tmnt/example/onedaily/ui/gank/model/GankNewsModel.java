@@ -25,7 +25,7 @@ public class GankNewsModel implements Model<Observable<List<GankInfo>>> {
     }
 
     @Override
-    public Observable<List<GankInfo>> getGankNews() {
+    public Observable<List<GankInfo>> getNews() {
 
         Observable<List<GankInfo>> inListObservable = service.getGankNews(category, "10", "1");
 

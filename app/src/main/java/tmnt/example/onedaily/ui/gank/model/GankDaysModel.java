@@ -30,7 +30,7 @@ public class GankDaysModel implements Model<Observable<List<GankDaysInfo>>> {
 
 
     @Override
-    public Observable<List<GankDaysInfo>> getGankNews() {
+    public Observable<List<GankDaysInfo>> getNews() {
         Observable<List<GankDaysInfo>> observable = mService.getGankDays(year, month, day);
         return observable;
     }

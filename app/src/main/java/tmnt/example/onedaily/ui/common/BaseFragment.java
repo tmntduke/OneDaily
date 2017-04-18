@@ -18,7 +18,7 @@ public abstract class BaseFragment extends Fragment implements BaseFunc {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initData();
+        initData(savedInstanceState);
 
     }
 
@@ -26,7 +26,7 @@ public abstract class BaseFragment extends Fragment implements BaseFunc {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = setContentView();
+        View view = setContentView(inflater, container, savedInstanceState);
 
         initView();
         initOperation();
@@ -39,9 +39,10 @@ public abstract class BaseFragment extends Fragment implements BaseFunc {
 
     /**
      * 设置布局
+     *
      * @return
      */
-    protected abstract View setContentView();
+    protected abstract View setContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
 
     /**
      * 跳转activity

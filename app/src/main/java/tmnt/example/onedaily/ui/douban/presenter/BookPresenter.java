@@ -9,9 +9,9 @@ import tmnt.example.onedaily.mvp.View;
  * Created by tmnt on 2017/4/17.
  */
 
-public class MoviePresenter extends BasePresenter {
+public class BookPresenter extends BasePresenter {
 
-    public MoviePresenter(Model model, View view) {
+    public BookPresenter(Model model, View view) {
         super(model, view);
     }
 

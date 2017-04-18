@@ -25,7 +25,7 @@ public class MainActivity extends BaseActivity {
     private SharedPreferencesUtil util;
 
     @Override
-    public void initData() {
+    public void initData(Bundle savedInstanceState) {
         util = SharedPreferencesUtil.getInstance(this);
     }
 
