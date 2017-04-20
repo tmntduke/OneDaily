@@ -7,4 +7,22 @@
         <attr name="labelPadding" format="dimension"></attr>
         <attr name="labelBackground" format="reference"></attr>
     </declare-styleable>
+
+
+        <attr name="smart_ui_enable_pull_down" format="boolean" />
+        <attr name="smart_ui_enable_pull_up" format="boolean" />
+        <attr name="smart_ui_background" format="color|reference" />
+
+        <declare-styleable name="SmartPullableLayout">
+            <attr name="smart_ui_enable_pull_down" />
+            <attr name="smart_ui_enable_pull_up" />
+            <attr name="smart_ui_background" />
+        </declare-styleable>
+
+        <declare-styleable name="WaitingDots">
+            <attr name="dotsColor" format="color" />
+            <attr name="period" format="integer" />
+            <attr name="jumpHeight" format="integer" />
+            <attr name="autoPlay" format="boolean" />
+        </declare-styleable>
 </resources>

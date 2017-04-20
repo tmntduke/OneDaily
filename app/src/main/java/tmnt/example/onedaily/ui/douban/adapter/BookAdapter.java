@@ -2,6 +2,7 @@ package tmnt.example.onedaily.ui.douban.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,18 +24,21 @@ public class BookAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private OnBookItenListener mOnBookItenListener;
 
+    private static final String TAG = "BookAdapter";
+
     public void setOnBookItenListener(OnBookItenListener onBookItenListener) {
         mOnBookItenListener = onBookItenListener;
     }
 
     public BookAdapter(List<Book> books, Context context) {
+        Log.i(TAG, "BookAdapter: "+books);
         mBooks = books;
         mContext = context;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.list_book_item, parent);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.list_book_item, parent,false);
         BookViewHolder adapter = new BookViewHolder(view);
         return adapter;
     }
@@ -48,6 +52,6 @@ public class BookAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mBooks.size();
     }
 }

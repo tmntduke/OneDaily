@@ -70,7 +70,6 @@ public class TabItem extends LinearLayout {
     }
 
     private void setTest(String text, Context context) {
-        Log.i(TAG, "setTest: " + text);
         if (TextUtils.isEmpty(text)) {
 //            LayoutParams layoutParams = new LayoutParams(DensityUtils.dp2px(context, 35)
 //                    , DensityUtils.dp2px(context, 35));
@@ -82,7 +81,6 @@ public class TabItem extends LinearLayout {
             bottomTV.setText(text);
         }
 
-        Log.i(TAG, "setTest: " + bottomTV);
     }
 
     public void setIcon(boolean isChoice) {
@@ -94,7 +92,6 @@ public class TabItem extends LinearLayout {
             bitmap = drawIcon(selectColor);
             bottomTV.setTextColor(selectColor);
         }
-        Log.i(TAG, "setIcon: " + bitmap);
         bottomImg.setImageBitmap(bitmap);
         invalidate();
     }
@@ -103,7 +100,6 @@ public class TabItem extends LinearLayout {
         Bitmap bimap = ((BitmapDrawable) getResources().getDrawable(res)).getBitmap();
         Bitmap outBitmap = Bitmap.createBitmap(bimap.getWidth(), bimap.getHeight(), Bitmap.Config.ARGB_8888);
 
-        Log.i(TAG, "drawIcon: " + bimap.getWidth() + "  " + bimap.getHeight());
         Bitmap alphaBitmap = bimap.extractAlpha();
         Canvas canvas = new Canvas(outBitmap);
 
@@ -162,11 +158,9 @@ public class TabItem extends LinearLayout {
             tabItem.selectColor = selectColor;
             tabItem.setTest(test, mContext);
             tabItem.res = res;
-            Log.i(TAG, "build: " + mObject);
             tabItem.setTag(mObject);
             // tabItem.addView(tabItem.view);
             tabItem.setIcon(false);
-            Log.i(TAG, "build: " + tabItem);
             tabItem.setOnClickListener(v ->
                     tabItem.mHandler.obtainMessage(2001, v.getTag()).sendToTarget());
             return tabItem;

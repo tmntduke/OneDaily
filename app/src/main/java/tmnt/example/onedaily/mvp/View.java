@@ -8,9 +8,11 @@ import java.util.List;
 
 public interface View<T> {
 
-    void showData(List<T> datas);
+    void showData(T datas);
 
-    void showLoadData(List<T> datas);
+    void showLoadData(T datas);
 
-    void showRefreshData(List<T> datas);
+    void showRefreshData(T datas);
+
+    void showError(Throwable throwable);
 }

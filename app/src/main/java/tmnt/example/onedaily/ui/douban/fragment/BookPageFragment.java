@@ -18,6 +18,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.bean.book.Book;
+import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.ui.common.BaseFragment;
 import tmnt.example.onedaily.ui.douban.adapter.BookPagerAdapter;
 
@@ -46,6 +47,7 @@ public class BookPageFragment extends BaseFragment implements tmnt.example.oneda
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        ((BaseActivity)getActivity()).setStatesBar(R.color.colorPrimary);
 
     }
 
@@ -59,7 +61,7 @@ public class BookPageFragment extends BaseFragment implements tmnt.example.oneda
 
         mTabCategory.addTab(mTabCategory.newTab().setText("综合"));
         mTabCategory.addTab(mTabCategory.newTab().setText("文学"));
-        mTabCategory.addTab(mTabCategory.newTab().setText("文化"));
+        mTabCategory.addTab(mTabCategory.newTab().setText("流行"));
         mTabCategory.addTab(mTabCategory.newTab().setText("生活"));
 
 
@@ -82,20 +84,6 @@ public class BookPageFragment extends BaseFragment implements tmnt.example.oneda
 
     }
 
-    @Override
-    public void showData(List<Book> datas) {
-
-    }
-
-    @Override
-    public void showLoadData(List<Book> datas) {
-
-    }
-
-    @Override
-    public void showRefreshData(List<Book> datas) {
-
-    }
 
     @Override
     public void onDestroyView() {
@@ -108,7 +96,7 @@ public class BookPageFragment extends BaseFragment implements tmnt.example.oneda
      *
      * @return
      */
-    public static Fragment getInstance(String categoryId) {
+    public static Fragment getInstance() {
         BookPageFragment fragment = new BookPageFragment();
         return fragment;
     }
@@ -123,4 +111,23 @@ public class BookPageFragment extends BaseFragment implements tmnt.example.oneda
     }
 
 
+    @Override
+    public void showData(Book datas) {
+
+    }
+
+    @Override
+    public void showLoadData(Book datas) {
+
+    }
+
+    @Override
+    public void showRefreshData(Book datas) {
+
+    }
+
+    @Override
+    public void showError(Throwable throwable) {
+
+    }
 }

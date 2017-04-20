@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal|bottom"
+    android:padding="@dimen/smart_ui_pullable_padding">
+
+    <ImageView
+        android:id="@+id/smart_ui_iv_pull_down_arrow"
+        android:layout_width="@dimen/smart_ui_pullable_item_size"
+        android:layout_height="@dimen/smart_ui_pullable_item_size"
+        android:background="@drawable/smart_ui_pullable_layout_indicate_arrow" />
+
+    <ImageView
+        android:id="@+id/smart_ui_iv_pull_down_loading"
+        android:layout_width="@dimen/smart_ui_pullable_item_size"
+        android:layout_height="@dimen/smart_ui_pullable_item_size"
+        android:background="@drawable/smart_ui_loading_animation"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/smart_ui_tv_pull_down_des"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/smart_ui_iv_pull_down_arrow"
+        android:layout_marginLeft="@dimen/smart_ui_pullable_item_margin"
+        android:layout_toRightOf="@id/smart_ui_iv_pull_down_arrow"
+        android:text="@string/smart_ui_pull_down_normal"
+        android:textColor="@color/smart_ui_pullable_layout_text_color" />
+
+</RelativeLayout>

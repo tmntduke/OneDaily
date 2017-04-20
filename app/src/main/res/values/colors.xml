@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
-    <color name="text_gray">#9e9e9e</color>
-    <color name="bg_gray">#d4d4d4</color>
+    <color name="text_gray">#878787</color>
+    <color name="bg_gray">#e4e4e4</color>
+    <color name="smart_ui_pullable_layout_text_color">#707070</color>
 </resources>

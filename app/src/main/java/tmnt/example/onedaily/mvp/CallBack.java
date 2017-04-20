@@ -6,9 +6,9 @@ package tmnt.example.onedaily.mvp;
 
 public interface CallBack<T> {
 
-    T onSuccess();
+    void onSuccess(T t);
 
-    void onError(Exception e);
+    void onError(Throwable e);
 
 
 }

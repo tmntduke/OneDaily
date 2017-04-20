@@ -9,6 +9,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.ui.common.BaseActivity;
+import tmnt.example.onedaily.ui.douban.fragment.BookFragment;
+import tmnt.example.onedaily.ui.douban.fragment.BookPageFragment;
 import tmnt.example.onedaily.util.SharedPreferencesUtil;
 import tmnt.example.onedaily.weight.BottomNavigation.BottomNavigationLayout;
 import tmnt.example.onedaily.weight.BottomNavigation.Controller;
@@ -86,11 +88,21 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initOperation() {
 
+        //setFragment(R.id.main_contain,);
+
         controller.setSelect(0);
         controller.addTabItemClickListener(new OnTabItemSelectListener() {
             @Override
             public void onSelected(int index, Object tag) {
+                Log.i(TAG, "onSelected: "+index);
+                switch (index) {
+                    case 0:
 
+                        break;
+                    case 1:
+                        toFragment(R.id.main_contain, BookPageFragment.getInstance());
+                        break;
+                }
             }
 
             @Override

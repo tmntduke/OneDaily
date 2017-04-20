@@ -51,14 +51,20 @@ public class BookViewHolder extends BaseViewHolder<Book> {
 
     @Override
     public void setData(Context context, Book book) {
-        Glide.with(context).load(book.getImage()).into(mCover);
+        Glide.with(context).load(book.getImages().getLarge()).into(mCover);
         List<String> authors = book.getAuthor();
 
         for (int i = 0, count = authors.size(); i < count; i++) {
             mStringBuilder.append(authors.get(i));
-            mStringBuilder.append(",");
+            mStringBuilder.append(" ");
         }
-        mStringBuilder.deleteCharAt(mStringBuilder.length() - 1);
+        if (mStringBuilder.length() != 0 && mStringBuilder != null) {
+            mStringBuilder.deleteCharAt(mStringBuilder.length() - 1);
+        } else {
+            mStringBuilder.append("无");
+        }
+
+        mName.setText(book.getTitle());
         mAuthor.setText("作者:" + mStringBuilder.toString());
         mRaing.setText("评分:" + book.getRating().getAverage());
         mPulisher.setText("出版社:" + book.getPublisher());
@@ -73,7 +79,6 @@ public class BookViewHolder extends BaseViewHolder<Book> {
                         mOnBookItenListener.onBookItem(view, position);
                     }
                 }
-
         );
     }
 }

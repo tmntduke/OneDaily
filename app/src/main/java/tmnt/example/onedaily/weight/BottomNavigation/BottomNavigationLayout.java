@@ -109,7 +109,6 @@ public class BottomNavigationLayout extends LinearLayout {
         public void addTabItemClickListener(OnTabItemSelectListener listener) {
 
             mOnTabItemSelectListener = listener;
-            Log.i(TAG, "addTabItemClickListener: " + mTabItems.size());
 
 //            for (int i = 0; i < mTabItems.size(); i++) {
 //                if (mTabItems.get(i).getTag().equals(mTag)) {
@@ -139,13 +138,17 @@ public class BottomNavigationLayout extends LinearLayout {
             super.handleMessage(msg);
             if (msg.what == 2001) {
                 mTag = msg.obj;
-                Log.i(TAG, "handleMessage: " + mTag);
+
                 for (int i = 0; i < mTabItems.size(); i++) {
                     TabItem tabItem = mTabItems.get(i);
                     if (mTabItems.get(i).getTag().equals(mTag)) {
                         index = i;
-                        Log.i(TAG, "handleMessage: " + index);
-                        mOnTabItemSelectListener.onSelected(index, mTag);
+
+                        if (mOnTabItemSelectListener!=null){
+
+                            mOnTabItemSelectListener.onSelected(index, mTag);
+                        }
+
 
                         tabItem.setIcon(true);
                     } else {

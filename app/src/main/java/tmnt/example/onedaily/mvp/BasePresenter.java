@@ -9,12 +9,12 @@ import tmnt.example.onedaily.mvp.View;
  * Created by tmnt on 2017/4/12.
  */
 
-public abstract class BasePresenter implements IPresenter {
+public abstract class BasePresenter<T> implements IPresenter {
 
-    protected Model mModel;
-    protected View mView;
+    protected Model<T> mModel;
+    protected View<T> mView;
 
-    public BasePresenter(Model model, View view) {
+    public BasePresenter(Model<T> model, View<T> view) {
         mModel = model;
         mView = view;
     }

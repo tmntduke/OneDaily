@@ -2,4 +2,12 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- SmartPullableLayout -->
+    <dimen name="smart_ui_pullable_padding">20dp</dimen>
+    <dimen name="smart_ui_pullable_item_size">20dp</dimen>
+    <dimen name="smart_ui_pullable_item_margin">10dp</dimen>
+    <dimen name="smart_ui_effective_pull_range">65dp</dimen>
+    <dimen name="smart_ui_ignorable_pull_range">5dp</dimen>
+
 </resources>

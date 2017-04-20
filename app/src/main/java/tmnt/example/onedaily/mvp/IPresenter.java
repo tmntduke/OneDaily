@@ -6,10 +6,10 @@ package tmnt.example.onedaily.mvp;
 
 public interface IPresenter {
 
-    void handleData(CallBack callBack);
+    void handleData();
 
-    void handleLoad(CallBack callBack);
+    void handleLoad(String page);
 
-    void handleRefresh(String page, CallBack callBack);
+    void handleRefresh(String page);
 
 }

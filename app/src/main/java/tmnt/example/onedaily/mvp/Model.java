@@ -6,10 +6,10 @@ package tmnt.example.onedaily.mvp;
 
 public interface Model<T> {
 
-    T getNews();
+    void getNews(CallBack<T> callBack);
 
-    T refresh();
+    void refresh(CallBack<T> callBack);
 
-    T load(String page);
+    void load(String page,CallBack<T> callBack);
 
 }
