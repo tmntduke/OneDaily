@@ -1,5 +1,9 @@
 package tmnt.example.onedaily.bean.book;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import tmnt.example.onedaily.bean.common.Image;
@@ -9,7 +13,7 @@ import tmnt.example.onedaily.bean.common.Rating;
  * Created by tmnt on 2017/4/17.
  */
 
-public class Book {
+public class Book implements Parcelable {
     /**
      * rating : {"max":10,"numRaters":1,"average":"0.0","min":0}
      * subtitle : Visual QuickStart Guide
@@ -273,6 +277,87 @@ public class Book {
     public void setTranslator(List<?> translator) {
         this.translator = translator;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.rating, flags);
+        dest.writeString(this.subtitle);
+        dest.writeString(this.pubdate);
+        dest.writeString(this.origin_title);
+        dest.writeString(this.image);
+        dest.writeString(this.binding);
+        dest.writeString(this.catalog);
+        dest.writeString(this.pages);
+        dest.writeParcelable(this.images, flags);
+        dest.writeString(this.alt);
+        dest.writeString(this.id);
+        dest.writeString(this.publisher);
+        dest.writeString(this.isbn10);
+        dest.writeString(this.isbn13);
+        dest.writeString(this.title);
+        dest.writeString(this.url);
+        dest.writeString(this.alt_title);
+        dest.writeString(this.author_intro);
+        dest.writeString(this.summary);
+        dest.writeString(this.price);
+        dest.writeString(this.ebook_url);
+        dest.writeString(this.ebook_price);
+        dest.writeParcelable(this.series, flags);
+        dest.writeStringList(this.author);
+        dest.writeList(this.tags);
+        dest.writeList(this.translator);
+    }
+
+    public Book() {
+    }
+
+    protected Book(Parcel in) {
+        this.rating = in.readParcelable(Rating.class.getClassLoader());
+        this.subtitle = in.readString();
+        this.pubdate = in.readString();
+        this.origin_title = in.readString();
+        this.image = in.readString();
+        this.binding = in.readString();
+        this.catalog = in.readString();
+        this.pages = in.readString();
+        this.images = in.readParcelable(Image.class.getClassLoader());
+        this.alt = in.readString();
+        this.id = in.readString();
+        this.publisher = in.readString();
+        this.isbn10 = in.readString();
+        this.isbn13 = in.readString();
+        this.title = in.readString();
+        this.url = in.readString();
+        this.alt_title = in.readString();
+        this.author_intro = in.readString();
+        this.summary = in.readString();
+        this.price = in.readString();
+        this.ebook_url = in.readString();
+        this.ebook_price = in.readString();
+        this.series = in.readParcelable(Series.class.getClassLoader());
+        this.author = in.createStringArrayList();
+        this.tags = new ArrayList<Tags>();
+        in.readList(this.tags, Tags.class.getClassLoader());
+        this.translator = new ArrayList<String>();
+        in.readList(this.translator, Object.class.getClassLoader());
+    }
+
+    public static final Creator<Book> CREATOR = new Creator<Book>() {
+        @Override
+        public Book createFromParcel(Parcel source) {
+            return new Book(source);
+        }
+
+        @Override
+        public Book[] newArray(int size) {
+            return new Book[size];
+        }
+    };
 }
 
 

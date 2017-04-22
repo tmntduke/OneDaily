@@ -16,13 +16,7 @@ import tmnt.example.onedaily.mvp.CallBack;
 
 public class RxUilt<T> {
 
-    private CallBack<T> callBack;
-
-    public void setCallBack(CallBack<T> callBack) {
-        this.callBack = callBack;
-    }
-
-    public void getDataForObservable(Observable<T> observable) {
+    public void getDataForObservable(Observable<T> observable,CallBack<T> callBack) {
 
         observable.timeout(6, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.newThread())

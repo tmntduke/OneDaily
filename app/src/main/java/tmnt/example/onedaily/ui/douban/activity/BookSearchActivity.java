@@ -2,6 +2,7 @@ package tmnt.example.onedaily.ui.douban.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -9,8 +10,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.google.zxing.client.android.decode.CaptureActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -18,11 +21,17 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.Rx.RxUilt;
+import tmnt.example.onedaily.bean.book.Book;
 import tmnt.example.onedaily.bean.book.DoubanBookInfo;
 import tmnt.example.onedaily.mvp.CallBack;
 import tmnt.example.onedaily.mvp.View;
 import tmnt.example.onedaily.ui.common.BaseActivity;
+import tmnt.example.onedaily.ui.douban.adapter.BookSearchAdapter;
+import tmnt.example.onedaily.ui.douban.fragment.BookFragment;
+import tmnt.example.onedaily.ui.douban.model.BookModel;
+import tmnt.example.onedaily.ui.douban.presenter.BookPresenter;
 import tmnt.example.onedaily.util.BookApiUtils;
+import tmnt.example.onedaily.util.DividerItemDecoration;
 import tmnt.example.onedaily.util.SystemUtils;
 import tmnt.example.onedaily.weight.ClearEditText.ClearEditText;
 import tmnt.example.onedaily.weight.Lable.LabelView;
@@ -43,19 +52,27 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
     TextView mTvChange;
     @Bind(R.id.search_contain)
     LinearLayout mSearchContain;
-    @Bind(R.id.search_list_contain)
-    LinearLayout mSearchListContain;
     @Bind(R.id.rv_book_search)
     RecyclerView mRvBookSearch;
 
     private static final int REQUEST_ZXING = 0010;
     private static final String TAG = "BookSearchActivity";
+    public static final String BOOK_ID = "id";
+    public static final String BOOK = "book";
+    public static final String BOOK_ISBN = "isbn";
 
     private Random mRandom;
+    private BookSearchAdapter mSearchAdapter;
+    private List<Book> mBooks;
+    private BookModel model;
+    private BookPresenter presenter;
 
     @Override
     public void initData(Bundle savedInstanceState) {
         mRandom = new Random();
+        mBooks = new ArrayList<>();
+        model = new BookModel();
+        presenter = new BookPresenter(model, BookSearchActivity.this);
     }
 
     @Override
@@ -67,12 +84,19 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
     @Override
     public void initOperation() {
         mEdSearch.setOnScanLisenter(view ->
-            toActivityForResult(CaptureActivity.class, REQUEST_ZXING)
+                toActivityForResult(CaptureActivity.class, REQUEST_ZXING)
         );
 
         mLvBook.setLabelBackgroundResource(R.drawable.label_bg);
 
         changLable(mLvBook);
+
+        mLvBook.setOnLabelListener((v, position) -> {
+            model.setQ(((TextView) v).getText().toString());
+            presenter.setModel(model);
+            presenter.handleData();
+            hideSoftInput();
+        });
 
         mTvCancel.setOnClickListener(v -> onBackPressed());
 
@@ -80,13 +104,34 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
 
         mEdSearch.setOnKeyListener((v, keyCode, event) -> {
             if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                SystemUtils.showToast(this, "done");
+
+                requestSearch();
+
                 hideSoftInput();
                 return true;
             }
             return false;
         });
 
+        mSearchAdapter = new BookSearchAdapter(this, mBooks);
+        mRvBookSearch.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+        mRvBookSearch.addItemDecoration(new DividerItemDecoration(this
+                , DividerItemDecoration.VERTICAL_LIST));
+        mRvBookSearch.setAdapter(mSearchAdapter);
+
+        mSearchAdapter.setOnItemClickListener((view, position) -> {
+            Bundle bundle = new Bundle();
+            bundle.putString(BookFragment.BOOK_ID, "id");
+            bundle.putParcelable(BOOK, mBooks.get(position));
+            toActivity(BookDetailActivity.class, bundle);
+        });
+
+    }
+
+    private void requestSearch() {
+        model.setQ(mEdSearch.getText().toString());
+        presenter.setModel(model);
+        presenter.handleData();
     }
 
     @Override
@@ -101,6 +146,10 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
             Bundle bundle = data.getExtras();
             String scanResult = bundle.getString("result");
             Log.i(TAG, "onActivityResult: " + scanResult);
+            Bundle isbn = new Bundle();
+            isbn.putString(BookFragment.BOOK_ID, BOOK_ISBN);
+            isbn.putString(BOOK_ISBN, scanResult);
+            toActivity(BookDetailActivity.class, isbn);
         }
     }
 
@@ -136,6 +185,11 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
 
     @Override
     public void showData(DoubanBookInfo datas) {
+        mBooks.clear();
+        mBooks.addAll(datas.getBooks());
+        mSearchContain.setVisibility(android.view.View.GONE);
+        mSearchAdapter.notifyDataSetChanged();
+        mRvBookSearch.setVisibility(android.view.View.VISIBLE);
 
     }
 

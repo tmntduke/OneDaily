@@ -61,4 +61,19 @@ public class BookApiUtils {
 
     }
 
+    public static String getAuthor(List<String> list){
+        StringBuilder builder = new StringBuilder();
+        int count = list.size();
+        for (int i = 0; i < count; i++) {
+            builder.append(list.get(i));
+            builder.append(" ");
+        }
+        if (builder != null && builder.length() != 0) {
+            builder.deleteCharAt(builder.length() - 1);
+        } else {
+            builder.append("无");
+        }
+        return builder.toString();
+    }
+
 }

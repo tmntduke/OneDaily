@@ -12,4 +12,8 @@
     <string name="cancel">取消</string>
     <string name="hot_search">热门搜索</string>
     <string name="lable_change">换一批</string>
+    <string name="book_raing">评分</string>
+    <string name="book_summary">简介</string>
+    <string name="book_catlog">目录</string>
+    <string name="book_author">作者简介</string>
 </resources>

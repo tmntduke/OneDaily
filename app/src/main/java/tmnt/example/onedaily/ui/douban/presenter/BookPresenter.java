@@ -1,5 +1,7 @@
 package tmnt.example.onedaily.ui.douban.presenter;
 
+import android.util.Log;
+
 import tmnt.example.onedaily.Rx.RxUilt;
 import tmnt.example.onedaily.bean.book.DoubanBookInfo;
 import tmnt.example.onedaily.mvp.BasePresenter;
@@ -13,6 +15,8 @@ import tmnt.example.onedaily.mvp.View;
 
 public class BookPresenter extends BasePresenter<DoubanBookInfo> {
 
+
+    private static final String TAG = "BookPresenter";
 
     public BookPresenter(Model<DoubanBookInfo> model, View<DoubanBookInfo> view) {
         super(model, view);
@@ -39,6 +43,7 @@ public class BookPresenter extends BasePresenter<DoubanBookInfo> {
         mModel.load(page,new CallBack<DoubanBookInfo>() {
             @Override
             public void onSuccess(DoubanBookInfo doubanBookInfo) {
+
                 mView.showLoadData(doubanBookInfo);
             }
 

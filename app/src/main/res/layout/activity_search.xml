@@ -30,15 +30,12 @@
 
     </LinearLayout>
 
-    <ImageView android:layout_width="match_parent"
-               android:layout_height="2dp"
-               android:background="@color/bg_gray"/>
-
     <LinearLayout
         android:id="@+id/search_contain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:visibility="visible"
         android:padding="5dp">
 
         <RelativeLayout
@@ -78,17 +75,18 @@
         ></tmnt.example.onedaily.weight.Lable.LabelView>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/search_list_contain"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"></LinearLayout>
+    <ImageView android:layout_width="match_parent"
+               android:layout_height="2dp"
+               android:background="@color/bg_gray"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_book_search"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+    android:visibility="gone">
 
     </android.support.v7.widget.RecyclerView>
+
+
 
 </LinearLayout>

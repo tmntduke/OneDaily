@@ -48,6 +48,7 @@ public class BookAdapter extends RecyclerView.Adapter {
         BookViewHolder bookViewHolder = (BookViewHolder) holder;
         bookViewHolder.setData(mContext, mBooks.get(position));
         bookViewHolder.setOnBookItenListener(mOnBookItenListener);
+        bookViewHolder.setOperation(position);
     }
 
     @Override

@@ -187,7 +187,7 @@ public class LabelView extends ViewGroup {
             @Override
             public void onClick(View v) {
                 if (mOnLabelListener != null) {
-                    mOnLabelListener.labelClick(v, position);
+                    mOnLabelListener.labelClick(lable, position);
                 }
             }
         });
@@ -206,7 +206,7 @@ public class LabelView extends ViewGroup {
         }
     }
 
-    interface OnLabelListener {
+    public interface OnLabelListener {
         void labelClick(View view, int position);
     }
 

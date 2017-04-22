@@ -25,15 +25,13 @@ public class BookModel implements Model<DoubanBookInfo> {
 
     private String q;
 
-    public BookModel(String q) {
+    public void setQ(String q) {
         this.q = q;
     }
 
-
     @Override
     public void getNews(CallBack<DoubanBookInfo> callBack) {
-        mRxUilt.setCallBack(callBack);
-        mRxUilt.getDataForObservable(mDoubanService.getBook(q, PAGE_INT, PAGE_SIZE));
+        mRxUilt.getDataForObservable(mDoubanService.getBook(q, PAGE_INT, PAGE_SIZE),callBack);
     }
 
     @Override
@@ -43,7 +41,6 @@ public class BookModel implements Model<DoubanBookInfo> {
 
     @Override
     public void load(String page, CallBack<DoubanBookInfo> callBack) {
-        mRxUilt.setCallBack(callBack);
-        mRxUilt.getDataForObservable(mDoubanService.getBook(q, page, PAGE_SIZE));
+        mRxUilt.getDataForObservable(mDoubanService.getBook(q, page, PAGE_SIZE),callBack);
     }
 }

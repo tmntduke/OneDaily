@@ -19,6 +19,8 @@ import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.bean.book.Book;
 import tmnt.example.onedaily.bean.book.DoubanBookInfo;
 import tmnt.example.onedaily.ui.common.BaseFragment;
+import tmnt.example.onedaily.ui.douban.activity.BookDetailActivity;
+import tmnt.example.onedaily.ui.douban.activity.BookSearchActivity;
 import tmnt.example.onedaily.ui.douban.adapter.BookAdapter;
 import tmnt.example.onedaily.ui.douban.listener.OnBookItenListener;
 import tmnt.example.onedaily.ui.douban.model.BookModel;
@@ -49,7 +51,10 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
 
     private static final String BOOK_CATEGORY = "BOOK_CATEGORY";
 
+    public static final String BOOK_ID = "id";
+
     private static final String TAG = "BookFragment";
+    public static final String BOOK_INFO = "info";
 
     private int page;
 
@@ -65,7 +70,8 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
         category = getArguments().getString(BOOK_CATEGORY);
         mBookList = new ArrayList<>();
 
-        BookModel model = new BookModel(category);
+        BookModel model = new BookModel();
+        model.setQ(category);
         presenter = new BookPresenter(model, this);
 
         presenter.handleData();
@@ -90,7 +96,10 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
         mBookAdapter.setOnBookItenListener(new OnBookItenListener() {
             @Override
             public void onBookItem(View view, int position) {
-
+                Bundle bundle = new Bundle();
+                bundle.putString(BOOK_ID, "id");
+                bundle.putParcelable(BOOK_INFO, mBookList.get(position));
+                toActivity(BookDetailActivity.class, bundle);
             }
         });
 
@@ -105,6 +114,13 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
                 page++;
                 presenter.handleLoad(String.valueOf(page));
             }
+        });
+
+        mBookAdapter.setOnBookItenListener((view, position) -> {
+            Bundle bundle = new Bundle();
+            bundle.putString(BOOK_ID, "id");
+            bundle.putParcelable(BookSearchActivity.BOOK, mBookList.get(position));
+            toActivity(BookDetailActivity.class, bundle);
         });
 
     }

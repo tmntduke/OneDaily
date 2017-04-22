@@ -15,6 +15,7 @@ import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.bean.book.Book;
 import tmnt.example.onedaily.ui.common.BaseViewHolder;
 import tmnt.example.onedaily.ui.douban.listener.OnBookItenListener;
+import tmnt.example.onedaily.util.BookApiUtils;
 
 /**
  * Created by tmnt on 2017/4/18.
@@ -35,8 +36,6 @@ public class BookViewHolder extends BaseViewHolder<Book> {
         mOnBookItenListener = onBookItenListener;
     }
 
-    private StringBuilder mStringBuilder = new StringBuilder();
-
     public BookViewHolder(View itemView) {
         super(itemView);
         mCover = (ImageView) itemView.findViewById(R.id.img_book_cover);
@@ -54,18 +53,8 @@ public class BookViewHolder extends BaseViewHolder<Book> {
         Glide.with(context).load(book.getImages().getLarge()).into(mCover);
         List<String> authors = book.getAuthor();
 
-        for (int i = 0, count = authors.size(); i < count; i++) {
-            mStringBuilder.append(authors.get(i));
-            mStringBuilder.append(" ");
-        }
-        if (mStringBuilder.length() != 0 && mStringBuilder != null) {
-            mStringBuilder.deleteCharAt(mStringBuilder.length() - 1);
-        } else {
-            mStringBuilder.append("无");
-        }
-
+        mAuthor.setText(("作者:" + BookApiUtils.getAuthor(authors)));
         mName.setText(book.getTitle());
-        mAuthor.setText("作者:" + mStringBuilder.toString());
         mRaing.setText("评分:" + book.getRating().getAverage());
         mPulisher.setText("出版社:" + book.getPublisher());
         mSummary.setText(book.getSummary());
@@ -73,7 +62,7 @@ public class BookViewHolder extends BaseViewHolder<Book> {
 
 
     @Override
-    public void setOperation(View v, int position) {
+    public void setOperation(int position) {
         mBookContain.setOnClickListener(view -> {
                     if (mOnBookItenListener != null) {
                         mOnBookItenListener.onBookItem(view, position);

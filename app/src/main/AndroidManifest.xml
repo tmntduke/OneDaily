@@ -17,6 +17,8 @@
         </activity>
 
         <activity android:name=".ui.douban.activity.BookSearchActivity"></activity>
+        <activity android:name=".ui.douban.activity.BookCatalogActivity"></activity>
+        <activity android:name=".ui.douban.activity.BookDetailActivity"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
