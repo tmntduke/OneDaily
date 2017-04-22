@@ -4,6 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/bg_gray"
-    android:gravity="center" >
+    android:gravity="center">
+
+    <tmnt.example.onedaily.weight.ClearEditText.ClearEditText
+        android:id="@+id/ed_search"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@drawable/search_bar_edit_bg"
+        android:gravity="center"
+        android:hint="图书"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:singleLine="true"
+        android:textColorHint="@color/text_gray"
+        android:textSize="12sp"/>
 
 </LinearLayout>

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:fitsSystemWindows="true"
               android:orientation="vertical">
 
     <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
+                  android:layout_height="30dp"
+                  android:layout_margin="5dp"
                   android:orientation="horizontal">
         <include
             layout="@layout/search_lay"
@@ -18,13 +21,74 @@
             android:id="@+id/tv_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimary"
-            android:text="@string/cancel"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:gravity="center"
-            android:textSize="14sp"
-            android:layout_weight="1"/>
+            android:text="@string/cancel"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp"/>
 
     </LinearLayout>
+
+    <ImageView android:layout_width="match_parent"
+               android:layout_height="2dp"
+               android:background="@color/bg_gray"/>
+
+    <LinearLayout
+        android:id="@+id/search_contain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/hot_search"
+                android:textColor="@color/text_gray"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="@string/lable_change"
+                android:textColor="@color/text_gray"
+                android:textSize="14sp"/>
+
+        </RelativeLayout>
+
+        <tmnt.example.onedaily.weight.Lable.LabelView
+            android:id="@+id/lv_book"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:labelMargin="5dp"
+            app:labelPadding="8dp"
+            app:textColor="@color/colorPrimary"
+            app:textSize="16sp"
+        ></tmnt.example.onedaily.weight.Lable.LabelView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/search_list_contain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"></LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_book_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

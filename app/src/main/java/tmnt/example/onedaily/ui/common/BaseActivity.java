@@ -55,6 +55,19 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseFunc
         startActivity(intent);
     }
 
+
+    protected void toActivityForResult(Class clazz, int requestCode) {
+        toActivityForResult(clazz, requestCode, null);
+    }
+
+    protected void toActivityForResult(Class clazz, int requestCode, Bundle bundle) {
+        Intent intent = new Intent(this, clazz);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        startActivityForResult(intent, requestCode);
+    }
+
     /**
      * 设置fragment
      *

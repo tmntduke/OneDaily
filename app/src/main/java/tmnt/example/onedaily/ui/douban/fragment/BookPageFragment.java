@@ -20,6 +20,7 @@ import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.bean.book.Book;
 import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.ui.common.BaseFragment;
+import tmnt.example.onedaily.ui.douban.activity.BookSearchActivity;
 import tmnt.example.onedaily.ui.douban.adapter.BookPagerAdapter;
 
 /**
@@ -47,7 +48,7 @@ public class BookPageFragment extends BaseFragment implements tmnt.example.oneda
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        ((BaseActivity)getActivity()).setStatesBar(R.color.colorPrimary);
+        ((BaseActivity) getActivity()).setStatesBar(R.color.colorPrimary);
 
     }
 
@@ -73,9 +74,12 @@ public class BookPageFragment extends BaseFragment implements tmnt.example.oneda
         mTabCategory.setTabMode(TabLayout.MODE_FIXED);
 
         mImgAdd.setOnClickListener(v -> {
-            Intent intent = new Intent();
+
         });
 
+        mImgSearch.setOnClickListener(v -> {
+            toActivity(BookSearchActivity.class);
+        });
 
     }
 

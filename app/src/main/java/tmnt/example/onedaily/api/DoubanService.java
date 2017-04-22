@@ -21,4 +21,7 @@ public interface DoubanService {
     @GET("book/search")
     Observable<DoubanBookInfo> getBook(@Query("q") String q, @Query("start") String start, @Query("count") String count);
 
+    @GET("book/search")
+    Observable<DoubanBookInfo> getSearchBook(@Query("q") String q, @Query("start") String start, @Query("count") String count);
+
 }

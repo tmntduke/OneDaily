@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import tmnt.example.onedaily.R;
+import tmnt.example.onedaily.util.DensityUtils;
 
 /**
  * Created by tmnt on 2017/3/17.
@@ -26,6 +28,8 @@ public class LabelView extends ViewGroup {
     private Context mContext;
 
     private OnLabelListener mOnLabelListener;
+
+    private static final String TAG = "LabelView";
 
     public void setOnLabelListener(OnLabelListener onLabelListener) {
         mOnLabelListener = onLabelListener;
@@ -173,7 +177,8 @@ public class LabelView extends ViewGroup {
         TextView lable = new TextView(mContext);
         lable.setPadding(mLabelPadding, mLabelPadding, mLabelPadding, mLabelPadding);
         lable.setTextColor(mTextColor);
-        lable.setTextSize(mTextSize);
+        Log.i(TAG, "addLabel: "+mTextSize);
+        lable.setTextSize(mTextSize/3);
         lable.setText(text);
         if (mTextBackground != 0) {
             lable.setBackgroundResource(mTextBackground);

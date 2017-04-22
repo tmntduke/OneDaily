@@ -1,5 +1,6 @@
 package tmnt.example.onedaily.Rx;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
@@ -35,6 +36,21 @@ public class RxUilt<T> {
                         callBack.onError(throwable);
                     }
                 });
+    }
+
+    public void distinctForData(List<T> t,CallBack<List<T>> callBack){
+
+        Observable.just(t)
+                .distinct()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(list->{
+                    if (callBack!=null){
+                        callBack.onSuccess(list);
+                    }
+                });
+
+
     }
 
 }
