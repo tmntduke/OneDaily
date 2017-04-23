@@ -35,8 +35,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="visible"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:visibility="visible">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -68,11 +68,46 @@
             android:id="@+id/lv_book"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:labelMargin="5dp"
-            app:labelPadding="8dp"
+            app:labelMargin="6dp"
+            app:labelPadding="6dp"
             app:textColor="@color/colorPrimary"
-            app:textSize="16sp"
+            app:textSize="14sp"
         ></tmnt.example.onedaily.weight.Lable.LabelView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/search_history"
+                android:textColor="@color/text_gray"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="@string/history_clear"
+                android:textColor="@color/text_gray"
+                android:textSize="14sp"/>
+
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/lv_search_history"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:scrollbars="none"></ListView>
+
     </LinearLayout>
 
     <ImageView android:layout_width="match_parent"
@@ -83,10 +118,9 @@
         android:id="@+id/rv_book_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-    android:visibility="gone">
+        android:visibility="gone">
 
     </android.support.v7.widget.RecyclerView>
-
 
 
 </LinearLayout>

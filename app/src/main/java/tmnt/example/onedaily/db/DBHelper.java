@@ -13,7 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "one.db";
     private static final int VERSION = 1;
 
-    private static final String CREATE = "create table t_searchHistory (hId integer PRIMARY KEY AUTOINCREMENT" +
+    public static final String CREATE = "create table t_searchHistory (hId integer PRIMARY KEY AUTOINCREMENT" +
             ", history varchar (200))";
 
     public DBHelper(Context context) {

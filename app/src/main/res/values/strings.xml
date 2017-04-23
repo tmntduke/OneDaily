@@ -16,4 +16,6 @@
     <string name="book_summary">简介</string>
     <string name="book_catlog">目录</string>
     <string name="book_author">作者简介</string>
+    <string name="search_history">搜索历史</string>
+    <string name="history_clear">清空</string>
 </resources>

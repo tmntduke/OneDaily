@@ -4,8 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import rx.schedulers.Schedulers;
@@ -27,6 +30,8 @@ public class OneDailyDB {
 
     private static OneDailyDB mOneDailyDB;
 
+    private static final String TAG = "OneDailyDB";
+
     private OneDailyDB(Context context) {
         mContext = context;
         helper = new DBHelper(context);
@@ -44,28 +49,27 @@ public class OneDailyDB {
         ContentValues values = new ContentValues();
         values.put(HISTORY, history);
 
-        new RxUilt<Boolean>().createAndResult(Schedulers.io(), new Operation<Boolean>() {
-            @Override
-            public Boolean operation() {
-                mDatabase = helper.getWritableDatabase();
-                mDatabase.insert(TABLE, ID, values);
-                return null;
-            }
+        new RxUilt<Boolean>().createAndResult(Schedulers.io(), () -> {
+                    mDatabase = helper.getWritableDatabase();
+                    mDatabase.insert(TABLE, ID, values);
+                    return null;
+                }, new CallBack<Boolean>() {
+                    @Override
+                    public void onSuccess(Boolean aBoolean) {
 
-            @Override
-            public void onSuccess(Boolean contentValues) {
+                    }
 
-            }
+                    @Override
+                    public void onError(Throwable e) {
 
-            @Override
-            public void onError(Throwable throwable) {
+                    }
+                }
 
-            }
-        });
+        );
 
     }
 
-    public void queryHistory(CallBack<List<String>> callBack) {
+    public  void queryHistory(CallBack<List<String>> callBack) {
 
         new RxUilt<List<String>>().createAndResult(Schedulers.io(), new Operation<List<String>>() {
             @Override
@@ -75,22 +79,20 @@ public class OneDailyDB {
                 Cursor cursor = mDatabase.query(TABLE, null, null, null, null,
                         null, null);
                 while (cursor.moveToNext()) {
-                    arrayList.add(cursor.getString(cursor.getColumnIndex(ID)));
+                    arrayList.add(cursor.getString(cursor.getColumnIndex(HISTORY)));
                 }
                 cursor.close();
+                if (arrayList == null || arrayList.size() == 0) {
+                    return Collections.emptyList();
+                }
                 return arrayList;
             }
+        }, callBack);
+    }
 
-            @Override
-            public void onSuccess(List<String> list) {
-                callBack.onSuccess(list);
-            }
-
-            @Override
-            public void onError(Throwable throwable) {
-                callBack.onError(throwable);
-            }
-        });
-
+    public void clearHistory() {
+        mDatabase = helper.getReadableDatabase();
+        mDatabase.execSQL("delete from t_searchHistory");
+        mDatabase.execSQL("update sqlite_sequence SET seq = 0 where name ='t_searchHistory'");
     }
 }

@@ -6,8 +6,4 @@ package tmnt.example.onedaily.Rx;
 
 public interface Operation<T> {
     T operation();
-
-    void onSuccess(T t);
-
-    void onError(Throwable throwable);
 }

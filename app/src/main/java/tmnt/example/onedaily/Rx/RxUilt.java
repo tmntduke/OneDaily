@@ -1,5 +1,7 @@
 package tmnt.example.onedaily.Rx;
 
+import android.util.Log;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -8,6 +10,7 @@ import rx.Scheduler;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import tmnt.example.onedaily.bean.book.DoubanBookInfo;
 import tmnt.example.onedaily.mvp.CallBack;
@@ -17,6 +20,8 @@ import tmnt.example.onedaily.mvp.CallBack;
  */
 
 public class RxUilt<T> {
+
+    private static final String TAG = "RxUilt";
 
     public void getDataForObservable(Observable<T> observable, CallBack<T> callBack) {
 
@@ -54,7 +59,7 @@ public class RxUilt<T> {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public void createAndResult(Scheduler scheduler, Operation<T> operation) {
+    public void createAndResult(Scheduler scheduler, Operation<T> operation, CallBack<T> callBack) {
         Observable.create(new Observable.OnSubscribe<T>() {
             @Override
             public void call(Subscriber<? super T> subscriber) {
@@ -65,9 +70,9 @@ public class RxUilt<T> {
         }).subscribeOn(scheduler)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(t1 -> {
-                    operation.onSuccess(t1);
+                    callBack.onSuccess(t1);
                 }, throwable -> {
-                    operation.onError(throwable);
+                    callBack.onError(throwable);
                 });
     }
 
