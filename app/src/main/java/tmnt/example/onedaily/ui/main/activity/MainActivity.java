@@ -1,6 +1,7 @@
 package tmnt.example.onedaily.ui.main.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.RelativeLayout;
@@ -11,6 +12,7 @@ import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.ui.douban.fragment.BookFragment;
 import tmnt.example.onedaily.ui.douban.fragment.BookPageFragment;
+import tmnt.example.onedaily.ui.douban.listener.OnBookRetrunListener;
 import tmnt.example.onedaily.util.SharedPreferencesUtil;
 import tmnt.example.onedaily.weight.BottomNavigation.BottomNavigationLayout;
 import tmnt.example.onedaily.weight.BottomNavigation.Controller;
@@ -25,6 +27,8 @@ public class MainActivity extends BaseActivity {
 
     private Controller controller;
     private SharedPreferencesUtil util;
+
+    private static OnBookRetrunListener mOnBookRetrunListener;
 
     @Override
     public void initData(Bundle savedInstanceState) {
@@ -94,13 +98,21 @@ public class MainActivity extends BaseActivity {
         controller.addTabItemClickListener(new OnTabItemSelectListener() {
             @Override
             public void onSelected(int index, Object tag) {
-                Log.i(TAG, "onSelected: "+index);
+                Log.i(TAG, "onSelected: " + index);
                 switch (index) {
                     case 0:
 
                         break;
                     case 1:
-                        toFragment(R.id.main_contain, BookPageFragment.getInstance());
+                        Fragment douban = BookPageFragment.getInstance();
+                        if (douban.isVisible() && douban.isAdded()) {
+                            if (mOnBookRetrunListener != null) {
+                                mOnBookRetrunListener.onReturn();
+                            }
+                        } else {
+                            toFragment(R.id.main_contain, douban);
+                        }
+
                         break;
                 }
             }
@@ -115,5 +127,9 @@ public class MainActivity extends BaseActivity {
     @Override
     public void loadData() {
 
+    }
+
+    public static void setOnBookRetrunListener(OnBookRetrunListener onBookRetrunListener) {
+        mOnBookRetrunListener = onBookRetrunListener;
     }
 }

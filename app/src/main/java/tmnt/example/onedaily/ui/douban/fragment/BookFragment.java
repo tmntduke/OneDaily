@@ -23,8 +23,10 @@ import tmnt.example.onedaily.ui.douban.activity.BookDetailActivity;
 import tmnt.example.onedaily.ui.douban.activity.BookSearchActivity;
 import tmnt.example.onedaily.ui.douban.adapter.BookAdapter;
 import tmnt.example.onedaily.ui.douban.listener.OnBookItenListener;
+import tmnt.example.onedaily.ui.douban.listener.OnBookRetrunListener;
 import tmnt.example.onedaily.ui.douban.model.BookModel;
 import tmnt.example.onedaily.ui.douban.presenter.BookPresenter;
+import tmnt.example.onedaily.ui.main.activity.MainActivity;
 import tmnt.example.onedaily.util.DividerItemDecoration;
 import tmnt.example.onedaily.weight.Refresh.SmartPullableLayout;
 import tmnt.example.onedaily.weight.WaveView.WaveLoadingView;
@@ -43,7 +45,6 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
     ImageView mImgBookEmpty;
 
     private View mView;
-
     private String category;
     private List<Book> mBookList;
     private BookAdapter mBookAdapter;
@@ -123,6 +124,12 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
             toActivity(BookDetailActivity.class, bundle);
         });
 
+        MainActivity.setOnBookRetrunListener(new OnBookRetrunListener() {
+            @Override
+            public void onReturn() {
+                mListBook.smoothScrollToPosition(0);
+            }
+        });
     }
 
     @Override
