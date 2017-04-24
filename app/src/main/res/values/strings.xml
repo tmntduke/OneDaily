@@ -18,4 +18,6 @@
     <string name="book_author">作者简介</string>
     <string name="search_history">搜索历史</string>
     <string name="history_clear">清空</string>
+    <string name="gank_category">专题</string>
+    <string name="gank_time">时间浏览</string>
 </resources>

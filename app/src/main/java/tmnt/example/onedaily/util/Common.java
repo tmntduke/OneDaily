@@ -10,6 +10,7 @@ public class Common {
     public static final String GANK_URL = "http://gank.io/api/";
 
 
+    public static final String ZHIHU_URL = "http://news-at.zhihu.com/api/4/news/";
 
 
 }
