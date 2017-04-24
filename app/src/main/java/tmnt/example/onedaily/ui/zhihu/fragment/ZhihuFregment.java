@@ -10,13 +10,14 @@ import android.view.ViewGroup;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
+import tmnt.example.onedaily.bean.zhihu.ZhihuInfo;
 import tmnt.example.onedaily.ui.common.BaseFragment;
 
 /**
  * Created by tmnt on 2017/4/24.
  */
 
-public class ZhihuFregment extends BaseFragment {
+public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily.mvp.View<ZhihuInfo> {
 
     @Bind(R.id.rv_gank)
     RecyclerView mRvGank;
@@ -57,5 +58,25 @@ public class ZhihuFregment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void showData(ZhihuInfo datas) {
+
+    }
+
+    @Override
+    public void showLoadData(ZhihuInfo datas) {
+
+    }
+
+    @Override
+    public void showRefreshData(ZhihuInfo datas) {
+
+    }
+
+    @Override
+    public void showError(Throwable throwable) {
+
     }
 }
