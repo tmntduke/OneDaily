@@ -13,6 +13,7 @@ import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.ui.douban.fragment.BookFragment;
 import tmnt.example.onedaily.ui.douban.fragment.BookPageFragment;
 import tmnt.example.onedaily.ui.douban.listener.OnBookRetrunListener;
+import tmnt.example.onedaily.ui.zhihu.fragment.ZhihuFregment;
 import tmnt.example.onedaily.util.SharedPreferencesUtil;
 import tmnt.example.onedaily.weight.BottomNavigation.BottomNavigationLayout;
 import tmnt.example.onedaily.weight.BottomNavigation.Controller;
@@ -87,6 +88,8 @@ public class MainActivity extends BaseActivity {
                 .addTabItem(tabItem4)
                 .build();
 
+        Fragment zhihu = ZhihuFregment.getInstance();
+        setFragment(R.id.main_contain, zhihu);
     }
 
     @Override
@@ -101,7 +104,8 @@ public class MainActivity extends BaseActivity {
                 Log.i(TAG, "onSelected: " + index);
                 switch (index) {
                     case 0:
-
+                        Fragment zhihu = ZhihuFregment.getInstance();
+                        toFragment(R.id.main_contain, zhihu);
                         break;
                     case 1:
                         Fragment douban = BookPageFragment.getInstance();
@@ -112,6 +116,9 @@ public class MainActivity extends BaseActivity {
                         } else {
                             toFragment(R.id.main_contain, douban);
                         }
+
+                        break;
+                    case 2:
 
                         break;
                 }

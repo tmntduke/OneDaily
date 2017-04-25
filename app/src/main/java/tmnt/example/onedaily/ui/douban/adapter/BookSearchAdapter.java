@@ -38,7 +38,7 @@ public class BookSearchAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.list_search_item, parent, false);
-        BookSearchViewHolder bookSearchViewHolder = new BookSearchViewHolder(view);
+        BookSearchViewHolder bookSearchViewHolder = new BookSearchViewHolder(view,0);
         return bookSearchViewHolder;
     }
 

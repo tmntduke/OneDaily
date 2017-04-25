@@ -10,8 +10,11 @@ import android.view.View;
 
 public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder {
 
-    public BaseViewHolder(View itemView) {
+    public int type;
+
+    public BaseViewHolder(View itemView, int type) {
         super(itemView);
+        this.type = type;
     }
 
     /**
@@ -19,5 +22,5 @@ public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder {
      */
     public abstract void setData(Context context, T t);
 
-    public abstract void setOperation( int position);
+    public abstract void setOperation(int position);
 }

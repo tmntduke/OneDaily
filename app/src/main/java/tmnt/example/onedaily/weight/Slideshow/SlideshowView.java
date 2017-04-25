@@ -131,13 +131,13 @@ public class SlideshowView extends FrameLayout {
         int count = list.size();
         for (int i = 0; i < count + 2; i++) {
             if (i == 0) {
-                ImageBean imageBean = new ImageBean((ImageView) holder.createView(mContext), list.get(count - 1));
+                ImageBean imageBean = new ImageBean( holder.createView(mContext), list.get(count - 1));
                 views.add(imageBean);
             } else if (i == count + 1) {
-                ImageBean imageBean = new ImageBean((ImageView) holder.createView(mContext), list.get(0));
+                ImageBean imageBean = new ImageBean( holder.createView(mContext), list.get(0));
                 views.add(imageBean);
             } else {
-                ImageBean imageBean = new ImageBean((ImageView) holder.createView(mContext), list.get(i - 1));
+                ImageBean imageBean = new ImageBean( holder.createView(mContext), list.get(i - 1));
                 views.add(imageBean);
             }
         }

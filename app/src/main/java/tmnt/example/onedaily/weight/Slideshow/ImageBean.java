@@ -1,5 +1,6 @@
 package tmnt.example.onedaily.weight.Slideshow;
 
+import android.view.View;
 import android.widget.ImageView;
 
 /**
@@ -7,19 +8,19 @@ import android.widget.ImageView;
  */
 
 public class ImageBean<T> {
-    private ImageView mImageView;
+    private View mImageView;
     private T t;
 
-    public ImageBean(ImageView imageView, T t) {
+    public ImageBean(View imageView, T t) {
         mImageView = imageView;
         this.t = t;
     }
 
-    public ImageView getImageView() {
+    public View getImageView() {
         return mImageView;
     }
 
-    public void setImageView(ImageView imageView) {
+    public void setImageView(View imageView) {
         mImageView = imageView;
     }
 

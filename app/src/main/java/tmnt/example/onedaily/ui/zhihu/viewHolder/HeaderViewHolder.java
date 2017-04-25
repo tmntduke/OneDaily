@@ -3,35 +3,39 @@ package tmnt.example.onedaily.ui.zhihu.viewHolder;
 import android.content.Context;
 import android.view.View;
 
+import java.util.List;
+
 import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.bean.zhihu.TopStories;
 import tmnt.example.onedaily.bean.zhihu.ZhihuDetailInfo;
 import tmnt.example.onedaily.bean.zhihu.ZhihuInfo;
 import tmnt.example.onedaily.ui.common.BaseViewHolder;
-import tmnt.example.onedaily.ui.zhihu.listener.OnSlideItemClickListener;
+import tmnt.example.onedaily.ui.zhihu.listener.OnZhihuItemClickListener;
 import tmnt.example.onedaily.weight.Slideshow.SlideshowView;
 
 /**
  * Created by tmnt on 2017/4/24.
  */
 
-public class HeaderViewHolder extends BaseViewHolder<ZhihuInfo> {
+public class HeaderViewHolder extends BaseViewHolder<List<TopStories>> {
 
+    private int type;
     private SlideshowView mSlideshowView;
-    private OnSlideItemClickListener mOnSlideItemClickListener;
+    private OnZhihuItemClickListener mOnSlideItemClickListener;
 
-    public HeaderViewHolder(View itemView) {
-        super(itemView);
+    public HeaderViewHolder(View itemView, int type) {
+        super(itemView,type);
+        this.type = type;
         mSlideshowView = (SlideshowView) itemView.findViewById(R.id.slide_zhihu);
     }
 
-    public void setOnSlideItemClickListener(OnSlideItemClickListener onSlideItemClickListener) {
+    public void setOnSlideItemClickListener(OnZhihuItemClickListener onSlideItemClickListener) {
         mOnSlideItemClickListener = onSlideItemClickListener;
     }
 
     @Override
-    public void setData(Context context, ZhihuInfo zhihuDetailInfo) {
-        mSlideshowView.setData(new ImageHolder(), zhihuDetailInfo.getTop_stories());
+    public void setData(Context context, List<TopStories> zhihuDetailInfo) {
+        mSlideshowView.setData(new ImageHolder(), zhihuDetailInfo);
     }
 
     @Override
@@ -39,9 +43,8 @@ public class HeaderViewHolder extends BaseViewHolder<ZhihuInfo> {
 
         mSlideshowView.setOnItemClickListener((v, position1) -> {
             if (mOnSlideItemClickListener != null) {
-                mOnSlideItemClickListener.onItemClick(v, position);
+                mOnSlideItemClickListener.onItemSlideClick(v, position);
             }
         });
-
     }
 }

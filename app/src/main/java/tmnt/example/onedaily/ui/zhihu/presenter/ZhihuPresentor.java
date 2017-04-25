@@ -2,6 +2,7 @@ package tmnt.example.onedaily.ui.zhihu.presenter;
 
 import tmnt.example.onedaily.bean.zhihu.ZhihuInfo;
 import tmnt.example.onedaily.mvp.BasePresenter;
+import tmnt.example.onedaily.mvp.CallBack;
 import tmnt.example.onedaily.mvp.Model;
 import tmnt.example.onedaily.mvp.View;
 
@@ -17,7 +18,17 @@ public class ZhihuPresentor extends BasePresenter<ZhihuInfo> {
 
     @Override
     public void handleData() {
+        mModel.getNews(new CallBack<ZhihuInfo>() {
+            @Override
+            public void onSuccess(ZhihuInfo zhihuInfo) {
+                mView.showData(zhihuInfo);
+            }
 
+            @Override
+            public void onError(Throwable e) {
+                mView.showError(e);
+            }
+        });
     }
 
     @Override

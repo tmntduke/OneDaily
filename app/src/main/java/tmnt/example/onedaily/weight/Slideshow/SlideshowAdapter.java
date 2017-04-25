@@ -52,9 +52,9 @@ public class SlideshowAdapter extends PagerAdapter {
         Log.i(TAG, "instantiateItem: " + position);
         ImageBean imageBean = mDatas.get(position);
 
-        ImageView imageView = imageBean.getImageView();
-        mHolder.UpdateUI(mContext, position, imageBean.getT(),imageView);
-        container.addView(imageView);
+        View view = imageBean.getImageView();
+        mHolder.UpdateUI(mContext, position, imageBean.getT(),view);
+        container.addView(view);
 
 
         imageBean.getImageView().setOnClickListener(v -> {
@@ -64,7 +64,7 @@ public class SlideshowAdapter extends PagerAdapter {
         });
 
 
-        return imageView;
+        return view;
     }
 
     @Override

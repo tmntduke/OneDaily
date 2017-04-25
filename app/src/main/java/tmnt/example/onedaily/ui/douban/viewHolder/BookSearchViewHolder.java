@@ -27,17 +27,19 @@ public class BookSearchViewHolder extends BaseViewHolder<Book> {
 
     private static final String TAG = "BookSearchViewHolder";
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        mOnItemClickListener = onItemClickListener;
-    }
-
-    public BookSearchViewHolder(View itemView) {
-        super(itemView);
+    public BookSearchViewHolder(View itemView, int type) {
+        super(itemView, type);
         imgSearchCover = (ImageView) itemView.findViewById(R.id.img_search_cover);
         tvSearchTilte = (TextView) itemView.findViewById(R.id.tv_search_title);
         tvSearchAuthor = (TextView) itemView.findViewById(R.id.tv_search_author);
         searchItem= (LinearLayout) itemView. findViewById(R.id.search_item);
+
     }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
+    }
+
 
     @Override
     public void setData(Context context, Book book) {

@@ -1,11 +1,17 @@
 package tmnt.example.onedaily.api;
 
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -22,12 +28,18 @@ public class Api {
 
     private static Retrofit retrofit;
 
+    private String baseUrl;
+
     public static Api getInstance(String baseUrl) {
         if (ourInstance == null) {
             ourInstance = new Api(baseUrl);
         }
         return ourInstance;
 
+    }
+
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
     }
 
     private Api(String baseUrl) {
@@ -39,6 +51,13 @@ public class Api {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addNetworkInterceptor(new HttpLoggingInterceptor()
                         .setLevel(HttpLoggingInterceptor.Level.BODY))
+                .addInterceptor(new Interceptor() {
+                    @Override
+                    public Response intercept(Chain chain) throws IOException {
+
+                        return null;
+                    }
+                })
                 .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .build();
 
@@ -55,7 +74,6 @@ public class Api {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(getOkhttp())
                 .build();
-
     }
 
     public <T> T getCall(Class<T> clazz) {

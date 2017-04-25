@@ -10,10 +10,8 @@ import com.bumptech.glide.Glide;
 
 import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.bean.zhihu.Story;
-import tmnt.example.onedaily.bean.zhihu.ZhihuInfo;
-import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.ui.common.BaseViewHolder;
-import tmnt.example.onedaily.ui.zhihu.listener.OnCardItemClickListener;
+import tmnt.example.onedaily.ui.zhihu.listener.OnZhihuItemClickListener;
 
 /**
  * Created by tmnt on 2017/4/24.
@@ -26,18 +24,21 @@ public class NewsViewHolder extends BaseViewHolder<Story> {
     private ImageView imgCover;
     private TextView tvDate;
 
-    private String date;
-    private OnCardItemClickListener mOnCardItemClickListener;
+    private int type;
 
-    public NewsViewHolder(View itemView) {
-        super(itemView);
+    private String date;
+    private OnZhihuItemClickListener mOnCardItemClickListener;
+
+    public NewsViewHolder(View itemView ,int type) {
+        super(itemView,type);
+        this.type=type;
         cdNews = (CardView) itemView.findViewById(R.id.cd_news);
         tvTilte = (TextView) itemView.findViewById(R.id.tv_zhihu_title);
         imgCover = (ImageView) itemView.findViewById(R.id.img_zhihu_cover);
         tvDate = (TextView) itemView.findViewById(R.id.tv_zhihu_date);
     }
 
-    public void setOnCardItemClickListener(OnCardItemClickListener onCardItemClickListener) {
+    public void setOnCardItemClickListener(OnZhihuItemClickListener onCardItemClickListener) {
         mOnCardItemClickListener = onCardItemClickListener;
     }
 
@@ -52,7 +53,7 @@ public class NewsViewHolder extends BaseViewHolder<Story> {
     public void setOperation(int position) {
         cdNews.setOnClickListener(v -> {
             if (mOnCardItemClickListener != null) {
-                mOnCardItemClickListener.onItemClick(v, position);
+                mOnCardItemClickListener.onItemCardClick(v, position);
             }
         });
     }

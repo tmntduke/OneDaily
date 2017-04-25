@@ -32,12 +32,8 @@ public class BookViewHolder extends BaseViewHolder<Book> {
     private LinearLayout mBookContain;
     private OnBookItenListener mOnBookItenListener;
 
-    public void setOnBookItenListener(OnBookItenListener onBookItenListener) {
-        mOnBookItenListener = onBookItenListener;
-    }
-
-    public BookViewHolder(View itemView) {
-        super(itemView);
+    public BookViewHolder(View itemView, int type) {
+        super(itemView, type);
         mCover = (ImageView) itemView.findViewById(R.id.img_book_cover);
         mName = (TextView) itemView.findViewById(R.id.tv_book_name);
         mRaing = (TextView) itemView.findViewById(R.id.tv_book_raing);
@@ -45,8 +41,13 @@ public class BookViewHolder extends BaseViewHolder<Book> {
         mPulisher = (TextView) itemView.findViewById(R.id.tv_book_publisher);
         mSummary = (TextView) itemView.findViewById(R.id.tv_book_summary);
         mBookContain = (LinearLayout) itemView.findViewById(R.id.book_contain);
-
     }
+
+
+    public void setOnBookItenListener(OnBookItenListener onBookItenListener) {
+        mOnBookItenListener = onBookItenListener;
+    }
+
 
     @Override
     public void setData(Context context, Book book) {
