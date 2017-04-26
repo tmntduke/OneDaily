@@ -31,4 +31,18 @@ public class ImageBean<T> {
     public void setT(T t) {
         this.t = t;
     }
+
+    @Override
+    public int hashCode() {
+        return mImageView.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof ImageBean))
+            return false;
+        ImageBean imageBean = (ImageBean) o;
+        return imageBean.mImageView.hashCode() == this.mImageView.hashCode();
+    }
+
 }

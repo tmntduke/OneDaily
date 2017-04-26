@@ -1,6 +1,7 @@
 package tmnt.example.onedaily.ui.zhihu.viewHolder;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,18 +22,22 @@ public class ImageHolder implements Holder<TopStories> {
 
     ImageView imageView;
     TextView mTextView;
+    private static final String TAG = "ImageHolder";
 
     @Override
     public View createView(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.zhihu_slide_lay, null);
-        imageView = (ImageView) view.findViewById(R.id.img_zhihu_slide);
-        mTextView = (TextView) view.findViewById(R.id.tv_zhihu_slide);
+
+        Log.i(TAG, "createView: "+mTextView);
         return view;
     }
 
     @Override
     public void UpdateUI(Context context, int position, TopStories data, View v) {
-        Glide.with(context).load(data.getImage()).into(imageView);
+        Log.i(TAG, "UpdateUI: "+data.getTitle());
+        imageView = (ImageView) v.findViewById(R.id.img_zhihu_slide);
+        mTextView = (TextView) v.findViewById(R.id.tv_zhihu_slide);
+        Glide.with(context).load(data.getImage()).placeholder(R.drawable.ic_moren).into(imageView);
         mTextView.setText(data.getTitle());
     }
 }

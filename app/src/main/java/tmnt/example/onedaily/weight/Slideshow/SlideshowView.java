@@ -37,7 +37,7 @@ public class SlideshowView extends FrameLayout {
     private List<ImageBean> mViewList;
     private OnItemClickListener mOnItemClickListener;
     private Context mContext;
-    private int dotSize = 12;
+    private int dotSize = 14;
     private int dotSpace = 12;
     private Animator animatorToLarge;
     private Animator animatorToSmall;
@@ -94,20 +94,22 @@ public class SlideshowView extends FrameLayout {
 
     public void setData(Holder holder, List<?> list) {
 
-        mViewList = createImage(holder, list);
-        Log.i(TAG, "holder: " + holder);
-        adapter = new SlideshowAdapter(mViewList, holder, mContext);
-        mViewPager.setAdapter(adapter);
-        setSelector(list.size());
-        Log.i(TAG, "setData: " + mViewList.size());
+     if (list.size()>0){
+         mViewList = createImage(holder, list);
+         Log.i(TAG, "holder: " + holder);
+         adapter = new SlideshowAdapter(mViewList, holder, mContext);
+         mViewPager.setAdapter(adapter);
+         setSelector(list.size());
+         Log.i(TAG, "setData: " + mViewList.size());
 
 
-        showImage(list.size() + 2);
-        autoPlay();
+         showImage(list.size() + 2);
+         autoPlay();
+     }
     }
 
     private void autoPlay() {
-        mSubscription = Observable.interval(5, 5, TimeUnit.SECONDS)
+        mSubscription = Observable.interval(7, 7, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<Long>() {
@@ -134,7 +136,7 @@ public class SlideshowView extends FrameLayout {
                 ImageBean imageBean = new ImageBean( holder.createView(mContext), list.get(count - 1));
                 views.add(imageBean);
             } else if (i == count + 1) {
-                ImageBean imageBean = new ImageBean( holder.createView(mContext), list.get(0));
+                ImageBean imageBean = new ImageBean(holder.createView(mContext), list.get(0));
                 views.add(imageBean);
             } else {
                 ImageBean imageBean = new ImageBean( holder.createView(mContext), list.get(i - 1));
@@ -204,8 +206,8 @@ public class SlideshowView extends FrameLayout {
                 switch (state) {
                     case ViewPager.SCROLL_STATE_IDLE:
                         if (mViewPager.getCurrentItem() == 0) {
-                            mViewPager.setCurrentItem(count, false);
-                        } else if (mViewPager.getCurrentItem() == count - 1) {
+                            mViewPager.setCurrentItem(count-2, false);
+                        } else if (mViewPager.getCurrentItem() == count-1) {
                             mViewPager.setCurrentItem(1, false);
                         }
                         currentItem = mViewPager.getCurrentItem();

@@ -6,11 +6,15 @@
               android:fitsSystemWindows="true"
               android:orientation="vertical">
 
+    <View android:layout_width="match_parent"
+          android:layout_height="20dp"
+          android:background="@color/colorPrimary"></View>
+
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:fitsSystemWindows="true"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="true">
 
         <RelativeLayout
             android:layout_width="match_parent"

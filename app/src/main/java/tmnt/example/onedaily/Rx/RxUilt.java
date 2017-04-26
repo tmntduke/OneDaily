@@ -30,6 +30,7 @@ public class RxUilt<T> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(o -> {
                     if (callBack != null) {
+                        Log.i(TAG, "getDataForObservable: "+o);
                         callBack.onSuccess(o);
                     }
                 }, throwable -> {

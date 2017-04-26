@@ -1,12 +1,18 @@
 package tmnt.example.onedaily.ui.zhihu.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.v4.app.Fragment;
+import android.support.v4.graphics.ColorUtils;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +37,19 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
 
     @Bind(R.id.rv_zhihu)
     RecyclerView mRvZhihu;
+    @Bind(R.id.img_zhihu_empty)
+    ImageView mImgZhihuEmpty;
+    @Bind(R.id.spl_zhihu)
+    SwipeRefreshLayout mSplZhihu;
+
 
     private List<TopStories> mTopStories;
     private List<Story> mStories;
     private ZhihuPresentor mZhihuPresentor;
     private ZhihuAdapter mZhihuAdapter;
     private ZhihuModel model;
+
+    private static final String TAG = "ZhihuFregment";
 
     @Override
     protected View setContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,6 +90,14 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
             }
         });
 
+        mSplZhihu.setColorSchemeColors(new int[]{Color.parseColor("#26f913"), Color.parseColor("#ef4054")
+                , Color.parseColor("#e9ec56"), Color.parseColor("#009dff")});
+        mSplZhihu.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+            }
+        });
 
     }
 
@@ -98,11 +119,13 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
 
     @Override
     public void showData(ZhihuInfo datas) {
+        Log.i(TAG, "showData: " + datas.getTop_stories().size());
         if (datas.getTop_stories() != null) {
             mTopStories.addAll(datas.getTop_stories());
         }
         mStories.addAll(datas.getStories());
         mZhihuAdapter.notifyDataSetChanged();
+        //mZhihuAdapter.notifyToData();
     }
 
     @Override
@@ -117,6 +140,9 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
 
     @Override
     public void showError(Throwable throwable) {
-
+        Log.i(TAG, "showError: " + throwable.toString());
+        mImgZhihuEmpty.setVisibility(View.VISIBLE);
+        mSplZhihu.setVisibility(View.GONE);
     }
+
 }

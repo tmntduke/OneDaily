@@ -51,7 +51,7 @@ public class BookViewHolder extends BaseViewHolder<Book> {
 
     @Override
     public void setData(Context context, Book book) {
-        Glide.with(context).load(book.getImages().getLarge()).into(mCover);
+        Glide.with(context).load(book.getImages().getLarge()).placeholder(R.drawable.ic_moren).into(mCover);
         List<String> authors = book.getAuthor();
 
         mAuthor.setText(("作者:" + BookApiUtils.getAuthor(authors)));

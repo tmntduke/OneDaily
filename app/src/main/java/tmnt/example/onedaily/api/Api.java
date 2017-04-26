@@ -2,6 +2,7 @@ package tmnt.example.onedaily.api;
 
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -9,8 +10,10 @@ import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -30,6 +33,8 @@ public class Api {
 
     private String baseUrl;
 
+    private static final String TAG = "Api";
+
     public static Api getInstance(String baseUrl) {
         if (ourInstance == null) {
             ourInstance = new Api(baseUrl);
@@ -43,7 +48,7 @@ public class Api {
     }
 
     private Api(String baseUrl) {
-
+        this.baseUrl = baseUrl;
         createRetrofit(baseUrl);
     }
 
@@ -51,13 +56,6 @@ public class Api {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addNetworkInterceptor(new HttpLoggingInterceptor()
                         .setLevel(HttpLoggingInterceptor.Level.BODY))
-                .addInterceptor(new Interceptor() {
-                    @Override
-                    public Response intercept(Chain chain) throws IOException {
-
-                        return null;
-                    }
-                })
                 .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .build();
 
@@ -77,6 +75,7 @@ public class Api {
     }
 
     public <T> T getCall(Class<T> clazz) {
+        Log.i(TAG, "getCall: " + retrofit.baseUrl().toString());
         return retrofit.create(clazz);
     }
 

@@ -26,9 +26,6 @@ public class SlideshowAdapter extends PagerAdapter {
         mDatas = datas;
         mHolder = holder;
         mContext = context;
-        Log.i(TAG, "SlideshowAdapter: " + mDatas);
-        Log.i(TAG, "image: " + mDatas.get(2).getImageView() + " " + mDatas.get(2).getT());
-        Log.i(TAG, "holder: "+mHolder);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {

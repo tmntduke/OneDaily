@@ -95,8 +95,6 @@ public class MainActivity extends BaseActivity {
     @Override
     public void initOperation() {
 
-        //setFragment(R.id.main_contain,);
-
         controller.setSelect(0);
         controller.addTabItemClickListener(new OnTabItemSelectListener() {
             @Override

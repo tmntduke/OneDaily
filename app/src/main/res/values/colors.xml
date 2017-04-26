@@ -8,4 +8,7 @@
     <color name="text_gray">#878787</color>
     <color name="bg_gray">#e4e4e4</color>
     <color name="smart_ui_pullable_layout_text_color">#707070</color>
+    <color name="green">#26f913</color>
+    <color name="red">#ef4054</color>
+    <color name="yellow">#e9ec56</color>
 </resources>

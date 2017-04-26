@@ -2,6 +2,7 @@ package tmnt.example.onedaily.ui.zhihu.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,11 @@ public class ZhihuAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private OnZhihuItemClickListener mOnZhihuItemClickListener;
 
+    private HeaderViewHolder headerViewHolder;
+
+    private static final String TAG = "ZhihuAdapter";
+    private boolean isAdd = false;
+
     public static final int IS_HEADER = 2;
     public static final int IS_NORMAL = 1;
 
@@ -38,13 +44,16 @@ public class ZhihuAdapter extends RecyclerView.Adapter {
         mContext = context;
     }
 
+    public void setTopStories(List<TopStories> topStories) {
+        mTopStories = topStories;
+    }
+
     public void setOnZhihuItemClickListener(OnZhihuItemClickListener onZhihuItemClickListener) {
         mOnZhihuItemClickListener = onZhihuItemClickListener;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         if (viewType == IS_HEADER) {
             BaseViewHolder<List<TopStories>> header = ViewHolderFactory.create(IS_HEADER, mContext, parent);
             return header;
@@ -56,14 +65,31 @@ public class ZhihuAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        isAdd = true;
         BaseViewHolder baseViewHolder = (BaseViewHolder) holder;
         if (position == 0 && baseViewHolder.type == IS_HEADER) {
-            HeaderViewHolder headerViewHolder = (HeaderViewHolder) baseViewHolder;
+            Log.i(TAG, "onBindViewHolder: ");
+            headerViewHolder = (HeaderViewHolder) baseViewHolder;
             headerViewHolder.setData(mContext, mTopStories);
+            mTopStories.clear();
+
         } else {
             NewsViewHolder newsViewHolder = (NewsViewHolder) baseViewHolder;
-            newsViewHolder.setData(mContext, mStories.get(position));
+            newsViewHolder.setData(mContext, mStories.get(position - 1));
         }
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(RecyclerView.ViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+        Log.i(TAG, "onViewDetachedFromWindow: ");
+//        if (((BaseViewHolder) holder).type == IS_HEADER && isAdd)
+//            mTopStories.clear();
+    }
+
+    @Override
+    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+        Log.i(TAG, "onViewAttachedToWindow: ");
     }
 
     @Override

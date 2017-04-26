@@ -158,6 +158,7 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
 
     @Override
     public void showError(Throwable throwable) {
+        Log.i(TAG, "showError: "+throwable.toString());
         mListBook.setVisibility(View.GONE);
         mImgBookEmpty.setVisibility(View.VISIBLE);
     }

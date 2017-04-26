@@ -50,7 +50,7 @@ public class BookPageFragment extends BaseFragment implements tmnt.example.oneda
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        ((BaseActivity) getActivity()).setStatesBar(R.color.colorPrimary);
+        //((BaseActivity) getActivity()).setStatesBar(R.color.colorPrimary);
 
     }
 

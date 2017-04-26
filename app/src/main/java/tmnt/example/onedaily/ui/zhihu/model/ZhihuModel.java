@@ -1,5 +1,7 @@
 package tmnt.example.onedaily.ui.zhihu.model;
 
+import android.util.Log;
+
 import tmnt.example.onedaily.Rx.RxUilt;
 import tmnt.example.onedaily.api.Api;
 import tmnt.example.onedaily.api.ZhihuService;
@@ -17,8 +19,11 @@ public class ZhihuModel implements Model<ZhihuInfo> {
     private ZhihuService mZhihuService = mApi.getCall(ZhihuService.class);
     private RxUilt<ZhihuInfo>mRxUilt=new RxUilt<>();
 
+    private static final String TAG = "ZhihuModel";
+
     @Override
     public void getNews(CallBack<ZhihuInfo> callBack) {
+        Log.i(TAG, "getNews: "+mZhihuService);
         mRxUilt.getDataForObservable(mZhihuService.getZhihuLeast(),callBack);
     }
 

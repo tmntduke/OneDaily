@@ -208,11 +208,8 @@ public class SmartPullableLayout extends ViewGroup implements NestedScrollingPar
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        Log.i("refresh", "onLayout: "+getChildCount());
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
-            Log.i("refresh", "onLayout: "+child);
-            Log.i("refresh", "onLayout: "+child.getParent());
             if (child == mPullableHeader) { // 头视图隐藏在顶端
                 child.layout(0, 0 - child.getMeasuredHeight(), child.getMeasuredWidth(), 0);
             } else if (child == mPullableFooter) { // 尾视图隐藏在末端
