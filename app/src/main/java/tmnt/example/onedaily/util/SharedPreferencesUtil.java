@@ -46,7 +46,18 @@ public class SharedPreferencesUtil {
 
     public <T> T getData(String key) {
         datas = sSharedPreferences.getAll();
-        return (T) datas.get(key);
+        try {
+            return (T) datas.get(key);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
+    public void removeData(String key) {
+        if (getData(key) != null){
+            sEditor.remove(key);
+            sEditor.commit();
+        }
+
+    }
 }

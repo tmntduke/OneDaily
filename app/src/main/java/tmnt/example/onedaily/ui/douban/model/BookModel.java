@@ -18,8 +18,8 @@ public class BookModel implements Model<DoubanBookInfo> {
     private static final String PAGE_INT = "0";
     private static final String PAGE_SIZE = "15";
 
-    private Api mApi = Api.getInstance(Common.DOUBAN_URL);
-    private DoubanService mDoubanService = mApi.getCall(DoubanService.class);
+    private Api mApi = Api.getInstance();
+    private DoubanService mDoubanService = mApi.getCall(Common.DOUBAN_URL,DoubanService.class);
 
     private RxUilt<DoubanBookInfo> mRxUilt = new RxUilt<>();
 

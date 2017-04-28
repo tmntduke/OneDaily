@@ -27,18 +27,14 @@ public class Api {
 
     private static final int DEFAULT_TIMEOUT = 10;
 
-    private static Api ourInstance;
+    private static Api ourInstance=new Api();
 
-    private static Retrofit retrofit;
 
     private String baseUrl;
 
     private static final String TAG = "Api";
 
-    public static Api getInstance(String baseUrl) {
-        if (ourInstance == null) {
-            ourInstance = new Api(baseUrl);
-        }
+    public static Api getInstance() {
         return ourInstance;
 
     }
@@ -47,9 +43,7 @@ public class Api {
         this.baseUrl = baseUrl;
     }
 
-    private Api(String baseUrl) {
-        this.baseUrl = baseUrl;
-        createRetrofit(baseUrl);
+    private Api() {
     }
 
     private OkHttpClient getOkhttp() {
@@ -62,20 +56,21 @@ public class Api {
         return okHttpClient;
     }
 
-    private void createRetrofit(String baseUrl) {
+    private Retrofit createRetrofit(String baseUrl) {
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
-        retrofit = new Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(getOkhttp())
                 .build();
+        return retrofit;
     }
 
-    public <T> T getCall(Class<T> clazz) {
-        Log.i(TAG, "getCall: " + retrofit.baseUrl().toString());
+    public <T> T getCall(String baseUrl,Class<T> clazz) {
+        Retrofit retrofit = createRetrofit(baseUrl);
         return retrofit.create(clazz);
     }
 

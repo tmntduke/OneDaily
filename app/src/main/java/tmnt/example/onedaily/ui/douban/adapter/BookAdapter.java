@@ -39,14 +39,14 @@ public class BookAdapter extends RecyclerView.Adapter {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.list_book_item, parent,false);
-        BookViewHolder adapter = new BookViewHolder(view,0);
+        BookViewHolder adapter = new BookViewHolder(view,0,mContext);
         return adapter;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         BookViewHolder bookViewHolder = (BookViewHolder) holder;
-        bookViewHolder.setData(mContext, mBooks.get(position));
+        bookViewHolder.setData( mBooks.get(position));
         bookViewHolder.setOnBookItenListener(mOnBookItenListener);
         bookViewHolder.setOperation(position);
     }

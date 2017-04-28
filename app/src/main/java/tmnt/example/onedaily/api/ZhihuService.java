@@ -15,7 +15,7 @@ public interface ZhihuService {
     Observable<ZhihuInfo> getZhihuLeast();
 
     @GET("before/{date}")
-    Observable<ZhihuDetailInfo> getZhihuBefor(@Path("date") String date);
+    Observable<ZhihuInfo> getZhihuBefor(@Path("date") String date);
 
     @GET("{id}")
     Observable<ZhihuDetailInfo> getZhihuDetail(@Path("id") String id);

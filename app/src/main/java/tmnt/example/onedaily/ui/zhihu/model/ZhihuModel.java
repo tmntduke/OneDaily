@@ -15,8 +15,8 @@ import tmnt.example.onedaily.util.Common;
  */
 
 public class ZhihuModel implements Model<ZhihuInfo> {
-    private Api mApi = Api.getInstance(Common.ZHIHU_URL);
-    private ZhihuService mZhihuService = mApi.getCall(ZhihuService.class);
+    private Api mApi = Api.getInstance();
+    private ZhihuService mZhihuService = mApi.getCall(Common.ZHIHU_URL,ZhihuService.class);
     private RxUilt<ZhihuInfo>mRxUilt=new RxUilt<>();
 
     private static final String TAG = "ZhihuModel";
@@ -34,6 +34,6 @@ public class ZhihuModel implements Model<ZhihuInfo> {
 
     @Override
     public void load(String page, CallBack<ZhihuInfo> callBack) {
-
+        mRxUilt.getDataForObservable(mZhihuService.getZhihuBefor(page),callBack);
     }
 }

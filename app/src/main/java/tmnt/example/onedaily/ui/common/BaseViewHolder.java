@@ -11,16 +11,18 @@ import android.view.View;
 public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder {
 
     public int type;
+    protected Context mContext;
 
-    public BaseViewHolder(View itemView, int type) {
+    public BaseViewHolder(View itemView, int type, Context context) {
         super(itemView);
         this.type = type;
+        this.mContext = context;
     }
 
     /**
      * 设置数据
      */
-    public abstract void setData(Context context, T t);
+    public abstract void setData(T t);
 
     public abstract void setOperation(int position);
 }

@@ -21,11 +21,11 @@ public class ViewHolderFactory {
     public static BaseViewHolder create(int type, Context context, ViewGroup parent) {
         if (type == ZhihuAdapter.IS_HEADER) {
             View view = LayoutInflater.from(context).inflate(R.layout.list_zhihu_slide_item, parent, false);
-            BaseViewHolder<List<TopStories>> header = new HeaderViewHolder(view, ZhihuAdapter.IS_HEADER);
+            BaseViewHolder<List<TopStories>> header = new HeaderViewHolder(view, ZhihuAdapter.IS_HEADER,context);
             return header;
         } else if (type == ZhihuAdapter.IS_NORMAL) {
             View view = LayoutInflater.from(context).inflate(R.layout.list_zhihu_news_item, parent, false);
-            BaseViewHolder<Story> item = new NewsViewHolder(view, ZhihuAdapter.IS_NORMAL);
+            BaseViewHolder<Story> item = new NewsViewHolder(view, ZhihuAdapter.IS_NORMAL,context);
             return item;
         }
         return null;

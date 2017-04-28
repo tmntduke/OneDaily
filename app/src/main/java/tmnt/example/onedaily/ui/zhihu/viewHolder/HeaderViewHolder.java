@@ -23,18 +23,18 @@ public class HeaderViewHolder extends BaseViewHolder<List<TopStories>> {
     private SlideshowView mSlideshowView;
     private OnZhihuItemClickListener mOnSlideItemClickListener;
 
-    public HeaderViewHolder(View itemView, int type) {
-        super(itemView,type);
-        this.type = type;
+    public HeaderViewHolder(View itemView, int type, Context context) {
+        super(itemView, type, context);
         mSlideshowView = (SlideshowView) itemView.findViewById(R.id.slide_zhihu);
     }
+
 
     public void setOnSlideItemClickListener(OnZhihuItemClickListener onSlideItemClickListener) {
         mOnSlideItemClickListener = onSlideItemClickListener;
     }
 
     @Override
-    public void setData(Context context, List<TopStories> zhihuDetailInfo) {
+    public void setData(List<TopStories> zhihuDetailInfo) {
         mSlideshowView.setData(new ImageHolder(), zhihuDetailInfo);
     }
 
@@ -43,7 +43,7 @@ public class HeaderViewHolder extends BaseViewHolder<List<TopStories>> {
 
         mSlideshowView.setOnItemClickListener((v, position1) -> {
             if (mOnSlideItemClickListener != null) {
-                mOnSlideItemClickListener.onItemSlideClick(v, position);
+                mOnSlideItemClickListener.onItemSlideClick(v, position1);
             }
         });
     }

@@ -33,7 +33,17 @@ public class ZhihuPresentor extends BasePresenter<ZhihuInfo> {
 
     @Override
     public void handleLoad(String page) {
+        mModel.load(page, new CallBack<ZhihuInfo>() {
+            @Override
+            public void onSuccess(ZhihuInfo zhihuInfo) {
+                mView.showLoadData(zhihuInfo);
+            }
 
+            @Override
+            public void onError(Throwable e) {
+                mView.showError(e);
+            }
+        });
     }
 
     @Override

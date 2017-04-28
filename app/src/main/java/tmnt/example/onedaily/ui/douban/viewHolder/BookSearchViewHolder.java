@@ -27,24 +27,23 @@ public class BookSearchViewHolder extends BaseViewHolder<Book> {
 
     private static final String TAG = "BookSearchViewHolder";
 
-    public BookSearchViewHolder(View itemView, int type) {
-        super(itemView, type);
+    public BookSearchViewHolder(View itemView, int type, Context context) {
+        super(itemView, type, context);
         imgSearchCover = (ImageView) itemView.findViewById(R.id.img_search_cover);
         tvSearchTilte = (TextView) itemView.findViewById(R.id.tv_search_title);
         tvSearchAuthor = (TextView) itemView.findViewById(R.id.tv_search_author);
         searchItem= (LinearLayout) itemView. findViewById(R.id.search_item);
-
     }
+
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         mOnItemClickListener = onItemClickListener;
     }
 
-
     @Override
-    public void setData(Context context, Book book) {
+    public void setData(Book book) {
         Log.i(TAG, "setData: "+book.getTitle());
-        Glide.with(context).load(book.getImages().getLarge()).into(imgSearchCover);
+        Glide.with(mContext).load(book.getImages().getLarge()).into(imgSearchCover);
         tvSearchTilte.setText(book.getTitle());
 
         tvSearchAuthor.setText(BookApiUtils.getAuthor(book.getAuthor()));

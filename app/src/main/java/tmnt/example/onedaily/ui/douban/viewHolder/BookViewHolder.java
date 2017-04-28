@@ -32,8 +32,8 @@ public class BookViewHolder extends BaseViewHolder<Book> {
     private LinearLayout mBookContain;
     private OnBookItenListener mOnBookItenListener;
 
-    public BookViewHolder(View itemView, int type) {
-        super(itemView, type);
+    public BookViewHolder(View itemView, int type, Context context) {
+        super(itemView, type, context);
         mCover = (ImageView) itemView.findViewById(R.id.img_book_cover);
         mName = (TextView) itemView.findViewById(R.id.tv_book_name);
         mRaing = (TextView) itemView.findViewById(R.id.tv_book_raing);
@@ -50,8 +50,8 @@ public class BookViewHolder extends BaseViewHolder<Book> {
 
 
     @Override
-    public void setData(Context context, Book book) {
-        Glide.with(context).load(book.getImages().getLarge()).placeholder(R.drawable.ic_moren).into(mCover);
+    public void setData(Book book) {
+        Glide.with(mContext).load(book.getImages().getLarge()).placeholder(R.drawable.ic_moren).into(mCover);
         List<String> authors = book.getAuthor();
 
         mAuthor.setText(("作者:" + BookApiUtils.getAuthor(authors)));

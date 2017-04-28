@@ -89,7 +89,9 @@ public class SlideshowView extends FrameLayout {
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         mOnItemClickListener = onItemClickListener;
-        adapter.setOnItemClickListener(mOnItemClickListener);
+       if (adapter!=null){
+           adapter.setOnItemClickListener(mOnItemClickListener);
+       }
     }
 
     public void setData(Holder holder, List<?> list) {
