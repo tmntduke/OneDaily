@@ -50,6 +50,7 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
 
 
     private List<TopStories> mTopStories;
+    private List<TopStories> mTopStoriesCopy;
     private List<Story> mStories;
     private ZhihuPresentor mZhihuPresentor;
     private ZhihuAdapter mZhihuAdapter;
@@ -61,6 +62,7 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
     private Bundle mBundle;
 
     public static final String ZHIHU_ID = "zhihu_id";
+    public static final String ZHIHU_TITLE = "zhihu_title";
 
     private static final String TAG = "ZhihuFregment";
 
@@ -74,6 +76,7 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
     @Override
     public void initData(Bundle savedInstanceState) {
         mTopStories = new ArrayList<>();
+        mTopStoriesCopy=new ArrayList<>();
         mStories = new ArrayList<>();
         model = new ZhihuModel();
         mZhihuPresentor = new ZhihuPresentor(model, this);
@@ -98,24 +101,23 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
             @Override
             public void onItemCardClick(View v, int position) {
                 mBundle.putString(ZHIHU_ID, String.valueOf(mStories.get(position).getId()));
+                mBundle.putString(ZHIHU_TITLE, mStories.get(position).getTitle());
                 toActivity(ZhihuDetailActivity.class, mBundle);
             }
 
             @Override
             public void onItemSlideClick(View v, int position) {
-                mBundle.putString(ZHIHU_ID, String.valueOf(mStories.get(position).getId()));
+                mBundle.putString(ZHIHU_ID, String.valueOf(mTopStoriesCopy.get(position-1).getId()));
+                mBundle.putString(ZHIHU_TITLE, mTopStoriesCopy.get(position-1).getTitle());
                 toActivity(ZhihuDetailActivity.class, mBundle);
             }
         });
 
         mSplZhihu.setColorSchemeColors(new int[]{Color.parseColor("#26f913"), Color.parseColor("#ef4054")
                 , Color.parseColor("#e9ec56"), Color.parseColor("#009dff")});
-        mSplZhihu.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mZhihuPresentor.handleData();
-            }
-        });
+
+        mSplZhihu.setOnRefreshListener(() ->
+                mZhihuPresentor.handleData());
 
         mRvZhihu.setOnScrollListener(new OnLoadingListener(linearLayoutManager) {
             @Override
@@ -154,6 +156,7 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
         mSplZhihu.setRefreshing(false);
         if (datas.getTop_stories() != null) {
             mTopStories.addAll(datas.getTop_stories());
+            mTopStoriesCopy.addAll(mTopStories);
         }
         if (datas.getDate() != null) {
             mZhihuAdapter.setDate(datas.getDate(), true);

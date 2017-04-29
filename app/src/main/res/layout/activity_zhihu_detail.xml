@@ -3,32 +3,69 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:gravity="center"
               android:orientation="vertical">
 
-    <FrameLayout
+    <ScrollView
+        android:id="@+id/sv_zhihu_detail"
         android:layout_width="match_parent"
-        android:layout_height="220dp">
+                android:layout_height="match_parent"
+                android:scrollbars="none">
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/img_zhihu_detail_cover"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="center"/>
 
-        <TextView
-            android:id="@+id/tv_zhihu_detail_msg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_margin="10dp"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            tools:text="版权信息"/>
-    </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="220dp">
 
-    <WebView
-        android:id="@+id/wv_zhihu_detail_body"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></WebView>
+                <ImageView
+                    android:id="@+id/img_zhihu_detail_cover"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"/>
+
+                <TextView
+                    android:id="@+id/tv_zhihu_detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    tools:text="版权信息"/>
+
+                <TextView
+                    android:id="@+id/tv_zhihu_detail_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    tools:text="版权信息"/>
+            </FrameLayout>
+
+            <WebView
+                android:id="@+id/wv_zhihu_detail_body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"></WebView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <ImageView
+        android:id="@+id/img_zhihu_detail_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_moren"
+        android:visibility="gone"/>
 
 </LinearLayout>

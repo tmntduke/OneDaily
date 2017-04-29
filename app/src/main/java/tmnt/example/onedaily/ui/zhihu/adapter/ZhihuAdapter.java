@@ -78,6 +78,7 @@ public class ZhihuAdapter extends RecyclerView.Adapter {
         if (position == 0 && baseViewHolder.type == IS_HEADER) {
             headerViewHolder = (HeaderViewHolder) baseViewHolder;
             headerViewHolder.setData(mTopStories);
+            headerViewHolder.setOnSlideItemClickListener(mOnZhihuItemClickListener);
             headerViewHolder.setOperation(position);
             mTopStories.clear();
 
@@ -96,7 +97,7 @@ public class ZhihuAdapter extends RecyclerView.Adapter {
                     newsViewHolder.goneDate();
                 }
             }
-
+            newsViewHolder.setOnCardItemClickListener(mOnZhihuItemClickListener);
             newsViewHolder.setOperation(position - 1);
             isDate = false;
 
