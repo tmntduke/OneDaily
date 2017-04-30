@@ -1,0 +1,23 @@
+apply plugin: 'com.android.library'
+
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "25.0.0"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+}
+
+//publish {
+//    userOrg = POM_DEVELOPER_ID
+//    groupId = GROUP
+//    artifactId = ARTIFACT_ID
+//    publishVersion = VERSION_NAME
+//    desc = POM_DESCRIPTION
+//    website = POM_URL
+//}
