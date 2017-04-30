@@ -76,7 +76,7 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
     @Override
     public void initData(Bundle savedInstanceState) {
         mTopStories = new ArrayList<>();
-        mTopStoriesCopy=new ArrayList<>();
+        mTopStoriesCopy = new ArrayList<>();
         mStories = new ArrayList<>();
         model = new ZhihuModel();
         mZhihuPresentor = new ZhihuPresentor(model, this);
@@ -100,16 +100,14 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
         mZhihuAdapter.setOnZhihuItemClickListener(new OnZhihuItemClickListener() {
             @Override
             public void onItemCardClick(View v, int position) {
-                mBundle.putString(ZHIHU_ID, String.valueOf(mStories.get(position).getId()));
-                mBundle.putString(ZHIHU_TITLE, mStories.get(position).getTitle());
-                toActivity(ZhihuDetailActivity.class, mBundle);
+                createBundle(String.valueOf(mStories.get(position).getId())
+                        , mStories.get(position).getTitle());
             }
 
             @Override
             public void onItemSlideClick(View v, int position) {
-                mBundle.putString(ZHIHU_ID, String.valueOf(mTopStoriesCopy.get(position-1).getId()));
-                mBundle.putString(ZHIHU_TITLE, mTopStoriesCopy.get(position-1).getTitle());
-                toActivity(ZhihuDetailActivity.class, mBundle);
+                createBundle(String.valueOf(mTopStoriesCopy.get(position - 1).getId())
+                        , mTopStoriesCopy.get(position - 1).getTitle());
             }
         });
 
@@ -131,7 +129,6 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
             }
         });
 
-
     }
 
     @Override
@@ -139,15 +136,10 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
         mZhihuPresentor.handleData();
     }
 
-    public static Fragment getInstance() {
-        ZhihuFregment fregment = new ZhihuFregment();
-        return fregment;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
+    private void createBundle(String value, String title) {
+        mBundle.putString(ZHIHU_ID, value);
+        mBundle.putString(ZHIHU_TITLE, title);
+        toActivity(ZhihuDetailActivity.class, mBundle);
     }
 
     @Override
@@ -187,6 +179,17 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
         Log.i(TAG, "showError: " + throwable.toString());
         mImgZhihuEmpty.setVisibility(View.VISIBLE);
         mSplZhihu.setVisibility(View.GONE);
+    }
+
+    public static Fragment getInstance() {
+        ZhihuFregment fregment = new ZhihuFregment();
+        return fregment;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 
     @Override

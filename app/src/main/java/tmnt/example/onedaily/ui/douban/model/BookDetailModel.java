@@ -17,7 +17,7 @@ public class BookDetailModel implements Model<Book> {
 
     private Api mApi=Api.getInstance();
     private DoubanService mDoubanService = mApi.getCall(Common.DOUBAN_URL,DoubanService.class);
-    private RxUilt<Book> mRxUilt = new RxUilt<>();
+    private RxUilt mRxUilt = RxUilt.getInstance();
 
     private String name;
 

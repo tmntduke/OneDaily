@@ -16,7 +16,7 @@ public class ZhihuDetailModel implements Model<ZhihuDetailInfo> {
 
     private Api mApi = Api.getInstance();
     private ZhihuService mZhihuService = mApi.getCall(Common.ZHIHU_URL, ZhihuService.class);
-    private RxUilt<ZhihuDetailInfo> mRxUilt = new RxUilt<>();
+    private RxUilt mRxUilt = RxUilt.getInstance();
     private String id;
 
     public void setId(String id) {

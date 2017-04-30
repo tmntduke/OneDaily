@@ -72,6 +72,7 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
     TextView mTvClear;
 
     private Random mRandom;
+    private RxUilt mRxUilt;
     private BookSearchAdapter mSearchAdapter;
     private List<Book> mBooks;
     private BookModel model;
@@ -84,6 +85,7 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
     public void initData(Bundle savedInstanceState) {
         mRandom = new Random();
         mBooks = new ArrayList<>();
+        mRxUilt = RxUilt.getInstance();
         model = new BookModel();
         presenter = new BookPresenter(model, BookSearchActivity.this);
         mHistory = new ArrayList<>();
@@ -226,7 +228,7 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
     }
 
     private void changLable(LabelView view) {
-        new RxUilt<String>().distinctForData(BookApiUtils.getRandomLable(mRandom.nextInt(4))
+        mRxUilt.distinctForData(BookApiUtils.getRandomLable(mRandom.nextInt(4))
                 , new CallBack<List<String>>() {
                     @Override
                     public void onSuccess(List<String> strings) {

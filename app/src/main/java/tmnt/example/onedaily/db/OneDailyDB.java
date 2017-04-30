@@ -31,10 +31,12 @@ public class OneDailyDB {
     private static OneDailyDB mOneDailyDB;
 
     private static final String TAG = "OneDailyDB";
+    private RxUilt mRxUilt;
 
     private OneDailyDB(Context context) {
         mContext = context;
         helper = new DBHelper(context);
+        mRxUilt=RxUilt.getInstance();
 
     }
 
@@ -49,7 +51,7 @@ public class OneDailyDB {
         ContentValues values = new ContentValues();
         values.put(HISTORY, history);
 
-        new RxUilt<Boolean>().createAndResult(Schedulers.io(), () -> {
+        mRxUilt.createAndResult(Schedulers.io(), () -> {
                     mDatabase = helper.getWritableDatabase();
                     mDatabase.insert(TABLE, ID, values);
                     return null;
@@ -71,7 +73,7 @@ public class OneDailyDB {
 
     public  void queryHistory(CallBack<List<String>> callBack) {
 
-        new RxUilt<List<String>>().createAndResult(Schedulers.io(), new Operation<List<String>>() {
+        mRxUilt.createAndResult(Schedulers.io(), new Operation<List<String>>() {
             @Override
             public List<String> operation() {
                 ArrayList<String> arrayList = new ArrayList<>();

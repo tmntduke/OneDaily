@@ -19,18 +19,27 @@ import tmnt.example.onedaily.mvp.CallBack;
  * Created by tmnt on 2017/4/20.
  */
 
-public class RxUilt<T> {
+public class RxUilt {
 
     private static final String TAG = "RxUilt";
 
-    public void getDataForObservable(Observable<T> observable, CallBack<T> callBack) {
+    private static final RxUilt INSTANCE = new RxUilt();
+
+    private RxUilt() {
+    }
+
+    public static RxUilt getInstance() {
+        return INSTANCE;
+    }
+
+    public <T> void getDataForObservable(Observable<T> observable, CallBack<T> callBack) {
 
         observable.timeout(6, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(o -> {
                     if (callBack != null) {
-                        Log.i(TAG, "getDataForObservable: "+o);
+                        Log.i(TAG, "getDataForObservable: " + o);
                         callBack.onSuccess(o);
                     }
                 }, throwable -> {
@@ -40,7 +49,7 @@ public class RxUilt<T> {
                 });
     }
 
-    public void distinctForData(List<T> t, CallBack<List<T>> callBack) {
+    public <T> void distinctForData(List<T> t, CallBack<List<T>> callBack) {
 
         Observable.from(t)
                 .distinct()
@@ -54,13 +63,13 @@ public class RxUilt<T> {
                 });
     }
 
-    public Observable<T> getObservaleForSingle(T t, Scheduler scheduler) {
+    public <T> Observable<T> getObservaleForSingle(T t, Scheduler scheduler) {
         return Observable.just(t)
                 .subscribeOn(scheduler)
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public void createAndResult(Scheduler scheduler, Operation<T> operation, CallBack<T> callBack) {
+    public <T> void createAndResult(Scheduler scheduler, Operation<T> operation, CallBack<T> callBack) {
         Observable.create(new Observable.OnSubscribe<T>() {
             @Override
             public void call(Subscriber<? super T> subscriber) {
@@ -70,11 +79,11 @@ public class RxUilt<T> {
             }
         }).subscribeOn(scheduler)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(t1 -> {
-                    callBack.onSuccess(t1);
-                }, throwable -> {
-                    callBack.onError(throwable);
-                });
+                .subscribe(o ->
+                                callBack.onSuccess(o)
+                        , throwable ->
+                                callBack.onError(throwable)
+                );
     }
 
 }
