@@ -21,6 +21,7 @@ public class HtmlUtil {
 
     /**
      * 根据css链接生成Link标签
+     *
      * @param url String
      * @return String
      */
@@ -30,6 +31,7 @@ public class HtmlUtil {
 
     /**
      * 根据多个css链接生成Link标签
+     *
      * @param urls List<String>
      * @return String
      */
@@ -75,5 +77,15 @@ public class HtmlUtil {
         final String css = HtmlUtil.createCssTag(cssList);
         final String js = HtmlUtil.createJsTag(jsList);
         return css.concat(HIDE_HEADER_STYLE).concat(html).concat(js);
+    }
+
+
+    public static String createWriteData(String html, String title) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("<h2>");
+        stringBuilder.append(title);
+        stringBuilder.append("</h2>");
+        stringBuilder.append(html);
+        return stringBuilder.toString();
     }
 }

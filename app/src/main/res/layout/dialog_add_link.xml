@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/ed_link_url"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="10dp"
+        android:hint="@string/dialog_link_url"
+        android:textColorHint="@color/text_gray"
+        android:textSize="14sp"
+    />
+
+    <EditText
+        android:id="@+id/ed_link_title"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_margin="10dp"
+        android:hint="@string/dialog_link_title"
+        android:textColorHint="@color/text_gray"
+        android:textSize="14sp"/>
+</LinearLayout>

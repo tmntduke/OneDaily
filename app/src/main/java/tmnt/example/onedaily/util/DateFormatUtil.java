@@ -31,6 +31,11 @@ public class DateFormatUtil {
 
     }
 
+    public static String nowDate() {
+        Date date = new Date();
+        return SIMPLEDATEFORMAT.format(date);
+    }
+
     public static String dateFormatForSub(int sub) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());

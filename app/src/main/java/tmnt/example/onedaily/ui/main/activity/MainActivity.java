@@ -13,6 +13,7 @@ import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.ui.douban.fragment.BookFragment;
 import tmnt.example.onedaily.ui.douban.fragment.BookPageFragment;
 import tmnt.example.onedaily.ui.douban.listener.OnBookRetrunListener;
+import tmnt.example.onedaily.ui.main.fragment.WriteArticleFragment;
 import tmnt.example.onedaily.ui.zhihu.fragment.ZhihuFregment;
 import tmnt.example.onedaily.util.SharedPreferencesUtil;
 import tmnt.example.onedaily.weight.BottomNavigation.BottomNavigationLayout;
@@ -117,7 +118,8 @@ public class MainActivity extends BaseActivity {
 
                         break;
                     case 2:
-
+                        Fragment write = WriteArticleFragment.getInstance();
+                        toFragment(R.id.main_contain, write);
                         break;
                 }
             }

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/style_contain"
+              android:layout_width="match_parent"
+              android:layout_height="40dp"
+              android:background="@color/bg_gray"
+              android:gravity="center"
+              android:orientation="horizontal"
+android:visibility="gone">
+
+
+    <ImageView
+        android:id="@+id/img_jiacu"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:src="@drawable/image_jiacu"/>
+
+    <ImageView
+        android:id="@+id/img_xieti"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:src="@drawable/image_xieti"/>
+
+    <ImageView
+        android:id="@+id/img_link"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:src="@drawable/ic_link"/>
+
+    <ImageView
+        android:id="@+id/img_biao_h1"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:src="@drawable/image_biaoti_h1"/>
+
+    <ImageView
+        android:id="@+id/img_biao_h2"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:src="@drawable/image_biaoti_h2"/>
+    <ImageView
+        android:id="@+id/img_biao_h3"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:src="@drawable/image_biaoti_h3"/>
+    <ImageView
+        android:id="@+id/img_biao_h4"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:src="@drawable/image_biaoti_h4"/>
+
+</LinearLayout>
