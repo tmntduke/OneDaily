@@ -86,11 +86,12 @@ public class WriteArticleActivity extends BaseActivity {
     private EditText edTitle;
     private EditText edUrl;
     private boolean isClick;
+    private AlertDialog dialog;
     private static final String WRITE_PATH = "oneDaily_write";
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+       setStatesBar(R.color.colorPrimary);
     }
 
     @Override
@@ -145,11 +146,11 @@ public class WriteArticleActivity extends BaseActivity {
         mImgStyle.setOnClickListener(v -> {
             if (!isClick) {
                 mStyleContain.setVisibility(View.VISIBLE);
-                mImgStyle.setImageDrawable(createBitmap(R.drawable.image_xiezuo_wenzi));
+                mImgStyle.setImageDrawable(createBitmap(R.drawable.image_xiezuo_wenzi, R.color.colorPrimary));
                 isClick = true;
             } else {
                 mStyleContain.setVisibility(View.GONE);
-                mImgStyle.setImageResource(R.drawable.image_xiezuo_wenzi);
+                mImgStyle.setImageDrawable(createBitmap(R.drawable.image_xiezuo_wenzi, R.color.write_gray));
                 isClick = false;
             }
         });
@@ -206,9 +207,9 @@ public class WriteArticleActivity extends BaseActivity {
 
     }
 
-    private Drawable createBitmap(int res) {
+    private Drawable createBitmap(int res, int color) {
         Drawable drawable = DrawableCompat.wrap(ContextCompat.getDrawable(WriteArticleActivity.this, res));
-        DrawableCompat.setTint(drawable, ContextCompat.getColor(WriteArticleActivity.this, R.color.colorPrimary));
+        DrawableCompat.setTint(drawable, ContextCompat.getColor(WriteArticleActivity.this, color));
         return drawable;
     }
 
@@ -229,6 +230,9 @@ public class WriteArticleActivity extends BaseActivity {
                 dialog.dismiss();
             }
         });
+
+        dialog = builder.create();
+        dialog.show();
     }
 
     private View getDialogView() {
@@ -255,6 +259,14 @@ public class WriteArticleActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (dialog != null) {
+            dialog.dismiss();
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

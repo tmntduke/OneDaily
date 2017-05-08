@@ -4,10 +4,12 @@
 
     <application
         android:allowBackup="true"
+        android:configChanges="orientation|keyboardHidden"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustResize">
         <activity android:name=".ui.main.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -20,7 +22,9 @@
         <activity android:name=".ui.douban.activity.BookCatalogActivity"></activity>
         <activity android:name=".ui.douban.activity.BookDetailActivity"></activity>
         <activity android:name=".ui.zhihu.activity.ZhihuDetailActivity"></activity>
-        <activity android:name=".ui.main.activity.WriteArticleActivity"></activity>
+        <activity android:name=".ui.main.activity.WriteArticleActivity"
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustResize"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>

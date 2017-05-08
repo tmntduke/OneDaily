@@ -7,8 +7,9 @@
     <EditText
         android:id="@+id/ed_link_url"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:layout_margin="10dp"
+        android:layout_marginTop="15dp"
         android:hint="@string/dialog_link_url"
         android:textColorHint="@color/text_gray"
         android:textSize="14sp"
@@ -17,7 +18,7 @@
     <EditText
         android:id="@+id/ed_link_title"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:layout_margin="10dp"
         android:hint="@string/dialog_link_title"
         android:textColorHint="@color/text_gray"

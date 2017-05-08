@@ -79,6 +79,15 @@ public class BottomNavigationLayout extends LinearLayout {
 
     }
 
+    public void setSelect(int bomIndex) {
+        mTabItems.get(index).setIcon(false);
+        mTabItems.get(bomIndex).setIcon(true);
+//        if (mOnTabItemSelectListener != null) {
+//            mOnTabItemSelectListener.onSelected(index, mTabItems.get(index).getTag());
+//        }
+        invalidate();
+    }
+
     class BaseController implements Controller {
         private static final String TAG = "BottomNavigationLayout";
 
@@ -144,7 +153,7 @@ public class BottomNavigationLayout extends LinearLayout {
                     if (mTabItems.get(i).getTag().equals(mTag)) {
                         index = i;
 
-                        if (mOnTabItemSelectListener!=null){
+                        if (mOnTabItemSelectListener != null) {
 
                             mOnTabItemSelectListener.onSelected(index, mTag);
                         }

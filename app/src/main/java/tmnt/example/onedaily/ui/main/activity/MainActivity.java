@@ -25,6 +25,7 @@ public class MainActivity extends BaseActivity {
 
     private Controller controller;
     private SharedPreferencesUtil util;
+    private int mIndex;
 
     private static OnBookRetrunListener mOnBookRetrunListener;
 
@@ -100,10 +101,12 @@ public class MainActivity extends BaseActivity {
                 switch (index) {
                     case 0:
                         Fragment zhihu = ZhihuFregment.getInstance();
+                        mIndex = index;
                         toFragment(R.id.main_contain, zhihu);
                         break;
                     case 1:
                         Fragment douban = BookPageFragment.getInstance();
+                        mIndex = index;
                         if (douban.isVisible() && douban.isAdded()) {
                             if (mOnBookRetrunListener != null) {
                                 mOnBookRetrunListener.onReturn();
@@ -129,6 +132,12 @@ public class MainActivity extends BaseActivity {
     @Override
     public void loadData() {
 
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        mBottom.setSelect(mIndex);
     }
 
     public static void setOnBookRetrunListener(OnBookRetrunListener onBookRetrunListener) {

@@ -10,7 +10,7 @@
 
     <style name="nav_bar_layout">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">65dp</item>
+        <item name="android:layout_height">45dp</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:background">@color/colorPrimary</item>
     </style>
@@ -19,8 +19,7 @@
         <item name="android:onClick">onBack</item>
         <item name="android:background">@drawable/back_selector</item>
         <item name="android:layout_marginLeft">5dp</item>
-        <item name="android:layout_alignParentBottom">true</item>
-        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_centerVertical">true</item>
         <item name="android:layout_marginRight">5dp</item>
         <item name="android:layout_width">25dp</item>
         <item name="android:layout_height">25dp</item>
