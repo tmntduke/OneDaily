@@ -1,31 +1,30 @@
-package tmnt.example.onedaily.ui.main.fragment;
+package tmnt.example.onedaily.ui.main.activity;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.RelativeSizeSpan;
 import android.transition.Slide;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,18 +33,19 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import jp.wasabeef.richeditor.RichEditor;
 import tmnt.example.onedaily.R;
-import tmnt.example.onedaily.ui.common.BaseFragment;
+import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.util.DateFormatUtil;
+import tmnt.example.onedaily.util.HtmlUtil;
+import tmnt.example.onedaily.util.IOUtil;
 import tmnt.example.onedaily.util.ImageUtils;
+import tmnt.example.onedaily.util.PremissionUtil;
 
 /**
  * Created by tmnt on 2017/5/8.
  */
 
-public class WriteArticleFragment extends BaseFragment {
+public class WriteArticleActivity extends BaseActivity {
 
-    @Bind(R.id.btnBack)
-    Button mBtnBack;
     @Bind(R.id.btn_save)
     TextView mBtnSave;
     @Bind(R.id.lyNav)
@@ -78,6 +78,8 @@ public class WriteArticleFragment extends BaseFragment {
     LinearLayout mStyleContain;
     @Bind(R.id.img_link)
     ImageView mImgLink;
+    @Bind(R.id.btnBack)
+    Button mBtnBack;
 
     private View mView;
     public static final int REQUES_CODE = 101;
@@ -87,19 +89,14 @@ public class WriteArticleFragment extends BaseFragment {
     private static final String WRITE_PATH = "oneDaily_write";
 
     @Override
-    protected View setContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = LayoutInflater.from(getActivity()).inflate(R.layout.activity_article_contribute, container, false);
-        ButterKnife.bind(this, mView);
-        return mView;
-    }
-
-    @Override
     public void initData(Bundle savedInstanceState) {
 
     }
 
     @Override
     public void initView() {
+        setContentView(R.layout.activity_article_contribute);
+        ButterKnife.bind(this);
     }
 
     @Override
@@ -114,7 +111,7 @@ public class WriteArticleFragment extends BaseFragment {
         mEditor.setPlaceholder("编辑正文...");
 
         mImgPicture.setOnClickListener(v ->
-                ImageUtils.toGallery(REQUES_CODE, getActivity())
+                ImageUtils.toGallery(REQUES_CODE, WriteArticleActivity.this)
 
         );
 
@@ -158,21 +155,50 @@ public class WriteArticleFragment extends BaseFragment {
         });
 
         mBtnSave.setOnClickListener(v -> {
-            createFile();
-            File file = new File(Environment.getExternalStorageDirectory().getPath()
-                    + File.separator + WRITE_PATH
-                    + File.separator
-                    + mEdTitle.getText().toString());
+            if (TextUtils.isEmpty(mEdTitle.getText().toString())
+                    || TextUtils.isEmpty(mEditor.getHtml())) {
+                Toast.makeText(WriteArticleActivity.this, "请输入内容", Toast.LENGTH_SHORT).show();
+            } else {
+                boolean isPer = PremissionUtil.chaeckPermission(WriteArticleActivity.this
+                        , "android.permission.WRITE_EXTERNAL_STORAGE");
 
-            if (!file.exists()) {
-                try {
-                    file.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (!isPer) {
+                    PremissionUtil.requestPermission(WriteArticleActivity.this
+                            , new String[]{"android.permission.WRITE_EXTERNAL_STORAGE"});
                 }
+                saveArticle();
             }
         });
 
+        mBtnBack.setOnClickListener(v ->
+                onBackPressed());
+
+    }
+
+    private void saveArticle() {
+        createFile();
+        File file = new File(Environment.getExternalStorageDirectory().getPath()
+                + File.separator + WRITE_PATH
+                + File.separator
+                + mEdTitle.getText().toString() + ".txt");
+
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        String html = HtmlUtil.createWriteData(mEditor.getHtml(), mEdTitle.getText().toString());
+
+        try {
+            IOUtil.output(file, html.getBytes());
+            Toast.makeText(WriteArticleActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(WriteArticleActivity.this, "保存失败", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -180,19 +206,14 @@ public class WriteArticleFragment extends BaseFragment {
 
     }
 
-    public static Fragment getInstance() {
-        Fragment fragment = new WriteArticleFragment();
-        return fragment;
-    }
-
     private Drawable createBitmap(int res) {
-        Drawable drawable = DrawableCompat.wrap(ContextCompat.getDrawable(getActivity(), res));
-        DrawableCompat.setTint(drawable, ContextCompat.getColor(getActivity(), R.color.colorPrimary));
+        Drawable drawable = DrawableCompat.wrap(ContextCompat.getDrawable(WriteArticleActivity.this, res));
+        DrawableCompat.setTint(drawable, ContextCompat.getColor(WriteArticleActivity.this, R.color.colorPrimary));
         return drawable;
     }
 
     private void insertLink() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(WriteArticleActivity.this);
         View view = getDialogView();
         builder.setView(view);
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -211,7 +232,7 @@ public class WriteArticleFragment extends BaseFragment {
     }
 
     private View getDialogView() {
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_add_link, null);
+        View view = LayoutInflater.from(WriteArticleActivity.this).inflate(R.layout.dialog_add_link, null);
         edTitle = (EditText) view.findViewById(R.id.ed_link_title);
         edUrl = (EditText) view.findViewById(R.id.ed_link_url);
         return view;
@@ -220,9 +241,9 @@ public class WriteArticleFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == getActivity().RESULT_OK) {
+        if (resultCode == WriteArticleActivity.this.RESULT_OK) {
             if (requestCode == REQUES_CODE) {
-                mEditor.insertImage(ImageUtils.getImagePathFromGallery(getActivity(), data),
+                mEditor.insertImage(ImageUtils.getImagePathFromGallery(WriteArticleActivity.this, data),
                         "image" + DateFormatUtil.nowDate());
 
                 //富文本显示上传的图片
@@ -230,6 +251,11 @@ public class WriteArticleFragment extends BaseFragment {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private Slide slide() {
@@ -239,23 +265,9 @@ public class WriteArticleFragment extends BaseFragment {
     }
 
     private void createFile() {
-        File file = new File(WRITE_PATH);
+        File file = new File(Environment.getExternalStorageDirectory() + File.separator + WRITE_PATH);
         if (!file.exists()) {
             file.mkdir();
         }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
     }
 }

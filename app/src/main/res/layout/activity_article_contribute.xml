@@ -2,12 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:fitsSystemWindows="true"
               android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/lyNav"
         style="@style/nav_bar_layout">
+
+        <Button
+            android:id="@+id/btnBack"
+            style="@style/navBackButton"/>
 
         <TextView
             android:id="@+id/btn_save"

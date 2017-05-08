@@ -20,11 +20,12 @@
         <activity android:name=".ui.douban.activity.BookCatalogActivity"></activity>
         <activity android:name=".ui.douban.activity.BookDetailActivity"></activity>
         <activity android:name=".ui.zhihu.activity.ZhihuDetailActivity"></activity>
+        <activity android:name=".ui.main.activity.WriteArticleActivity"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.CAMERA"></uses-permission>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
 
 </manifest>
