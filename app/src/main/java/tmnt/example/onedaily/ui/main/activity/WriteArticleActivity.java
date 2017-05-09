@@ -32,7 +32,11 @@ import java.io.IOException;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import jp.wasabeef.richeditor.RichEditor;
+import rx.schedulers.Schedulers;
 import tmnt.example.onedaily.R;
+import tmnt.example.onedaily.Rx.Operation;
+import tmnt.example.onedaily.Rx.RxUilt;
+import tmnt.example.onedaily.mvp.CallBack;
 import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.util.DateFormatUtil;
 import tmnt.example.onedaily.util.HtmlUtil;
@@ -87,11 +91,13 @@ public class WriteArticleActivity extends BaseActivity {
     private EditText edUrl;
     private boolean isClick;
     private AlertDialog dialog;
+    private RxUilt rxUilt;
     private static final String WRITE_PATH = "oneDaily_write";
 
     @Override
     public void initData(Bundle savedInstanceState) {
-       setStatesBar(R.color.colorPrimary);
+        setStatesBar(R.color.colorPrimary);
+        rxUilt = RxUilt.getInstance();
     }
 
     @Override
@@ -193,13 +199,33 @@ public class WriteArticleActivity extends BaseActivity {
 
         String html = HtmlUtil.createWriteData(mEditor.getHtml(), mEdTitle.getText().toString());
 
-        try {
-            IOUtil.output(file, html.getBytes());
-            Toast.makeText(WriteArticleActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(WriteArticleActivity.this, "保存失败", Toast.LENGTH_SHORT).show();
-        }
+        rxUilt.createAndResult(Schedulers.io(), new Operation<Boolean>() {
+            @Override
+            public Boolean operation() {
+                try {
+                    IOUtil.output(file, html.getBytes());
+                    return true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+        }, new CallBack<Boolean>() {
+            @Override
+            public void onSuccess(Boolean aBoolean) {
+                if (aBoolean) {
+                    Toast.makeText(WriteArticleActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(WriteArticleActivity.this, "保存失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Toast.makeText(WriteArticleActivity.this, "保存失败", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
