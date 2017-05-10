@@ -23,4 +23,11 @@
     <string name="article_save">保存</string>
     <string name="dialog_link_url">链接</string>
     <string name="dialog_link_title">标题</string>
+    <string name="msg_my">我的</string>
+    <string name="my_note">我的笔记</string>
+    <string name="my_book">我的图书</string>
+    <string name="my_notification">推送</string>
+    <string name="my_dispotion">功能介绍</string>
+    <string name="my_abort">关于</string>
+    <string name="my_exit">退出登录</string>
 </resources>

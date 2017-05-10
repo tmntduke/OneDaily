@@ -5,9 +5,11 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <ScrollView android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="none">
+    <ScrollView
+        android:id="@+id/sv_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
         <LinearLayout android:layout_width="match_parent"
                       android:layout_height="match_parent"
@@ -180,9 +182,24 @@
                     android:src="@drawable/ic_book_turn"/>
             </RelativeLayout>
         </LinearLayout>
-
-
     </ScrollView>
 
+    <LinearLayout
+        android:id="@+id/details_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <ImageView
+            android:id="@+id/img_book_empty"
+            android:src="@drawable/ic_moren"
+            style="@style/empty_image"/>
+
+        <TextView
+            android:id="@+id/tv_book_empty_refresh"
+            style="@style/empty_refresh"/>
+    </LinearLayout>
 
 </LinearLayout>

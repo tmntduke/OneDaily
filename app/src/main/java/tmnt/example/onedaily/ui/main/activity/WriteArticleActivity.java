@@ -38,11 +38,13 @@ import tmnt.example.onedaily.Rx.Operation;
 import tmnt.example.onedaily.Rx.RxUilt;
 import tmnt.example.onedaily.mvp.CallBack;
 import tmnt.example.onedaily.ui.common.BaseActivity;
+import tmnt.example.onedaily.util.Common;
 import tmnt.example.onedaily.util.DateFormatUtil;
 import tmnt.example.onedaily.util.HtmlUtil;
 import tmnt.example.onedaily.util.IOUtil;
 import tmnt.example.onedaily.util.ImageUtils;
 import tmnt.example.onedaily.util.PremissionUtil;
+import tmnt.example.onedaily.util.SharedPreferencesUtil;
 
 /**
  * Created by tmnt on 2017/5/8.
@@ -92,12 +94,15 @@ public class WriteArticleActivity extends BaseActivity {
     private boolean isClick;
     private AlertDialog dialog;
     private RxUilt rxUilt;
+    private SharedPreferencesUtil mSharedPreferencesUtil;
     private static final String WRITE_PATH = "oneDaily_write";
+    public static final String NOTE_NAME = "article";
 
     @Override
     public void initData(Bundle savedInstanceState) {
         setStatesBar(R.color.colorPrimary);
         rxUilt = RxUilt.getInstance();
+        mSharedPreferencesUtil = SharedPreferencesUtil.getInstance(this);
     }
 
     @Override
@@ -184,7 +189,7 @@ public class WriteArticleActivity extends BaseActivity {
 
     private void saveArticle() {
         createFile();
-        File file = new File(Environment.getExternalStorageDirectory().getPath()
+        File file = new File(Common.ONEDAILY_PATH
                 + File.separator + WRITE_PATH
                 + File.separator
                 + mEdTitle.getText().toString() + ".txt");
@@ -215,6 +220,12 @@ public class WriteArticleActivity extends BaseActivity {
             public void onSuccess(Boolean aBoolean) {
                 if (aBoolean) {
                     Toast.makeText(WriteArticleActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
+                    if (mSharedPreferencesUtil.getData(NOTE_NAME) != null) {
+                        int count = (int) mSharedPreferencesUtil.getData(NOTE_NAME) + 1;
+                        mSharedPreferencesUtil.putData(NOTE_NAME, count);
+                    } else {
+                        mSharedPreferencesUtil.putData(NOTE_NAME, 1);
+                    }
                 } else {
                     Toast.makeText(WriteArticleActivity.this, "保存失败", Toast.LENGTH_SHORT).show();
                 }
@@ -303,7 +314,8 @@ public class WriteArticleActivity extends BaseActivity {
     }
 
     private void createFile() {
-        File file = new File(Environment.getExternalStorageDirectory() + File.separator + WRITE_PATH);
+        File file = new File(Common.ONEDAILY_PATH
+                + File.separator + WRITE_PATH);
         if (!file.exists()) {
             file.mkdir();
         }

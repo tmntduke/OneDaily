@@ -1,5 +1,9 @@
 package tmnt.example.onedaily.util;
 
+import android.os.Environment;
+
+import java.io.File;
+
 /**
  * Created by tmnt on 2017/4/12.
  */
@@ -12,5 +16,6 @@ public class Common {
 
     public static final String ZHIHU_URL = "http://news-at.zhihu.com/api/4/news/";
 
+    public static final String ONEDAILY_PATH = Environment.getDownloadCacheDirectory().getPath() + File.separator + "oneDaily";
 
 }

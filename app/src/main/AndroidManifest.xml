@@ -3,6 +3,7 @@
           package="tmnt.example.onedaily">
 
     <application
+        android:name=".app.BaseApplication"
         android:allowBackup="true"
         android:configChanges="orientation|keyboardHidden"
         android:icon="@mipmap/ic_launcher"

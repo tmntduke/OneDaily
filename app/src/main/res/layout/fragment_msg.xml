@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <View android:layout_width="match_parent"
+          android:layout_height="20dp"
+          android:background="@color/colorPrimary"></View>
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@string/msg_my"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bg_gray"
+                android:scrollbars="none">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+                <tmnt.example.onedaily.weight.CircleView.CircleImageView
+                    android:id="@+id/cv_my_cover"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"/>
+
+                <TextView
+                    android:id="@+id/tv_my_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:textColor="@color/text_gray"
+                    android:textSize="16sp"
+                    tools:text="tmnt"/>
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_note"
+                style="@style/my_contain"
+                android:layout_marginTop="20dp">
+
+                <ImageView
+                    android:id="@+id/article_img"
+                    style="@style/my_image"
+                    android:src="@drawable/ic_my_article"/>
+
+                <TextView
+                    style="@style/my_title"
+                    android:layout_toRightOf="@+id/article_img"
+                    android:text="@string/my_note"/>
+
+                <TextView
+                    android:id="@+id/tv_note_count"
+                    style="@style/my_count"/>
+
+                <include layout="@layout/divier_view"
+                         android:layout_width="wrap_content"
+                         android:layout_height="1dp"
+                         android:layout_alignParentBottom="true"
+                         android:layout_marginLeft="10dp"
+                         android:layout_marginRight="10dp"></include>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_collect"
+                style="@style/my_contain">
+
+                <ImageView
+                    android:id="@+id/book_img"
+                    style="@style/my_image"
+                    android:src="@drawable/ic_my_book"/>
+
+                <TextView
+                    style="@style/my_title"
+                    android:layout_toRightOf="@+id/book_img"
+                    android:text="@string/my_book"/>
+
+                <TextView
+                    android:id="@+id/tv_collect_count"
+                    style="@style/my_count"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_notification"
+                style="@style/my_contain"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    style="@style/my_title"
+                    android:text="@string/my_notification"/>
+
+                <Switch
+                    android:id="@+id/sw_notification"
+                    style="@style/my_count"/>
+
+                <include layout="@layout/divier_view"
+                         android:layout_width="wrap_content"
+                         android:layout_height="1dp"
+                         android:layout_alignParentBottom="true"
+                         android:layout_marginLeft="10dp"
+                         android:layout_marginRight="10dp"></include>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_disposition"
+                style="@style/my_contain">
+
+                <TextView
+                    style="@style/my_title"
+                    android:text="@string/my_dispotion"/>
+
+
+                <include layout="@layout/divier_view"
+                         android:layout_width="wrap_content"
+                         android:layout_height="1dp"
+                         android:layout_alignParentBottom="true"
+                         android:layout_marginLeft="10dp"
+                         android:layout_marginRight="10dp"></include>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_abort"
+                style="@style/my_contain">
+
+                <TextView
+                    style="@style/my_title"
+                    android:text="@string/my_abort"/>
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/btn_exit"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/exit_bg"
+                android:text="@string/my_exit"
+                android:textColor="@color/colorPrimary"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

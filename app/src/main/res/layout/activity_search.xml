@@ -122,5 +122,22 @@
 
     </android.support.v7.widget.RecyclerView>
 
+    <LinearLayout
+        android:id="@+id/search_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <ImageView
+            android:id="@+id/img_book_empty"
+            android:src="@drawable/ic_moren"
+            style="@style/empty_image"/>
+
+        <TextView
+            android:id="@+id/tv_search_empty_refresh"
+            style="@style/empty_refresh"/>
+    </LinearLayout>
 
 </LinearLayout>
