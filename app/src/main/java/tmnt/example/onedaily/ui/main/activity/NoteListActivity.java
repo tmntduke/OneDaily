@@ -45,6 +45,7 @@ public class NoteListActivity extends BaseActivity implements View<List<NoteInfo
     private List<NoteInfo> mNoteInfos;
     private NoteListAdapter adapter;
     private NoteListPersenter persenter;
+    public static final String NOTE_PATH = "note_path";
     private static final String TAG = "NoteListActivity";
 
     @Override
@@ -71,7 +72,10 @@ public class NoteListActivity extends BaseActivity implements View<List<NoteInfo
         adapter.setOnNoteItemClickListener(new OnNoteItemClickListener() {
             @Override
             public void onItemClick(android.view.View view, int position) {
-
+                Log.i(TAG, "onItemClick: " + mNoteInfos.get(position).getPath());
+                Bundle bundle = new Bundle();
+                bundle.putString(NOTE_PATH, mNoteInfos.get(position).getPath());
+                toActivity(NoteDetailActivity.class,bundle);
             }
         });
 
@@ -98,7 +102,6 @@ public class NoteListActivity extends BaseActivity implements View<List<NoteInfo
 
     @Override
     public void showData(List<NoteInfo> datas) {
-
         setPage(datas);
 
     }
@@ -121,7 +124,7 @@ public class NoteListActivity extends BaseActivity implements View<List<NoteInfo
     private void setPage(List<NoteInfo> datas) {
         mNoteInfos.clear();
         mNoteInfos.addAll(datas);
-        Log.i(TAG, "showData: "+mNoteInfos.size());
+        Log.i(TAG, "showData: " + mNoteInfos.size());
         if (mNoteInfos.size() == 0) {
             mRvNoteList.setVisibility(android.view.View.GONE);
             mNoteListEmpty.setVisibility(android.view.View.VISIBLE);

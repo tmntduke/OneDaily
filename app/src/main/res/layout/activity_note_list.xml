@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:fitsSystemWindows="true"
-              android:gravity="center"
               android:orientation="vertical">
 
     <RelativeLayout
@@ -25,14 +25,20 @@
             android:textStyle="bold"/>
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_note_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/note_list_empty"
-        style="@style/empty_image"
-        android:src="@drawable/ic_moren"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_note_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+        <ImageView
+            android:id="@+id/note_list_empty"
+            style="@style/empty_image"
+            android:src="@drawable/ic_moren"
+            tools:visibility="visible"/>
+
+    </FrameLayout>
 
 </LinearLayout>

@@ -77,7 +77,7 @@ public class OneDailyDB {
 
     }
 
-    public void insertNote(NoteInfo noteInfo) {
+    public void insertNote(NoteInfo noteInfo, CallBack<Boolean> callBack) {
         ContentValues values = new ContentValues();
         mRxUilt.createAndResult(Schedulers.io(), () -> {
             mDatabase = helper.getWritableDatabase();
@@ -86,19 +86,12 @@ public class OneDailyDB {
             String note = new Gson().toJson(noteInfo);
             values.put("nId", d);
             values.put("note", note);
-            mDatabase.insert(TABLE_NOTE, NID, values);
+            long id = mDatabase.insert(TABLE_NOTE, NID, values);
+            if (id == -1) {
+                return false;
+            }
             return true;
-        }, new CallBack<Boolean>() {
-            @Override
-            public void onSuccess(Boolean t) {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-        });
+        }, callBack);
     }
 
     public void queryHistory(CallBack<List<String>> callBack) {
@@ -134,7 +127,7 @@ public class OneDailyDB {
                 NoteInfo noteInfo = new Gson().fromJson(note, NoteInfo.class);
                 list.add(noteInfo);
             }
-            Log.i(TAG, "queryNote: "+list.size());
+            Log.i(TAG, "queryNote: " + list.size());
             cursor.close();
             if (list == null || list.size() == 0) {
                 return Collections.emptyList();

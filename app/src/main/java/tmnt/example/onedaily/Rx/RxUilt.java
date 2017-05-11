@@ -74,7 +74,12 @@ public class RxUilt {
             @Override
             public void call(Subscriber<? super T> subscriber) {
                 if (operation != null) {
-                    subscriber.onNext(operation.operation());
+                    try {
+                        subscriber.onNext(operation.operation());
+                    } catch (Exception e) {
+                        subscriber.onError(e);
+                    }
+
                 }
             }
         }).subscribeOn(scheduler)

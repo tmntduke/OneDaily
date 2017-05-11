@@ -205,27 +205,20 @@ public class WriteArticleActivity extends BaseActivity {
         }
 
         String html = HtmlUtil.createWriteData(mEditor.getHtml(), mEdTitle.getText().toString());
+        try {
+            IOUtil.output(file, html.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        rxUilt.createAndResult(Schedulers.io(), new Operation<Boolean>() {
-            @Override
-            public Boolean operation() {
-                try {
-                    IOUtil.output(file, html.getBytes());
-                    NoteInfo noteInfo = new NoteInfo();
-                    noteInfo.setDate(DateFormatUtil.dateFomeNomal());
-                    noteInfo.setTitle(mEdTitle.getText().toString());
-                    noteInfo.setPath(Common.ONEDAILY_PATH
-                            + File.separator + WRITE_PATH
-                            + File.separator
-                            + mEdTitle.getText().toString() + ".txt");
-                    mOneDailyDB.insertNote(noteInfo);
-                    return true;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return false;
-                }
-            }
-        }, new CallBack<Boolean>() {
+        NoteInfo noteInfo = new NoteInfo();
+        noteInfo.setDate(DateFormatUtil.dateFomeNomal());
+        noteInfo.setTitle(mEdTitle.getText().toString());
+        noteInfo.setPath(Common.ONEDAILY_PATH
+                + File.separator + WRITE_PATH
+                + File.separator
+                + mEdTitle.getText().toString() + ".txt");
+        mOneDailyDB.insertNote(noteInfo, new CallBack<Boolean>() {
             @Override
             public void onSuccess(Boolean aBoolean) {
                 if (aBoolean) {

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,6 +73,8 @@ public class MsgFragment extends BaseFragment {
     private static final int CAMERA_REQUEST_CODE = 11001;
     private static final int IMAGE_REQUEST_CODE = 11002;
 
+    private static final String TAG = "MsgFragment";
+
     @Override
     protected View setContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_msg, container, false);
@@ -109,7 +112,7 @@ public class MsgFragment extends BaseFragment {
         mSwNotification.setOnCheckedChangeListener(((buttonView, isChecked) -> {
             if (isChecked) {
 
-            }else {
+            } else {
 
             }
         }));
@@ -122,6 +125,7 @@ public class MsgFragment extends BaseFragment {
     public void loadData() {
 
     }
+
 
     public static Fragment getInstance() {
         MsgFragment fragment = new MsgFragment();
@@ -174,6 +178,21 @@ public class MsgFragment extends BaseFragment {
                         , ImageUtils.getImagePathFromGallery(getActivity(), data)));
             }
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (fDialogFragment != null)
+            fDialogFragment.dismiss();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i(TAG, "onResume: start");
+        noteCount = mOneDailyDB.queryNoteCount();
+        mTvNoteCount.setText(String.valueOf(noteCount));
     }
 
     @Override

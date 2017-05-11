@@ -45,7 +45,7 @@ public class DateFormatUtil {
     }
 
     public static String dateFomeNomal() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         return simpleDateFormat.format(new Date());
     }
 
