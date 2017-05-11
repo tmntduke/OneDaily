@@ -16,6 +16,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String CREATE = "create table t_searchHistory (hId integer PRIMARY KEY AUTOINCREMENT" +
             ", history varchar (200))";
 
+    public static final String CREATE_NOTE = "create table t_note(id integer primary key autoincrement " +
+            "nId varchar(300) ,note varchar(600))";
+
     public DBHelper(Context context) {
         super(context, DB_NAME, null, VERSION);
     }
@@ -23,6 +26,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE);
+        db.execSQL(CREATE_NOTE);
     }
 
     @Override

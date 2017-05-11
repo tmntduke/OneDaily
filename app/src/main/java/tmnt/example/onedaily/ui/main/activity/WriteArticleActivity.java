@@ -36,6 +36,7 @@ import rx.schedulers.Schedulers;
 import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.Rx.Operation;
 import tmnt.example.onedaily.Rx.RxUilt;
+import tmnt.example.onedaily.db.OneDailyDB;
 import tmnt.example.onedaily.mvp.CallBack;
 import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.util.Common;
@@ -94,7 +95,7 @@ public class WriteArticleActivity extends BaseActivity {
     private boolean isClick;
     private AlertDialog dialog;
     private RxUilt rxUilt;
-    private SharedPreferencesUtil mSharedPreferencesUtil;
+    private OneDailyDB mOneDailyDB;
     private static final String WRITE_PATH = "oneDaily_write";
     public static final String NOTE_NAME = "article";
 
@@ -102,7 +103,7 @@ public class WriteArticleActivity extends BaseActivity {
     public void initData(Bundle savedInstanceState) {
         setStatesBar(R.color.colorPrimary);
         rxUilt = RxUilt.getInstance();
-        mSharedPreferencesUtil = SharedPreferencesUtil.getInstance(this);
+        mOneDailyDB=OneDailyDB.newInstance(this);
     }
 
     @Override
@@ -209,6 +210,7 @@ public class WriteArticleActivity extends BaseActivity {
             public Boolean operation() {
                 try {
                     IOUtil.output(file, html.getBytes());
+
                     return true;
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -219,13 +221,7 @@ public class WriteArticleActivity extends BaseActivity {
             @Override
             public void onSuccess(Boolean aBoolean) {
                 if (aBoolean) {
-                    Toast.makeText(WriteArticleActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
-                    if (mSharedPreferencesUtil.getData(NOTE_NAME) != null) {
-                        int count = (int) mSharedPreferencesUtil.getData(NOTE_NAME) + 1;
-                        mSharedPreferencesUtil.putData(NOTE_NAME, count);
-                    } else {
-                        mSharedPreferencesUtil.putData(NOTE_NAME, 1);
-                    }
+                    toActivity(NoteListActivity.class);
                 } else {
                     Toast.makeText(WriteArticleActivity.this, "保存失败", Toast.LENGTH_SHORT).show();
                 }

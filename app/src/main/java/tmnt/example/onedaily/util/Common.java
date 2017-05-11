@@ -11,11 +11,11 @@ import java.io.File;
 public class Common {
 
     public static final String DOUBAN_URL = "https://api.douban.com/v2/";//movie/in_theaters
-    public static final String GANK_URL = "http://gank.io/api/";
 
+    public static final String GANK_URL = "http://gank.io/api/";
 
     public static final String ZHIHU_URL = "http://news-at.zhihu.com/api/4/news/";
 
-    public static final String ONEDAILY_PATH = Environment.getDownloadCacheDirectory().getPath() + File.separator + "oneDaily";
+    public static final String ONEDAILY_PATH = Environment.getExternalStorageDirectory().getPath() + File.separator + "oneDaily";
 
 }

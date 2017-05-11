@@ -3,6 +3,8 @@ package tmnt.example.onedaily.ui.main.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +51,7 @@ public class MsgFragment extends BaseFragment {
     @Bind(R.id.rl_collect)
     RelativeLayout mRlCollect;
     @Bind(R.id.sw_notification)
-    Switch mSwNotification;
+    SwitchCompat mSwNotification;
     @Bind(R.id.rl_notification)
     RelativeLayout mRlNotification;
     @Bind(R.id.rl_disposition)
@@ -93,19 +95,19 @@ public class MsgFragment extends BaseFragment {
     @Override
     public void initOperation() {
 
-        mTvNoteCount.setText(noteCount);
+        mTvNoteCount.setText(String.valueOf(noteCount));
 
         mCvMyCover.setOnClickListener(v -> {
 
         });
 
-        mRlAbort.setOnClickListener(v -> toActivity());
-
-        mRlCollect.setOnClickListener(v -> toActivity());
-
-        mRlNote.setOnClickListener(v -> toActivity());
-
-        mRlDisposition.setOnClickListener(v -> toActivity());
+//        mRlAbort.setOnClickListener(v -> toActivity());
+//
+//        mRlCollect.setOnClickListener(v -> toActivity());
+//
+//        mRlNote.setOnClickListener(v -> toActivity());
+//
+//        mRlDisposition.setOnClickListener(v -> toActivity());
 
         mSwNotification.setOnCheckedChangeListener(((buttonView, isChecked) -> {
             if (isChecked) {
@@ -113,13 +115,20 @@ public class MsgFragment extends BaseFragment {
             }
         }));
 
-        mBtnExit.setOnClickListener(v ->);
+//        mBtnExit.setOnClickListener(v ->);
+
+        mCvMyCover.setOnClickListener(v -> showUploadDialog());
 
     }
 
     @Override
     public void loadData() {
 
+    }
+
+    public static Fragment getInstance() {
+        MsgFragment fragment = new MsgFragment();
+        return fragment;
     }
 
     private void showUploadDialog() {
@@ -162,9 +171,10 @@ public class MsgFragment extends BaseFragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == getActivity().RESULT_OK) {
             if (requestCode == CAMERA_REQUEST_CODE) {
-
+                mCvMyCover.setImageBitmap(ImageUtils.readBitMap(getActivity(), COVER_PATH));
             } else {
-
+                mCvMyCover.setImageBitmap(ImageUtils.readBitMap(getActivity()
+                        , ImageUtils.getImagePathFromGallery(getActivity(), data)));
             }
         }
     }

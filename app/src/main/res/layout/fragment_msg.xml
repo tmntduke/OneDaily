@@ -49,6 +49,8 @@
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
+                    android:src="@drawable/image"
+                    android:scaleType="fitXY"
                     android:layout_marginLeft="20dp"/>
 
                 <TextView
@@ -120,9 +122,11 @@
                     style="@style/my_title"
                     android:text="@string/my_notification"/>
 
-                <Switch
+                <android.support.v7.widget.SwitchCompat
                     android:id="@+id/sw_notification"
-                    style="@style/my_count"/>
+                    style="@style/my_count"
+                    android:theme="@style/SCBSwitch"
+                />
 
                 <include layout="@layout/divier_view"
                          android:layout_width="wrap_content"

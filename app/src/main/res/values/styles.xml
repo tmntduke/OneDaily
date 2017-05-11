@@ -10,17 +10,15 @@
 
     <style name="nav_bar_layout">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_height">40dp</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:background">@color/colorPrimary</item>
     </style>
 
     <style name="navBackButton">
-        <item name="android:onClick">onBack</item>
         <item name="android:background">@drawable/back_selector</item>
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_centerVertical">true</item>
-        <item name="android:layout_marginRight">5dp</item>
         <item name="android:layout_width">25dp</item>
         <item name="android:layout_height">25dp</item>
     </style>
@@ -76,5 +74,16 @@
     <style name="AnimBottom" parent="@android:style/Animation">
         <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
         <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
+
+    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/colorPrimary</item>
+
+        <!-- inactive thumb color -->
+        <item name="colorSwitchThumbNormal">#f1f1f1</item>
+
+        <!-- inactive track color (30% transparency) -->
+        <item name="android:colorForeground">#42221f1f</item>
     </style>
 </resources>
