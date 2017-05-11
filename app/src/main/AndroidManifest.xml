@@ -26,6 +26,7 @@
         <activity android:name=".ui.main.activity.WriteArticleActivity"
                   android:screenOrientation="portrait"
                   android:windowSoftInputMode="adjustUnspecified|stateHidden|adjustResize"></activity>
+        <activity android:name=".ui.main.activity.NoteListActivity"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>

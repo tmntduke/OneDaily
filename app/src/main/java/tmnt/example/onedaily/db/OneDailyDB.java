@@ -134,6 +134,7 @@ public class OneDailyDB {
                 NoteInfo noteInfo = new Gson().fromJson(note, NoteInfo.class);
                 list.add(noteInfo);
             }
+            Log.i(TAG, "queryNote: "+list.size());
             cursor.close();
             if (list == null || list.size() == 0) {
                 return Collections.emptyList();
@@ -147,7 +148,7 @@ public class OneDailyDB {
         mDatabase = helper.getReadableDatabase();
         Cursor cursor = mDatabase.query(TABLE_NOTE, null, null, null, null,
                 null, null);
-        return cursor.getColumnCount();
+        return cursor.getCount();
     }
 
     public void updateNote(String id, NoteInfo noteInfo) {

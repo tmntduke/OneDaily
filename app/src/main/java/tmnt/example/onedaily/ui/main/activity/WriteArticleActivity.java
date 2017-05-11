@@ -214,7 +214,10 @@ public class WriteArticleActivity extends BaseActivity {
                     NoteInfo noteInfo = new NoteInfo();
                     noteInfo.setDate(DateFormatUtil.dateFomeNomal());
                     noteInfo.setTitle(mEdTitle.getText().toString());
-                    noteInfo.setPath(file.getPath());
+                    noteInfo.setPath(Common.ONEDAILY_PATH
+                            + File.separator + WRITE_PATH
+                            + File.separator
+                            + mEdTitle.getText().toString() + ".txt");
                     mOneDailyDB.insertNote(noteInfo);
                     return true;
                 } catch (IOException e) {
@@ -227,6 +230,7 @@ public class WriteArticleActivity extends BaseActivity {
             public void onSuccess(Boolean aBoolean) {
                 if (aBoolean) {
                     toActivity(NoteListActivity.class);
+                    finish();
                 } else {
                     Toast.makeText(WriteArticleActivity.this, "保存失败", Toast.LENGTH_SHORT).show();
                 }

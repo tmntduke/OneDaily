@@ -124,6 +124,7 @@ public class MainActivity extends BaseActivity {
                         break;
                     case 4:
                         Fragment msg = MsgFragment.getInstance();
+                        mIndex = index;
                         toFragment(R.id.main_contain, msg);
                         break;
                 }

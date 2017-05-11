@@ -17,20 +17,25 @@ import tmnt.example.onedaily.Rx.RxUilt;
 public class IOUtil {
 
     public static String input(File file) throws IOException {
-        InputStream inputStream = new FileInputStream(file);
-        byte[] bytes = new byte[1024];
-        int foot = 0;
-        int temp = 0;
-        while ((temp = inputStream.read()) != -1) {
-            bytes[foot++] = (byte) temp;
+
+        try (InputStream inputStream = new FileInputStream(file)) {
+            byte[] bytes = new byte[1024];
+            int foot = 0;
+            int temp = 0;
+            while ((temp = inputStream.read()) != -1) {
+                bytes[foot++] = (byte) temp;
+            }
+            return new String(bytes, 0, foot);
         }
 
-        return new String(bytes, 0, foot);
+
     }
 
     public static void output(File file, byte[] bytes) throws IOException {
-        OutputStream outputStream = new FileOutputStream(file);
-        outputStream.write(bytes);
+        try (OutputStream outputStream = new FileOutputStream(file)) {
+            outputStream.write(bytes);
+        }
+
     }
 
 }

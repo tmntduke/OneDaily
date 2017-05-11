@@ -96,9 +96,7 @@ public class MsgFragment extends BaseFragment {
 
         mTvNoteCount.setText(String.valueOf(noteCount));
 
-        mCvMyCover.setOnClickListener(v -> {
-
-        });
+        mCvMyCover.setOnClickListener(v -> showUploadDialog());
 
 //        mRlAbort.setOnClickListener(v -> toActivity());
 //
@@ -111,12 +109,12 @@ public class MsgFragment extends BaseFragment {
         mSwNotification.setOnCheckedChangeListener(((buttonView, isChecked) -> {
             if (isChecked) {
 
+            }else {
+
             }
         }));
 
 //        mBtnExit.setOnClickListener(v ->);
-
-        mCvMyCover.setOnClickListener(v -> showUploadDialog());
 
     }
 
