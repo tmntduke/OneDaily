@@ -36,6 +36,7 @@ import rx.schedulers.Schedulers;
 import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.Rx.Operation;
 import tmnt.example.onedaily.Rx.RxUilt;
+import tmnt.example.onedaily.bean.note.NoteInfo;
 import tmnt.example.onedaily.db.OneDailyDB;
 import tmnt.example.onedaily.mvp.CallBack;
 import tmnt.example.onedaily.ui.common.BaseActivity;
@@ -103,7 +104,7 @@ public class WriteArticleActivity extends BaseActivity {
     public void initData(Bundle savedInstanceState) {
         setStatesBar(R.color.colorPrimary);
         rxUilt = RxUilt.getInstance();
-        mOneDailyDB=OneDailyDB.newInstance(this);
+        mOneDailyDB = OneDailyDB.newInstance(this);
     }
 
     @Override
@@ -210,7 +211,11 @@ public class WriteArticleActivity extends BaseActivity {
             public Boolean operation() {
                 try {
                     IOUtil.output(file, html.getBytes());
-
+                    NoteInfo noteInfo = new NoteInfo();
+                    noteInfo.setDate(DateFormatUtil.dateFomeNomal());
+                    noteInfo.setTitle(mEdTitle.getText().toString());
+                    noteInfo.setPath(file.getPath());
+                    mOneDailyDB.insertNote(noteInfo);
                     return true;
                 } catch (IOException e) {
                     e.printStackTrace();

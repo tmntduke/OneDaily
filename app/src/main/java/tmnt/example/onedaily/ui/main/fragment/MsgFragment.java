@@ -20,7 +20,9 @@ import java.io.File;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
+import tmnt.example.onedaily.db.OneDailyDB;
 import tmnt.example.onedaily.ui.common.BaseFragment;
+import tmnt.example.onedaily.ui.main.activity.NoteListActivity;
 import tmnt.example.onedaily.ui.main.activity.WriteArticleActivity;
 import tmnt.example.onedaily.util.Common;
 import tmnt.example.onedaily.util.DateFormatUtil;
@@ -62,7 +64,7 @@ public class MsgFragment extends BaseFragment {
     Button mBtnExit;
 
     private View mView;
-    private SharedPreferencesUtil mSharedPreferencesUtil;
+    private OneDailyDB mOneDailyDB;
     private int noteCount;
     private UploadDialogFragment fDialogFragment;
     private static final String COVER_PATH = Common.ONEDAILY_PATH + File.separator + "oneDaily_cover";
@@ -79,12 +81,9 @@ public class MsgFragment extends BaseFragment {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        mSharedPreferencesUtil = SharedPreferencesUtil.getInstance(getActivity());
-        if (mSharedPreferencesUtil.getData(WriteArticleActivity.NOTE_NAME) != null) {
-            noteCount = mSharedPreferencesUtil.getData(WriteArticleActivity.NOTE_NAME);
-        } else {
-            noteCount = 0;
-        }
+
+        mOneDailyDB = OneDailyDB.newInstance(getActivity());
+        noteCount = mOneDailyDB.queryNoteCount();
     }
 
     @Override
@@ -105,7 +104,7 @@ public class MsgFragment extends BaseFragment {
 //
 //        mRlCollect.setOnClickListener(v -> toActivity());
 //
-//        mRlNote.setOnClickListener(v -> toActivity());
+        mRlNote.setOnClickListener(v -> toActivity(NoteListActivity.class));
 //
 //        mRlDisposition.setOnClickListener(v -> toActivity());
 

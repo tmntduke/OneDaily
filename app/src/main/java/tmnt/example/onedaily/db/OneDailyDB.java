@@ -81,8 +81,10 @@ public class OneDailyDB {
         ContentValues values = new ContentValues();
         mRxUilt.createAndResult(Schedulers.io(), () -> {
             mDatabase = helper.getWritableDatabase();
+            String d = String.valueOf(new Date().getTime());
+            noteInfo.setId(d);
             String note = new Gson().toJson(noteInfo);
-            values.put("nId", String.valueOf(new Date().getTime()));
+            values.put("nId", d);
             values.put("note", note);
             mDatabase.insert(TABLE_NOTE, NID, values);
             return true;
@@ -120,7 +122,7 @@ public class OneDailyDB {
         }, callBack);
     }
 
-    public void queryNotee(CallBack<List<NoteInfo>> callBack) {
+    public void queryNote(CallBack<List<NoteInfo>> callBack) {
         mRxUilt.createAndResult(Schedulers.io(), () -> {
             ArrayList list = new ArrayList();
             mDatabase = helper.getReadableDatabase();
@@ -130,7 +132,6 @@ public class OneDailyDB {
                 String id = cursor.getColumnName(cursor.getColumnIndex("nId"));
                 String note = cursor.getString(cursor.getColumnIndex("note"));
                 NoteInfo noteInfo = new Gson().fromJson(note, NoteInfo.class);
-                noteInfo.setId(id);
                 list.add(noteInfo);
             }
             cursor.close();
@@ -140,6 +141,13 @@ public class OneDailyDB {
                 return list;
             }
         }, callBack);
+    }
+
+    public int queryNoteCount() {
+        mDatabase = helper.getReadableDatabase();
+        Cursor cursor = mDatabase.query(TABLE_NOTE, null, null, null, null,
+                null, null);
+        return cursor.getColumnCount();
     }
 
     public void updateNote(String id, NoteInfo noteInfo) {

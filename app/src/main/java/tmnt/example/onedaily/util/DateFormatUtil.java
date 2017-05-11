@@ -44,6 +44,11 @@ public class DateFormatUtil {
         return SIMPLEDATEFORMAT.format(calendar.getTime());
     }
 
+    public static String dateFomeNomal() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        return simpleDateFormat.format(new Date());
+    }
+
     public static String getWeek(Calendar calendar) {
         String week = null;
         switch (calendar.get(Calendar.DAY_OF_WEEK)) {
