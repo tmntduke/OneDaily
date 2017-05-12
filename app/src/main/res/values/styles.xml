@@ -86,4 +86,11 @@
         <!-- inactive track color (30% transparency) -->
         <item name="android:colorForeground">#42221f1f</item>
     </style>
+    <style name="collect_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text_gray</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textSize">13sp</item>
+    </style>
 </resources>

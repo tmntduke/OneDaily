@@ -68,6 +68,7 @@ public class MsgFragment extends BaseFragment {
     private View mView;
     private OneDailyDB mOneDailyDB;
     private int noteCount;
+    private int collectCount;
     private UploadDialogFragment fDialogFragment;
     private SharedPreferencesUtil mSharedPreferencesUtil;
     private String coverPath;
@@ -89,9 +90,9 @@ public class MsgFragment extends BaseFragment {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
         mOneDailyDB = OneDailyDB.newInstance(getActivity());
         noteCount = mOneDailyDB.queryNoteCount();
+        collectCount = mOneDailyDB.queryCollectCount();
         mSharedPreferencesUtil = SharedPreferencesUtil.getInstance(getActivity());
         coverPath = mSharedPreferencesUtil.getData(USER_COVER);
     }
@@ -105,9 +106,12 @@ public class MsgFragment extends BaseFragment {
     public void initOperation() {
 
         if (coverPath != null)
-            mCvMyCover.setImageBitmap(ImageUtils.readBitMap(getActivity(), coverPath));
+            mCvMyCover.setImageBitmap(ImageUtils.readBitMap(getActivity()
+                    , coverPath));
 
         mTvNoteCount.setText(String.valueOf(noteCount));
+
+        mTvCollectCount.setText(String.valueOf(collectCount));
 
         mCvMyCover.setOnClickListener(v -> showUploadDialog());
 

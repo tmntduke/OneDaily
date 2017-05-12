@@ -32,4 +32,5 @@
     <string name="my_exit">退出登录</string>
     <string name="note_title">笔记</string>
     <string name="user_login">登录</string>
+    <string name="collect_book">我的图书</string>
 </resources>

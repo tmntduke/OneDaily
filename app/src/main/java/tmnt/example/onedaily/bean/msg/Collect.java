@@ -11,6 +11,7 @@ public class Collect implements Parcelable {
     private String id;
     private String author;
     private String image;
+    private String title;
 
     public String getId() {
         return id;
@@ -18,6 +19,14 @@ public class Collect implements Parcelable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getAuthor() {
@@ -36,6 +45,9 @@ public class Collect implements Parcelable {
         this.image = image;
     }
 
+    public Collect() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -46,15 +58,14 @@ public class Collect implements Parcelable {
         dest.writeString(this.id);
         dest.writeString(this.author);
         dest.writeString(this.image);
-    }
-
-    public Collect() {
+        dest.writeString(this.title);
     }
 
     protected Collect(Parcel in) {
         this.id = in.readString();
         this.author = in.readString();
         this.image = in.readString();
+        this.title = in.readString();
     }
 
     public static final Creator<Collect> CREATOR = new Creator<Collect>() {

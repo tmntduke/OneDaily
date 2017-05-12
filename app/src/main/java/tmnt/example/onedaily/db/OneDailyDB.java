@@ -221,7 +221,7 @@ public class OneDailyDB {
     public void deleteCollect(String id) {
         mRxUilt.createAndResult(Schedulers.io(), () -> {
             mDatabase = helper.getWritableDatabase();
-            int re = mDatabase.delete(TABLE_COLLECT, "id=?", new String[]{id});
+            int re = mDatabase.delete(TABLE_COLLECT, "cId=?", new String[]{id});
             if (re == 0) {
                 return false;
             }
@@ -265,9 +265,20 @@ public class OneDailyDB {
             mDatabase = helper.getReadableDatabase();
             Cursor cursor = mDatabase.query(TABLE_COLLECT, new String[]{"id"}, "cId=?", new String[]{id}, null, null,
                     null, null);
-            boolean isHave = cursor.isNull(0);
-            return isHave;
+            int isHave = cursor.getCount();
+            if (isHave == 0) {
+                return false;
+            }
+            Log.i(TAG, "queryCollectBook: " + isHave);
+            return true;
         }, callBack);
+    }
+
+    public int queryCollectCount() {
+        mDatabase = helper.getReadableDatabase();
+        Cursor cursor = mDatabase.query(TABLE_COLLECT, null, null, null, null,
+                null, null);
+        return cursor.getCount();
     }
 
 }

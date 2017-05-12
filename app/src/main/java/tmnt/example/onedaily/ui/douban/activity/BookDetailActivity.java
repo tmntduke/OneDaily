@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.graphics.Palette;
+import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Window;
@@ -74,6 +75,8 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
     ImageView mImgShare;
     @Bind(R.id.img_collect)
     ImageView mImgCollect;
+    @Bind(R.id.cd_collect)
+    CardView mCdCollect;
 
     private String book;
     private Intent mIntent;
@@ -124,7 +127,7 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
 
         });
 
-        mImgCollect.setOnClickListener(v -> collectBook());
+        mCdCollect.setOnClickListener(v -> collectBook());
     }
 
     @Override
@@ -139,6 +142,7 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
             @Override
             public void onSuccess(Boolean aBoolean) {
                 isCollect = aBoolean;
+                Log.i(TAG, "onSuccess: " + isCollect);
                 if (aBoolean) {
                     mImgCollect.setImageResource(R.drawable.ic_collection_pro);
                 } else {
@@ -176,6 +180,7 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
     }
 
     private void collectBook() {
+        Log.i(TAG, "collectBook: " + isCollect);
         if (isCollect) {
             mOneDailyDB.deleteCollect(mBook.getId());
         } else {
@@ -183,6 +188,7 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
             collect.setId(mBook.getId());
             collect.setAuthor(mTvDetailAuthor.getText().toString());
             collect.setImage(mBook.getImages().getLarge());
+            collect.setTitle(mBook.getTitle());
             mOneDailyDB.insertCollect(collect);
         }
 
