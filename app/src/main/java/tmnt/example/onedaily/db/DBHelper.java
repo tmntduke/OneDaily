@@ -17,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper {
             ", history varchar (200))";
 
     public static final String CREATE_NOTE = "create table t_note(id integer primary key autoincrement " +
-            ",nId varchar(300) ,note varchar(600))";
+            ",nId varchar(300) ,note varchar(1500))";
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, VERSION);

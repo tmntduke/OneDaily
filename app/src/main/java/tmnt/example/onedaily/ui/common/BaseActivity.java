@@ -28,14 +28,18 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseFunc
         initData(savedInstanceState);
         initView();
         initOperation();
-        loadData();
-
     }
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData();
     }
 
     /**
@@ -62,6 +66,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseFunc
 
     protected void toActivityForResult(Class clazz, int requestCode, Bundle bundle) {
         Intent intent = new Intent(this, clazz);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         if (bundle != null) {
             intent.putExtras(bundle);
         }

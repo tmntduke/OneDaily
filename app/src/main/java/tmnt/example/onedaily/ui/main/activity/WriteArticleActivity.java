@@ -282,7 +282,7 @@ public class WriteArticleActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == WriteArticleActivity.this.RESULT_OK) {
             if (requestCode == REQUES_CODE) {
-                mEditor.insertImage(ImageUtils.getImagePathFromGallery(WriteArticleActivity.this, data),
+                mEditor.insertImage("file://"+ImageUtils.getImagePathFromGallery(WriteArticleActivity.this, data),
                         "image" + DateFormatUtil.nowDate());
 
                 //富文本显示上传的图片

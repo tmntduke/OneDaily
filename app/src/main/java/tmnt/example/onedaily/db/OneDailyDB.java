@@ -150,7 +150,7 @@ public class OneDailyDB {
             String note = new Gson().toJson(noteInfo);
             values.put("note", note);
             mDatabase = helper.getWritableDatabase();
-            mDatabase.update(TABLE_NOTE, values, "nId", new String[]{id});
+            mDatabase.update(TABLE_NOTE, values, "nId=?", new String[]{id});
             return true;
         }, new CallBack<Boolean>() {
             @Override
@@ -168,7 +168,7 @@ public class OneDailyDB {
     public void deleteNote(String id) {
         mRxUilt.createAndResult(Schedulers.io(), () -> {
             mDatabase = helper.getWritableDatabase();
-            int re = mDatabase.delete(TABLE_NOTE, "nId", new String[]{id});
+            int re = mDatabase.delete(TABLE_NOTE, "nId=?", new String[]{id});
             if (re == 0) {
                 return false;
             } else {

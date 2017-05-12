@@ -54,7 +54,6 @@ public class NoteListActivity extends BaseActivity implements View<List<NoteInfo
         mNoteInfos = new ArrayList<>();
         NoteListModel model = new NoteListModel(this);
         persenter = new NoteListPersenter(model, this);
-        persenter.handleData();
     }
 
     @Override
@@ -74,8 +73,8 @@ public class NoteListActivity extends BaseActivity implements View<List<NoteInfo
             public void onItemClick(android.view.View view, int position) {
                 Log.i(TAG, "onItemClick: " + mNoteInfos.get(position).getPath());
                 Bundle bundle = new Bundle();
-                bundle.putString(NOTE_PATH, mNoteInfos.get(position).getPath());
-                toActivity(NoteDetailActivity.class,bundle);
+                bundle.putParcelable(NOTE_PATH, mNoteInfos.get(position));
+                toActivity(NoteDetailActivity.class, bundle);
             }
         });
 
@@ -85,7 +84,7 @@ public class NoteListActivity extends BaseActivity implements View<List<NoteInfo
 
     @Override
     public void loadData() {
-
+        persenter.handleData();
     }
 
     @Override

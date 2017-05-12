@@ -55,6 +55,7 @@ public abstract class BaseFragment extends Fragment implements BaseFunc {
 
     protected void toActivity(Class<? extends BaseActivity> clazz, Bundle bundle) {
         Intent intent = new Intent(getActivity(), clazz);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         if (bundle != null) {
             intent.putExtras(bundle);
         }
