@@ -25,4 +25,7 @@ public interface DoubanService {
     @GET("book/isbn/{name}")
     Observable<Book> getBookForIsbn(@Path("name") String name);
 
+    @GET("book/{id}")
+    Observable<Book> getBookDetail(@Path("id")String id);
+
 }

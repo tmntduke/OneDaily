@@ -34,6 +34,7 @@ import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.ui.douban.adapter.BookHistoryAdapter;
 import tmnt.example.onedaily.ui.douban.adapter.BookSearchAdapter;
 import tmnt.example.onedaily.ui.douban.fragment.BookFragment;
+import tmnt.example.onedaily.ui.douban.model.BookDetailModel;
 import tmnt.example.onedaily.ui.douban.model.BookModel;
 import tmnt.example.onedaily.ui.douban.presenter.BookPresenter;
 import tmnt.example.onedaily.util.BookApiUtils;
@@ -206,7 +207,7 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
             String scanResult = bundle.getString("result");
             Log.i(TAG, "onActivityResult: " + scanResult);
             Bundle isbn = new Bundle();
-            isbn.putString(BookFragment.BOOK_ID, BOOK_ISBN);
+            isbn.putString(BookFragment.BOOK_ID, BookDetailModel.ISBN_TYPE);
             isbn.putString(BOOK_ISBN, scanResult);
             toActivity(BookDetailActivity.class, isbn);
         }

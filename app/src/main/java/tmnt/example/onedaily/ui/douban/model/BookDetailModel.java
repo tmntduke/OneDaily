@@ -15,11 +15,24 @@ import tmnt.example.onedaily.util.Common;
 
 public class BookDetailModel implements Model<Book> {
 
-    private Api mApi=Api.getInstance();
-    private DoubanService mDoubanService = mApi.getCall(Common.DOUBAN_URL,DoubanService.class);
+    private Api mApi = Api.getInstance();
+    private DoubanService mDoubanService = mApi.getCall(Common.DOUBAN_URL, DoubanService.class);
     private RxUilt mRxUilt = RxUilt.getInstance();
 
+    public static final String ISBN_TYPE = "isbn";
+    public static final String COLLECT_TYPE = "collect";
+
     private String name;
+    private String bookId;
+    private String type;
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setBookId(String bookId) {
+        this.bookId = bookId;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -27,7 +40,10 @@ public class BookDetailModel implements Model<Book> {
 
     @Override
     public void getNews(CallBack<Book> callBack) {
-         mRxUilt.getDataForObservable(mDoubanService.getBookForIsbn(name),callBack);
+        if (type.equals(ISBN_TYPE) )
+            mRxUilt.getDataForObservable(mDoubanService.getBookForIsbn(name), callBack);
+        else if (type.equals(COLLECT_TYPE))
+            mRxUilt.getDataForObservable(mDoubanService.getBookDetail(bookId), callBack);
     }
 
     @Override

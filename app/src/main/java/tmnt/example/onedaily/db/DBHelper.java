@@ -17,10 +17,10 @@ public class DBHelper extends SQLiteOpenHelper {
             ", history varchar (200))";
 
     public static final String CREATE_NOTE = "create table t_note(id integer primary key autoincrement " +
-            ",nId varchar(300) ,note varchar(1500))";
+            ",mId varchar(300) ,object varchar(1500))";
 
-    public static final String CREATE_COLLECT = "create table t_collect(id integer primary key autoincrement, cId varchar(300)" +
-            ",collect varchar(450))";
+    public static final String CREATE_COLLECT = "create table t_collect(id integer primary key autoincrement, mId varchar(300)" +
+            ",object varchar(450))";
 
     public DBHelper(Context context) {
         super(context, DB_NAME, null, VERSION);

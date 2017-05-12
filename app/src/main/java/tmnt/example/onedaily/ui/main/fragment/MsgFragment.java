@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.db.OneDailyDB;
 import tmnt.example.onedaily.ui.common.BaseFragment;
+import tmnt.example.onedaily.ui.main.activity.CollectListActivity;
 import tmnt.example.onedaily.ui.main.activity.NoteListActivity;
 import tmnt.example.onedaily.ui.main.activity.WriteArticleActivity;
 import tmnt.example.onedaily.util.Common;
@@ -116,12 +117,15 @@ public class MsgFragment extends BaseFragment {
         mCvMyCover.setOnClickListener(v -> showUploadDialog());
 
 //        mRlAbort.setOnClickListener(v -> toActivity());
-//
-//        mRlCollect.setOnClickListener(v -> toActivity());
-//
+
         mRlNote.setOnClickListener(v -> toActivity(NoteListActivity.class));
 //
 //        mRlDisposition.setOnClickListener(v -> toActivity());
+
+        mRlCollect.setOnClickListener(v -> {
+            if (collectCount != 0)
+                toActivity(CollectListActivity.class);
+        });
 
         mSwNotification.setOnCheckedChangeListener(((buttonView, isChecked) -> {
             if (isChecked) {
@@ -214,7 +218,9 @@ public class MsgFragment extends BaseFragment {
         super.onResume();
         Log.i(TAG, "onResume: start");
         noteCount = mOneDailyDB.queryNoteCount();
+        collectCount = mOneDailyDB.queryCollectCount();
         mTvNoteCount.setText(String.valueOf(noteCount));
+        mTvCollectCount.setText(String.valueOf(collectCount));
     }
 
     @Override

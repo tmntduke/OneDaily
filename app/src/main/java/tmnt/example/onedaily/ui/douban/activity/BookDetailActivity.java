@@ -41,6 +41,7 @@ import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.ui.douban.fragment.BookFragment;
 import tmnt.example.onedaily.ui.douban.model.BookDetailModel;
 import tmnt.example.onedaily.ui.douban.presenter.BookDetailPresent;
+import tmnt.example.onedaily.ui.main.activity.CollectListActivity;
 import tmnt.example.onedaily.util.BookApiUtils;
 
 /**
@@ -93,14 +94,22 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
     public void initData(Bundle savedInstanceState) {
         mIntent = getIntent();
         book = mIntent.getStringExtra(BookFragment.BOOK_ID);
+        BookDetailModel model = new BookDetailModel();//
+        Log.i(TAG, "initData: " + book);
+        model.setType(book);
         if ("id".equals(book)) {
             mBook = mIntent.getParcelableExtra(BookSearchActivity.BOOK);
-        } else if ("isbn".equals(book)) {
-            BookDetailModel model = new BookDetailModel();//
-            model.setName(mIntent.getStringExtra(BookSearchActivity.BOOK_ISBN));
+        } else {
+            if ((BookDetailModel.ISBN_TYPE.equals(book))) {
+                model.setName(mIntent.getStringExtra(BookSearchActivity.BOOK_ISBN));
+            } else if (BookDetailModel.COLLECT_TYPE.equals(book)) {
+                model.setBookId(mIntent.getStringExtra(CollectListActivity.COLLECT_ID));
+            }
+
             mDetailPresent = new BookDetailPresent(model, this);
             mDetailPresent.handleData();
         }
+
 
         mOneDailyDB = OneDailyDB.newInstance(this);
     }
@@ -115,8 +124,6 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
     @Override
     public void initOperation() {
 
-        changeCollect();
-
         mImgTurn.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putString(BOOK_CATALOG, mBook.getCatalog());
@@ -127,18 +134,19 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
 
         });
 
-        mCdCollect.setOnClickListener(v -> collectBook());
+        mImgCollect.setOnClickListener(v -> collectBook());
     }
 
     @Override
     public void loadData() {
         if (mBook != null) {
             setData(mBook);
+            changeCollect(mBook);
         }
     }
 
-    private void changeCollect() {
-        mOneDailyDB.queryCollectBook(mBook.getId(), new CallBack<Boolean>() {
+    private void changeCollect(Book book) {
+        mOneDailyDB.queryCollectBook(book.getId(), new CallBack<Boolean>() {
             @Override
             public void onSuccess(Boolean aBoolean) {
                 isCollect = aBoolean;
@@ -162,6 +170,7 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
         mBook = datas;
         Log.i(TAG, "showData: " + mBook);
         setData(datas);
+        changeCollect(datas);
     }
 
     @Override
@@ -182,17 +191,38 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
     private void collectBook() {
         Log.i(TAG, "collectBook: " + isCollect);
         if (isCollect) {
-            mOneDailyDB.deleteCollect(mBook.getId());
+            mOneDailyDB.deleteCollect(mBook.getId(), new CallBack<Boolean>() {
+                @Override
+                public void onSuccess(Boolean aBoolean) {
+                    mCollectHandle.sendEmptyMessage(CHANGE_COLLECT);
+                }
+
+                @Override
+                public void onError(Throwable e) {
+
+                }
+            });
         } else {
             Collect collect = new Collect();
             collect.setId(mBook.getId());
             collect.setAuthor(mTvDetailAuthor.getText().toString());
             collect.setImage(mBook.getImages().getLarge());
             collect.setTitle(mBook.getTitle());
-            mOneDailyDB.insertCollect(collect);
+            mOneDailyDB.insertCollect(collect, new CallBack<Boolean>() {
+                @Override
+                public void onSuccess(Boolean aBoolean) {
+                    if (aBoolean)
+                        mCollectHandle.sendEmptyMessage(CHANGE_COLLECT);
+                }
+
+                @Override
+                public void onError(Throwable e) {
+
+                }
+            });
         }
 
-        mCollectHandle.sendEmptyMessage(CHANGE_COLLECT);
+
     }
 
     private void setData(Book book) {
@@ -255,7 +285,8 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == CHANGE_COLLECT) {
-                changeCollect();
+                if (mBook != null)
+                    changeCollect(mBook);
             }
         }
     }

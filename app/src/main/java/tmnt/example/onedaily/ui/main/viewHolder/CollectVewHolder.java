@@ -1,6 +1,7 @@
 package tmnt.example.onedaily.ui.main.viewHolder;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,7 +23,7 @@ public class CollectVewHolder extends BaseViewHolder<Collect> {
     private TextView title;
     private TextView author;
     private ImageView cover;
-    private LinearLayout contain;
+    private CardView contain;
     private OnCollectItemListener mOnCollectItemListener;
 
     public CollectVewHolder(View itemView, int type, Context context) {
@@ -30,7 +31,7 @@ public class CollectVewHolder extends BaseViewHolder<Collect> {
         title = (TextView) itemView.findViewById(R.id.tv_collect_title);
         author = (TextView) itemView.findViewById(R.id.tv_collect_author);
         cover = (ImageView) itemView.findViewById(R.id.img_collect_cover);
-        contain = (LinearLayout) itemView.findViewById(R.id.collect_contain);
+        contain = (CardView) itemView.findViewById(R.id.collect_contain);
     }
 
     public void setOnCollectItemListener(OnCollectItemListener onCollectItemListener) {

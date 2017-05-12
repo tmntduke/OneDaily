@@ -20,8 +20,8 @@ import tmnt.example.onedaily.mvp.View;
 import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.ui.main.adapter.NoteListAdapter;
 import tmnt.example.onedaily.ui.main.listener.OnNoteItemClickListener;
-import tmnt.example.onedaily.ui.main.model.NoteListModel;
-import tmnt.example.onedaily.ui.main.presenter.NoteListPersenter;
+import tmnt.example.onedaily.ui.main.model.MsgListModel;
+import tmnt.example.onedaily.ui.main.presenter.MsgPresenter;
 import tmnt.example.onedaily.util.DividerItemDecoration;
 
 /**
@@ -42,7 +42,7 @@ public class NoteListActivity extends BaseActivity implements View<List<NoteInfo
 
     private List<NoteInfo> mNoteInfos;
     private NoteListAdapter adapter;
-    private NoteListPersenter persenter;
+    private MsgPresenter<NoteInfo> persenter;
     public static final String NOTE_PATH = "note_path";
     private static final String TAG = "NoteListActivity";
 
@@ -50,8 +50,8 @@ public class NoteListActivity extends BaseActivity implements View<List<NoteInfo
     public void initData(Bundle savedInstanceState) {
         setStatesBar(R.color.colorPrimary);
         mNoteInfos = new ArrayList<>();
-        NoteListModel model = new NoteListModel(this);
-        persenter = new NoteListPersenter(model, this);
+        MsgListModel<NoteInfo> model = new MsgListModel<>(this,MsgListModel.NOTE_TYPE);
+        persenter = new MsgPresenter<>(model, this);
     }
 
     @Override
