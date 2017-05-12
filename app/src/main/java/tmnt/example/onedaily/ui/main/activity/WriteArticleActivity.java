@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.text.SpannableString;
@@ -32,11 +31,9 @@ import java.io.IOException;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import jp.wasabeef.richeditor.RichEditor;
-import rx.schedulers.Schedulers;
 import tmnt.example.onedaily.R;
-import tmnt.example.onedaily.Rx.Operation;
 import tmnt.example.onedaily.Rx.RxUilt;
-import tmnt.example.onedaily.bean.note.NoteInfo;
+import tmnt.example.onedaily.bean.msg.NoteInfo;
 import tmnt.example.onedaily.db.OneDailyDB;
 import tmnt.example.onedaily.mvp.CallBack;
 import tmnt.example.onedaily.ui.common.BaseActivity;
@@ -46,7 +43,6 @@ import tmnt.example.onedaily.util.HtmlUtil;
 import tmnt.example.onedaily.util.IOUtil;
 import tmnt.example.onedaily.util.ImageUtils;
 import tmnt.example.onedaily.util.PremissionUtil;
-import tmnt.example.onedaily.util.SharedPreferencesUtil;
 
 /**
  * Created by tmnt on 2017/5/8.

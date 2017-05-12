@@ -20,7 +20,7 @@ import java.io.IOException;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
-import tmnt.example.onedaily.bean.note.NoteInfo;
+import tmnt.example.onedaily.bean.msg.NoteInfo;
 import tmnt.example.onedaily.db.OneDailyDB;
 import tmnt.example.onedaily.mvp.CallBack;
 import tmnt.example.onedaily.ui.common.BaseActivity;

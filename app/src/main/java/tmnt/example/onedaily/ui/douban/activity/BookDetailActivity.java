@@ -8,6 +8,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.graphics.Palette;
 import android.text.TextUtils;
 import android.util.Log;
@@ -29,6 +32,9 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.bean.book.Book;
+import tmnt.example.onedaily.bean.msg.Collect;
+import tmnt.example.onedaily.db.OneDailyDB;
+import tmnt.example.onedaily.mvp.CallBack;
 import tmnt.example.onedaily.mvp.View;
 import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.ui.douban.fragment.BookFragment;
@@ -66,14 +72,19 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
     ImageView mImgTurn;
     @Bind(R.id.img_share)
     ImageView mImgShare;
+    @Bind(R.id.img_collect)
+    ImageView mImgCollect;
 
     private String book;
     private Intent mIntent;
     private Book mBook;
-
+    private OneDailyDB mOneDailyDB;
+    private boolean isCollect;
     private BookDetailPresent mDetailPresent;
+    private CollectHandle mCollectHandle = new CollectHandle();
     public static final String BOOK_CATALOG = "book_catalog";
     private static final String TAG = "BookDetailActivity";
+    private static final int CHANGE_COLLECT = 2013;
 
     @Override
     public void initData(Bundle savedInstanceState) {
@@ -87,6 +98,8 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
             mDetailPresent = new BookDetailPresent(model, this);
             mDetailPresent.handleData();
         }
+
+        mOneDailyDB = OneDailyDB.newInstance(this);
     }
 
     @Override
@@ -99,6 +112,7 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
     @Override
     public void initOperation() {
 
+        changeCollect();
 
         mImgTurn.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
@@ -110,6 +124,7 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
 
         });
 
+        mImgCollect.setOnClickListener(v -> collectBook());
     }
 
     @Override
@@ -117,6 +132,25 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
         if (mBook != null) {
             setData(mBook);
         }
+    }
+
+    private void changeCollect() {
+        mOneDailyDB.queryCollectBook(mBook.getId(), new CallBack<Boolean>() {
+            @Override
+            public void onSuccess(Boolean aBoolean) {
+                isCollect = aBoolean;
+                if (aBoolean) {
+                    mImgCollect.setImageResource(R.drawable.ic_collection_pro);
+                } else {
+                    mImgCollect.setImageResource(R.drawable.ic_collection);
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        });
     }
 
     @Override
@@ -141,6 +175,20 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
 
     }
 
+    private void collectBook() {
+        if (isCollect) {
+            mOneDailyDB.deleteCollect(mBook.getId());
+        } else {
+            Collect collect = new Collect();
+            collect.setId(mBook.getId());
+            collect.setAuthor(mTvDetailAuthor.getText().toString());
+            collect.setImage(mBook.getImages().getLarge());
+            mOneDailyDB.insertCollect(collect);
+        }
+
+        mCollectHandle.sendEmptyMessage(CHANGE_COLLECT);
+    }
+
     private void setData(Book book) {
 //        Glide.with(this).load(book.getImages().getLarge()).into(mImgDetailCover);
 
@@ -160,6 +208,7 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
             set(book, bitmap);
         });
     }
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void set(Book book, Bitmap b) {
         Palette.from(b)
@@ -193,6 +242,16 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
         mTvDetailRaing.setText(book.getRating().getAverage());
         mTvDetailTitle.setText(book.getTitle());
         mTvDetailSummary.setText(book.getSummary());
+    }
+
+    class CollectHandle extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == CHANGE_COLLECT) {
+                changeCollect();
+            }
+        }
     }
 
 }

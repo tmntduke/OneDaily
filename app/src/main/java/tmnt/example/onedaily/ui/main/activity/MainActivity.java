@@ -1,5 +1,6 @@
 package tmnt.example.onedaily.ui.main.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -146,6 +147,15 @@ public class MainActivity extends BaseActivity {
     protected void onRestart() {
         super.onRestart();
         mBottom.setSelect(mIndex);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Fragment fragment = mFragmentManager.findFragmentById(R.id.main_contain);
+        if (fragment instanceof MsgFragment) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     public static void setOnBookRetrunListener(OnBookRetrunListener onBookRetrunListener) {

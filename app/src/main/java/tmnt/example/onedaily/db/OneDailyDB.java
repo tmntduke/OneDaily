@@ -4,13 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +16,8 @@ import java.util.List;
 import rx.schedulers.Schedulers;
 import tmnt.example.onedaily.Rx.Operation;
 import tmnt.example.onedaily.Rx.RxUilt;
-import tmnt.example.onedaily.bean.note.NoteInfo;
+import tmnt.example.onedaily.bean.msg.Collect;
+import tmnt.example.onedaily.bean.msg.NoteInfo;
 import tmnt.example.onedaily.mvp.CallBack;
 
 /**
@@ -32,6 +31,7 @@ public class OneDailyDB {
     private static final String HISTORY = "history";
     private static final String TABLE_History = "t_searchHistory";
     private static final String TABLE_NOTE = "t_note";
+    private static final String TABLE_COLLECT = "t_collect";
 
     private static final String ID = "hId";
     private static final String NID = "id";
@@ -117,7 +117,7 @@ public class OneDailyDB {
 
     public void queryNote(CallBack<List<NoteInfo>> callBack) {
         mRxUilt.createAndResult(Schedulers.io(), () -> {
-            ArrayList list = new ArrayList();
+            ArrayList<NoteInfo> list = new ArrayList();
             mDatabase = helper.getReadableDatabase();
             Cursor cursor = mDatabase.query(TABLE_NOTE, null, null, null, null,
                     null, null);
@@ -193,5 +193,81 @@ public class OneDailyDB {
         mDatabase.execSQL("update sqlite_sequence SET seq = 0 where name ='t_searchHistory'");
     }
 
+    public void insertCollect(Collect collect) {
+        mRxUilt.createAndResult(Schedulers.io(), () -> {
+            ContentValues values = new ContentValues();
+            String c = new Gson().toJson(collect);
+            values.put("cId", collect.getId());
+            values.put("collect", c);
+            mDatabase = helper.getWritableDatabase();
+            long id = mDatabase.insert(TABLE_COLLECT, "cId", values);
+            if (id == -1) {
+                return false;
+            }
+            return true;
+        }, new CallBack<Boolean>() {
+            @Override
+            public void onSuccess(Boolean aBoolean) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        });
+    }
+
+    public void deleteCollect(String id) {
+        mRxUilt.createAndResult(Schedulers.io(), () -> {
+            mDatabase = helper.getWritableDatabase();
+            int re = mDatabase.delete(TABLE_COLLECT, "id=?", new String[]{id});
+            if (re == 0) {
+                return false;
+            }
+            return true;
+        }, new CallBack<Boolean>() {
+            @Override
+            public void onSuccess(Boolean aBoolean) {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        });
+    }
+
+    public void queryCollect(CallBack<List<Collect>> callBack) {
+        mRxUilt.createAndResult(Schedulers.io(), () -> {
+            ArrayList<Collect> list = new ArrayList();
+            mDatabase = helper.getReadableDatabase();
+            Cursor cursor = mDatabase.query(TABLE_COLLECT, null, null, null, null,
+                    null, null);
+            while (cursor.moveToNext()) {
+                String collect = cursor.getString(cursor.getColumnIndex("collect"));
+                Collect collect1 = new Gson().fromJson(collect, Collect.class);
+                list.add(collect1);
+            }
+            Log.i(TAG, "queryNote: " + list.size());
+            cursor.close();
+            if (list == null || list.size() == 0) {
+                return Collections.emptyList();
+            } else {
+                return list;
+            }
+        }, callBack);
+    }
+
+    public void queryCollectBook(String id, CallBack<Boolean> callBack) {
+        mRxUilt.createAndResult(Schedulers.io(), () -> {
+            mDatabase = helper.getReadableDatabase();
+            Cursor cursor = mDatabase.query(TABLE_COLLECT, new String[]{"id"}, "cId=?", new String[]{id}, null, null,
+                    null, null);
+            boolean isHave = cursor.isNull(0);
+            return isHave;
+        }, callBack);
+    }
 
 }

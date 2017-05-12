@@ -6,10 +6,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import tmnt.example.onedaily.R;
-import tmnt.example.onedaily.bean.note.NoteInfo;
+import tmnt.example.onedaily.bean.msg.NoteInfo;
 import tmnt.example.onedaily.ui.common.BaseViewHolder;
 import tmnt.example.onedaily.ui.main.listener.OnNoteItemClickListener;
-import tmnt.example.onedaily.weight.BottomNavigation.OnTabItemSelectListener;
 
 /**
  * Created by tmnt on 2017/5/11.

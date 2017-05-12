@@ -1,4 +1,4 @@
-package tmnt.example.onedaily.bean.note;
+package tmnt.example.onedaily.bean.msg;
 
 import android.os.Parcel;
 import android.os.Parcelable;

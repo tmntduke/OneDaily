@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -68,10 +69,14 @@ public class MsgFragment extends BaseFragment {
     private OneDailyDB mOneDailyDB;
     private int noteCount;
     private UploadDialogFragment fDialogFragment;
+    private SharedPreferencesUtil mSharedPreferencesUtil;
+    private String coverPath;
     private static final String COVER_PATH = Common.ONEDAILY_PATH + File.separator + "oneDaily_cover";
-    private String coverName;
+    private static final String COVER_NAME = COVER_PATH + File.separator + DateFormatUtil.dateFomeNomal() + ".jpg";
     private static final int CAMERA_REQUEST_CODE = 11001;
     private static final int IMAGE_REQUEST_CODE = 11002;
+    private static final String USER_COVER = "user_cover";
+    private static final String USER_NAME = "user_name";
 
     private static final String TAG = "MsgFragment";
 
@@ -87,6 +92,8 @@ public class MsgFragment extends BaseFragment {
 
         mOneDailyDB = OneDailyDB.newInstance(getActivity());
         noteCount = mOneDailyDB.queryNoteCount();
+        mSharedPreferencesUtil = SharedPreferencesUtil.getInstance(getActivity());
+        coverPath = mSharedPreferencesUtil.getData(USER_COVER);
     }
 
     @Override
@@ -96,6 +103,9 @@ public class MsgFragment extends BaseFragment {
 
     @Override
     public void initOperation() {
+
+        if (coverPath != null)
+            mCvMyCover.setImageBitmap(ImageUtils.readBitMap(getActivity(), coverPath));
 
         mTvNoteCount.setText(String.valueOf(noteCount));
 
@@ -116,6 +126,12 @@ public class MsgFragment extends BaseFragment {
 
             }
         }));
+
+        mTvMyName.setOnClickListener(v -> {
+            if (mTvMyName.getText().toString().equals(getString(R.string.user_login))) {
+                //login
+            }
+        });
 
 //        mBtnExit.setOnClickListener(v ->);
 
@@ -143,7 +159,7 @@ public class MsgFragment extends BaseFragment {
             @Override
             public void onTakePhoto(View view) {
                 createFile();
-                ImageUtils.toCamera(getActivity(), COVER_PATH + DateFormatUtil.nowDate(), CAMERA_REQUEST_CODE);
+                ImageUtils.toCamera(getActivity(), COVER_NAME, CAMERA_REQUEST_CODE);
             }
 
             @Override
@@ -170,14 +186,16 @@ public class MsgFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == getActivity().RESULT_OK) {
-            if (requestCode == CAMERA_REQUEST_CODE) {
-                mCvMyCover.setImageBitmap(ImageUtils.readBitMap(getActivity(), COVER_PATH));
-            } else {
-                mCvMyCover.setImageBitmap(ImageUtils.readBitMap(getActivity()
-                        , ImageUtils.getImagePathFromGallery(getActivity(), data)));
-            }
+        Log.i(TAG, "onActivityResult: start");
+        if (requestCode == CAMERA_REQUEST_CODE) {
+            mCvMyCover.setImageBitmap(ImageUtils.readBitMap(getActivity(), COVER_NAME));
+        } else {
+            String p = ImageUtils.getImagePathFromGallery(getActivity(), data);
+            Log.i(TAG, "onActivityResult: " + p);
+            mCvMyCover.setImageBitmap(ImageUtils.readBitMap(getActivity(), p));
         }
+
+        mSharedPreferencesUtil.putData(USER_COVER, ImageUtils.getBitmapPath());
     }
 
     @Override

@@ -2,7 +2,7 @@ package tmnt.example.onedaily.ui.main.presenter;
 
 import java.util.List;
 
-import tmnt.example.onedaily.bean.note.NoteInfo;
+import tmnt.example.onedaily.bean.msg.NoteInfo;
 import tmnt.example.onedaily.mvp.BasePresenter;
 import tmnt.example.onedaily.mvp.CallBack;
 import tmnt.example.onedaily.mvp.Model;

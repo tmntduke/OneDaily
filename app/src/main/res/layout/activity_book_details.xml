@@ -29,6 +29,16 @@
                     android:layout_marginTop="25dp"
                     android:src="@drawable/ic_book_share"/>
 
+                <ImageView
+                    android:id="@+id/img_collect"
+                    android:layout_width="25dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/img_share"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/ic_collection"/>
+
                 <android.support.v7.widget.CardView
                     android:layout_width="110dp"
                     android:layout_height="150dp"
@@ -194,8 +204,8 @@
         android:visibility="gone">
         <ImageView
             android:id="@+id/img_book_empty"
-            android:src="@drawable/ic_moren"
-            style="@style/empty_image"/>
+            style="@style/empty_image"
+            android:src="@drawable/ic_moren"/>
 
         <TextView
             android:id="@+id/tv_book_empty_refresh"

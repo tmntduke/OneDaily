@@ -1,7 +1,6 @@
 package tmnt.example.onedaily.ui.main.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,8 +15,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
-import tmnt.example.onedaily.bean.note.NoteInfo;
-import tmnt.example.onedaily.db.OneDailyDB;
+import tmnt.example.onedaily.bean.msg.NoteInfo;
 import tmnt.example.onedaily.mvp.View;
 import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.ui.main.adapter.NoteListAdapter;

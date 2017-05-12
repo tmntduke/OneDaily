@@ -1,7 +1,6 @@
 package tmnt.example.onedaily.ui.main.adapter;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,7 +10,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import tmnt.example.onedaily.R;
-import tmnt.example.onedaily.bean.note.NoteInfo;
+import tmnt.example.onedaily.bean.msg.NoteInfo;
 import tmnt.example.onedaily.ui.main.listener.OnNoteItemClickListener;
 import tmnt.example.onedaily.ui.main.viewHolder.NoteListViewHolder;
 

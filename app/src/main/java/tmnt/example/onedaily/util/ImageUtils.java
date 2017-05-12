@@ -18,6 +18,8 @@ import java.io.InputStream;
  */
 public class ImageUtils {
 
+    private static String path;
+
     /**
      * 进入相机
      */
@@ -81,7 +83,11 @@ public class ImageUtils {
         options.inPreferredConfig = Bitmap.Config.RGB_565;
         options.inPurgeable = true;
         options.inInputShareable = true;
-
+        path = filename;
         return BitmapFactory.decodeFile(filename, options);
+    }
+
+    public static String getBitmapPath() {
+        return path;
     }
 }
