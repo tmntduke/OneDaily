@@ -1,5 +1,6 @@
 package tmnt.example.onedaily.ui.douban.fragment;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,7 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +33,6 @@ import tmnt.example.onedaily.ui.douban.presenter.BookPresenter;
 import tmnt.example.onedaily.ui.main.activity.MainActivity;
 import tmnt.example.onedaily.util.DividerItemDecoration;
 import tmnt.example.onedaily.weight.Refresh.SmartPullableLayout;
-import tmnt.example.onedaily.weight.WaveView.WaveLoadingView;
 
 /**
  * Created by tmnt on 2017/4/18.
@@ -43,6 +46,12 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
     SmartPullableLayout mSplBook;
     @Bind(R.id.img_book_empty)
     ImageView mImgBookEmpty;
+    @Bind(R.id.tv_book_empty_refresh)
+    TextView mTvBookEmptyRefresh;
+    @Bind(R.id.book_empty)
+    LinearLayout mBookEmpty;
+    @Bind(R.id.douban_loading)
+    ImageView mDoubanLoading;
 
     private View mView;
     private String category;
@@ -75,7 +84,7 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
         model.setQ(category);
         presenter = new BookPresenter(model, this);
 
-        presenter.handleData();
+
     }
 
     @Override
@@ -134,13 +143,17 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
 
     @Override
     public void loadData() {
-
+        mDoubanLoading.setVisibility(View.VISIBLE);
+       AnimationDrawable animation= (AnimationDrawable) mDoubanLoading.getBackground();
+        animation.start();
+        presenter.handleData();
     }
 
     @Override
     public void showData(DoubanBookInfo datas) {
         Log.i(TAG, "showData: " + datas.getBooks());
         mBookList.addAll(datas.getBooks());
+        mDoubanLoading.setVisibility(View.GONE);
         mBookAdapter.notifyDataSetChanged();
     }
 
@@ -158,8 +171,8 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
 
     @Override
     public void showError(Throwable throwable) {
-        Log.i(TAG, "showError: "+throwable.toString());
-        mListBook.setVisibility(View.GONE);
+        Log.i(TAG, "showError: " + throwable.toString());
+        mBookEmpty.setVisibility(View.GONE);
         mImgBookEmpty.setVisibility(View.VISIBLE);
     }
 
@@ -181,5 +194,4 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
-
 }
