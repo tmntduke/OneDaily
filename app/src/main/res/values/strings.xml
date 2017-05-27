@@ -33,4 +33,5 @@
     <string name="note_title">笔记</string>
     <string name="user_login">登录</string>
     <string name="collect_book">我的图书</string>
+    <string name="tv_refresh">点击刷新</string>
 </resources>

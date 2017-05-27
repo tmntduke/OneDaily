@@ -22,19 +22,19 @@ public class ImageHolder implements Holder<TopStories> {
 
     ImageView imageView;
     TextView mTextView;
-    private static final String TAG = "ImageHolder";
+//    private static final String TAG = "ImageHolder";
 
     @Override
     public View createView(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.zhihu_slide_lay, null);
 
-        Log.i(TAG, "createView: "+mTextView);
+//        Log.i(TAG, "createView: "+mTextView);
         return view;
     }
 
     @Override
     public void UpdateUI(Context context, int position, TopStories data, View v) {
-        Log.i(TAG, "UpdateUI: "+data.getTitle());
+//        Log.i(TAG, "UpdateUI: "+data.getTitle());
         imageView = (ImageView) v.findViewById(R.id.img_zhihu_slide);
         mTextView = (TextView) v.findViewById(R.id.tv_zhihu_slide);
         Glide.with(context).load(data.getImage()).placeholder(R.drawable.ic_moren).into(imageView);

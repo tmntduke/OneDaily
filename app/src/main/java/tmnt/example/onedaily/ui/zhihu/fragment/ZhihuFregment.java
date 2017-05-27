@@ -2,9 +2,8 @@ package tmnt.example.onedaily.ui.zhihu.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v4.graphics.ColorUtils;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,10 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -47,6 +47,12 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
     ImageView mImgZhihuEmpty;
     @Bind(R.id.spl_zhihu)
     SwipeRefreshLayout mSplZhihu;
+    @Bind(R.id.tv_book_empty_refresh)
+    TextView mTvBookEmptyRefresh;
+    @Bind(R.id.zhihu_empty)
+    LinearLayout mZhihuEmpty;
+    @Bind(R.id.zhihu_loading)
+    ImageView mZhihuLoading;
 
 
     private List<TopStories> mTopStories;
@@ -56,7 +62,7 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
     private ZhihuAdapter mZhihuAdapter;
     private ZhihuModel model;
     private SharedPreferencesUtil mSharedPreferencesUtil;
-    private android.os.Handler mHandler;
+    private Handler mHandler;
 
     private int page = 0;
     private Bundle mBundle;
@@ -119,7 +125,7 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
 
         mRvZhihu.setOnScrollListener(new OnLoadingListener(linearLayoutManager) {
             @Override
-            public void onLoading(android.os.Handler handler) {
+            public void onLoading(Handler handler) {
                 mHandler = handler;
                 mHandler.sendEmptyMessage(OnLoadingListener.LOAD);
                 String s = DateFormatUtil.dateFormatForSub(page);
@@ -129,10 +135,16 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
             }
         });
 
+        mTvBookEmptyRefresh.setOnClickListener(v -> {
+            mSplZhihu.setRefreshing(true);
+            mZhihuPresentor.handleData();
+        });
+
     }
 
     @Override
     public void loadData() {
+        mSplZhihu.setRefreshing(true);
         mZhihuPresentor.handleData();
     }
 
@@ -145,7 +157,6 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
     @Override
     public void showData(ZhihuInfo datas) {
         Log.i(TAG, "showData: " + datas.getTop_stories().size());
-        mSplZhihu.setRefreshing(false);
         if (datas.getTop_stories() != null) {
             mTopStories.addAll(datas.getTop_stories());
             mTopStoriesCopy.addAll(mTopStories);
@@ -153,7 +164,9 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
         if (datas.getDate() != null) {
             mZhihuAdapter.setDate(datas.getDate(), true);
         }
+        mStories.clear();
         mStories.addAll(datas.getStories());
+        mSplZhihu.setRefreshing(false);
         // mZhihuAdapter.notifyDataSetChanged();
         mZhihuAdapter.notityData();
     }
@@ -177,7 +190,7 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
     @Override
     public void showError(Throwable throwable) {
         Log.i(TAG, "showError: " + throwable.toString());
-        mImgZhihuEmpty.setVisibility(View.VISIBLE);
+        mZhihuEmpty.setVisibility(View.VISIBLE);
         mSplZhihu.setVisibility(View.GONE);
     }
 
@@ -198,4 +211,5 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
         Log.i(TAG, "onPause: ");
         mSharedPreferencesUtil.removeData(NewsViewHolder.DATE);
     }
+
 }

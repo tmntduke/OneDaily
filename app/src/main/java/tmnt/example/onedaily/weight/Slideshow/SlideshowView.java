@@ -48,6 +48,7 @@ public class SlideshowView extends FrameLayout {
     private SlideshowAdapter adapter;
 
     private SparseBooleanArray isLarge;
+    private List<?> copyList;
 
     private static final String TAG = "SlideshowView";
 
@@ -78,6 +79,7 @@ public class SlideshowView extends FrameLayout {
         mLinearLayout = (LinearLayout) mView.findViewById(R.id.selector_contain);
         mViewList = new ArrayList<>();
         isLarge = new SparseBooleanArray();
+        //copyList = new ArrayList<>();
         addView(mView);
 
     }
@@ -103,8 +105,6 @@ public class SlideshowView extends FrameLayout {
             mViewPager.setAdapter(adapter);
             setSelector(list.size());
             Log.i(TAG, "setData: " + mViewList.size());
-
-
             showImage(list.size() + 2);
             autoPlay();
         }
@@ -217,8 +217,5 @@ public class SlideshowView extends FrameLayout {
                 }
             }
         });
-
-
     }
-
 }

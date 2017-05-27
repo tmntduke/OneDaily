@@ -50,11 +50,8 @@ public class ZhihuAdapter extends RecyclerView.Adapter {
     }
 
     public void setDate(String date, boolean isDate) {
-
         this.date = date;
         this.isDate = isDate;
-
-
     }
 
     public void setOnZhihuItemClickListener(OnZhihuItemClickListener onZhihuItemClickListener) {
@@ -127,6 +124,10 @@ public class ZhihuAdapter extends RecyclerView.Adapter {
         } else {
             return IS_NORMAL;
         }
+    }
+
+    public void clearData(){
+        mTopStories.clear();
     }
 
     public void notityData() {

@@ -10,4 +10,5 @@
     <dimen name="smart_ui_effective_pull_range">65dp</dimen>
     <dimen name="smart_ui_ignorable_pull_range">5dp</dimen>
 
+    <dimen name="content_load">35dp</dimen>
 </resources>
