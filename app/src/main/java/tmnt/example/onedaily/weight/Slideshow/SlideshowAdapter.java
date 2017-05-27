@@ -26,6 +26,7 @@ public class SlideshowAdapter extends PagerAdapter {
         mDatas = datas;
         mHolder = holder;
         mContext = context;
+        Log.i(TAG, "SlideshowAdapter: "+datas.size());
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -59,8 +60,6 @@ public class SlideshowAdapter extends PagerAdapter {
                 mOnItemClickListener.onItemClick(v, position);
             }
         });
-
-
         return view;
     }
 
@@ -68,4 +67,6 @@ public class SlideshowAdapter extends PagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView(mDatas.get(position).getImageView());//删除页卡
     }
+
+
 }

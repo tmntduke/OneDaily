@@ -132,7 +132,6 @@ public class ZhihuAdapter extends RecyclerView.Adapter {
 
     public void notityData() {
         notifyDataSetChanged();
-
         Log.i(TAG, "notityData: noti" + date);
         if (mStories != null && mStories.size() != 0) {
             for (int i = count; i < mStories.size(); i++) {

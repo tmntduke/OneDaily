@@ -40,7 +40,6 @@ public class HeaderViewHolder extends BaseViewHolder<List<TopStories>> {
 
     @Override
     public void setOperation(int position) {
-
         mSlideshowView.setOnItemClickListener((v, position1) -> {
             if (mOnSlideItemClickListener != null) {
                 mOnSlideItemClickListener.onItemSlideClick(v, position1);

@@ -97,10 +97,10 @@ public class SlideshowView extends FrameLayout {
     }
 
     public void setData(Holder holder, List<?> list) {
-
         if (list.size() > 0) {
+            //mViewList.clear();
             mViewList = createImage(holder, list);
-            Log.i(TAG, "holder: " + holder);
+            Log.i(TAG, "mViewList: " + mViewList.size());
             adapter = new SlideshowAdapter(mViewList, holder, mContext);
             mViewPager.setAdapter(adapter);
             setSelector(list.size());
@@ -108,6 +108,10 @@ public class SlideshowView extends FrameLayout {
             showImage(list.size() + 2);
             autoPlay();
         }
+    }
+
+    public void notifiyData(){
+        adapter.notifyDataSetChanged();
     }
 
     private void autoPlay() {
@@ -162,7 +166,6 @@ public class SlideshowView extends FrameLayout {
             layoutParams.bottomMargin = dotSpace / 2;
             mLinearLayout.addView(imageView, layoutParams);
         }
-
         mLinearLayout.getChildAt(0).setBackgroundResource(R.drawable.select_shape);
         animatorToLarge.setTarget(mLinearLayout.getChildAt(0));
         animatorToLarge.start();
@@ -170,6 +173,7 @@ public class SlideshowView extends FrameLayout {
     }
 
     private void showImage(int count) {
+        Log.i(TAG, "setSelector: "+count);
         currentItem = 1;
 
         mViewPager.setCurrentItem(1);

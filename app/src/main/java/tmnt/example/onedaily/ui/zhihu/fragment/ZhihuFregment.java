@@ -64,12 +64,12 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
     private SharedPreferencesUtil mSharedPreferencesUtil;
     private Handler mHandler;
 
+    private boolean isTop;
     private int page = 0;
     private Bundle mBundle;
 
     public static final String ZHIHU_ID = "zhihu_id";
     public static final String ZHIHU_TITLE = "zhihu_title";
-
     private static final String TAG = "ZhihuFregment";
 
     @Override
@@ -157,9 +157,13 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
     @Override
     public void showData(ZhihuInfo datas) {
         Log.i(TAG, "showData: " + datas.getTop_stories().size());
-        if (datas.getTop_stories() != null) {
+        if (datas.getTop_stories() != null && !isTop) {
+            mTopStories.clear();
+            mTopStoriesCopy.clear();
             mTopStories.addAll(datas.getTop_stories());
+            Log.i(TAG, "showData: top" + mTopStories.size());
             mTopStoriesCopy.addAll(mTopStories);
+            isTop = true;
         }
         if (datas.getDate() != null) {
             mZhihuAdapter.setDate(datas.getDate(), true);
