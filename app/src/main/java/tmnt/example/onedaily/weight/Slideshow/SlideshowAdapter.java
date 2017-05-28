@@ -49,7 +49,6 @@ public class SlideshowAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         Log.i(TAG, "instantiateItem: " + position);
         ImageBean imageBean = mDatas.get(position);
-
         View view = imageBean.getImageView();
         mHolder.UpdateUI(mContext, position, imageBean.getT(),view);
         container.addView(view);

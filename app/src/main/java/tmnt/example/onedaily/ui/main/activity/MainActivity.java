@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -14,6 +18,7 @@ import tmnt.example.onedaily.ui.douban.listener.OnBookRetrunListener;
 import tmnt.example.onedaily.ui.main.fragment.MsgFragment;
 import tmnt.example.onedaily.ui.zhihu.fragment.ZhihuFregment;
 import tmnt.example.onedaily.util.SharedPreferencesUtil;
+import tmnt.example.onedaily.util.SystemUtils;
 import tmnt.example.onedaily.weight.BottomNavigation.BottomNavigationLayout;
 import tmnt.example.onedaily.weight.BottomNavigation.Controller;
 import tmnt.example.onedaily.weight.BottomNavigation.OnTabItemSelectListener;
@@ -30,6 +35,7 @@ public class MainActivity extends BaseActivity {
     private int mIndex;
 
     private static OnBookRetrunListener mOnBookRetrunListener;
+    private boolean isExit;
 
     @Override
     public void initData(Bundle savedInstanceState) {
@@ -156,6 +162,29 @@ public class MainActivity extends BaseActivity {
         if (fragment instanceof MsgFragment) {
             fragment.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (!isExit) {
+                isExit = true;
+                SystemUtils.showToast(MainActivity.this, "click is again");
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        isExit = false;
+                    }
+                }, 2000);
+                return false;
+            } else {
+                //Log.i("onKeyDown", "start");
+                finish();
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     public static void setOnBookRetrunListener(OnBookRetrunListener onBookRetrunListener) {
