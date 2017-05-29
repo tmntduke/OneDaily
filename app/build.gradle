@@ -19,26 +19,17 @@ android {
 //        }
     }
 
-    signingConfigs {
-        release {
-            keyAlias "tmnt"
-            keyPassword "19930724"
-            storeFile file('G:\\keyStore\\androidStudio.jks')
-            storePassword '19930724'
-        }
-    }
 
-    buildTypes {
-        release {
-            signingConfig signingConfigs.release
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+buildTypes {
+    release {
+        minifyEnabled false
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
-    compileOptions {
-        targetCompatibility org.gradle.api.JavaVersion.VERSION_1_8
-        sourceCompatibility org.gradle.api.JavaVersion.VERSION_1_8
-    }
+}
+compileOptions {
+    targetCompatibility org.gradle.api.JavaVersion.VERSION_1_8
+    sourceCompatibility org.gradle.api.JavaVersion.VERSION_1_8
+}
 }
 
 dependencies {
