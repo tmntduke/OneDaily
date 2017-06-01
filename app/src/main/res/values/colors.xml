@@ -13,4 +13,5 @@
     <color name="red">#ef4054</color>
     <color name="yellow">#e9ec56</color>
     <color name="transparent">#00000000</color>
+    <color name="feedback_pressed">#11000000</color>
 </resources>

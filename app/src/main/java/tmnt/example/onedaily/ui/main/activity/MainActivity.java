@@ -3,6 +3,7 @@ package tmnt.example.onedaily.ui.main.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.PermissionChecker;
 import android.util.Log;
 import android.view.KeyEvent;
 
@@ -16,7 +17,9 @@ import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.ui.douban.fragment.BookPageFragment;
 import tmnt.example.onedaily.ui.douban.listener.OnBookRetrunListener;
 import tmnt.example.onedaily.ui.main.fragment.MsgFragment;
+import tmnt.example.onedaily.ui.turing.fragment.TuringChatFragment;
 import tmnt.example.onedaily.ui.zhihu.fragment.ZhihuFregment;
+import tmnt.example.onedaily.util.PremissionUtil;
 import tmnt.example.onedaily.util.SharedPreferencesUtil;
 import tmnt.example.onedaily.util.SystemUtils;
 import tmnt.example.onedaily.weight.BottomNavigation.BottomNavigationLayout;
@@ -128,6 +131,13 @@ public class MainActivity extends BaseActivity {
                         toActivity(WriteArticleActivity.class);
                         break;
                     case 3:
+                        if (PremissionUtil.chaeckPermission(MainActivity.this
+                                , "android.permission.READ_PHONE_STATE")) {
+                            requestPermission();
+                        }
+                        Fragment chat = TuringChatFragment.getInstance();
+                        mIndex = index;
+                        toFragment(R.id.main_contain, chat);
                         break;
                     case 4:
                         Fragment msg = MsgFragment.getInstance();
@@ -189,5 +199,15 @@ public class MainActivity extends BaseActivity {
 
     public static void setOnBookRetrunListener(OnBookRetrunListener onBookRetrunListener) {
         mOnBookRetrunListener = onBookRetrunListener;
+    }
+
+    private void requestPermission() {
+        PremissionUtil.requestPermission(this, new String[]{"android.permission.RECORD_AUDIO"
+                , "android.permission.ACCESS_NETWORK_STATE"
+                , "android.permission.READ_PHONE_STATE"
+                , "android.permission.WRITE_EXTERNAL_STORAGE"
+                , "android.permission.READ_CONTACTS"
+                , "android.permission.ACCESS_WIFI_STATE"
+                , "android.permission.WRITE_SETTINGS"});
     }
 }

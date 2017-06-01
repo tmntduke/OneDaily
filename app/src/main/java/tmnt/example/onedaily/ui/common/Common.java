@@ -1,4 +1,4 @@
-package tmnt.example.onedaily.util;
+package tmnt.example.onedaily.ui.common;
 
 import android.os.Environment;
 

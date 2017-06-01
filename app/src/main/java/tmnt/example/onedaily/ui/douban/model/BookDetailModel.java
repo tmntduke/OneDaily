@@ -4,10 +4,9 @@ import tmnt.example.onedaily.Rx.RxUilt;
 import tmnt.example.onedaily.api.Api;
 import tmnt.example.onedaily.api.DoubanService;
 import tmnt.example.onedaily.bean.book.Book;
-import tmnt.example.onedaily.bean.book.DoubanBookInfo;
 import tmnt.example.onedaily.mvp.CallBack;
 import tmnt.example.onedaily.mvp.Model;
-import tmnt.example.onedaily.util.Common;
+import tmnt.example.onedaily.ui.common.Common;
 
 /**
  * Created by tmnt on 2017/4/22.

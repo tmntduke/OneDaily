@@ -8,7 +8,7 @@ import tmnt.example.onedaily.api.ZhihuService;
 import tmnt.example.onedaily.bean.zhihu.ZhihuInfo;
 import tmnt.example.onedaily.mvp.CallBack;
 import tmnt.example.onedaily.mvp.Model;
-import tmnt.example.onedaily.util.Common;
+import tmnt.example.onedaily.ui.common.Common;
 
 /**
  * Created by tmnt on 2017/4/24.

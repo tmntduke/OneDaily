@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:fitsSystemWindows="true"
+              android:orientation="vertical">
+
+    <View android:layout_width="match_parent"
+          android:layout_height="20dp"
+          android:background="@color/colorPrimary"></View>
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@string/turing_chat"
+                android:textColor="@color/white"
+                android:textSize="16sp"/>
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_turing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:id="@+id/input_text_layout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#E4E4E4"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="3dp">
+
+        <EditText
+            android:id="@+id/ed_input_text_send"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginLeft="6dp"
+            android:layout_weight="1"
+            android:hint="说点什么吧……"
+            android:maxLines="1"
+            android:paddingLeft="5dp"/>
+
+            <ImageView
+                android:id="@+id/img_send"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:src="@drawable/ic_send"/>
+        </LinearLayout>
+
+</LinearLayout>

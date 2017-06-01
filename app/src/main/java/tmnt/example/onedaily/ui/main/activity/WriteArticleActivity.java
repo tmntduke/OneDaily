@@ -37,7 +37,7 @@ import tmnt.example.onedaily.bean.msg.NoteInfo;
 import tmnt.example.onedaily.db.OneDailyDB;
 import tmnt.example.onedaily.mvp.CallBack;
 import tmnt.example.onedaily.ui.common.BaseActivity;
-import tmnt.example.onedaily.util.Common;
+import tmnt.example.onedaily.ui.common.Common;
 import tmnt.example.onedaily.util.DateFormatUtil;
 import tmnt.example.onedaily.util.HtmlUtil;
 import tmnt.example.onedaily.util.IOUtil;

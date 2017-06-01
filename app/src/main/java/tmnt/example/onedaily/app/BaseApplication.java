@@ -4,7 +4,7 @@ import android.app.Application;
 
 import java.io.File;
 
-import tmnt.example.onedaily.util.Common;
+import tmnt.example.onedaily.ui.common.Common;
 
 /**
  * Created by tmnt on 2017/4/12.
