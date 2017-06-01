@@ -20,16 +20,22 @@ android {
     }
 
 
-buildTypes {
-    release {
-        minifyEnabled false
-        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
-}
-compileOptions {
-    targetCompatibility org.gradle.api.JavaVersion.VERSION_1_8
-    sourceCompatibility org.gradle.api.JavaVersion.VERSION_1_8
-}
+    compileOptions {
+        targetCompatibility org.gradle.api.JavaVersion.VERSION_1_8
+        sourceCompatibility org.gradle.api.JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+    }
 }
 
 dependencies {
@@ -58,4 +64,12 @@ dependencies {
     compile project(':zxingLibrary')
     compile project(':richeditor')
 
+    compile files('libs/android-support-v4.jar')
+    compile files('libs/Baidu-SpeechRecognitionUI-SDK-Android-1.6.2.jar')
+    compile files('libs/com.baidu.android.localasr_1.1.22.jar')
+    compile files('libs/com.baidu.speechsynthesizer_1.1.2.jar')
+    compile files('libs/galaxy.jar')
+    compile files('libs/turingSDK.jar')
+    compile files('libs/VoiceRecognition-1.6.2.jar')
+    compile files('libs/volley.jar')
 }
