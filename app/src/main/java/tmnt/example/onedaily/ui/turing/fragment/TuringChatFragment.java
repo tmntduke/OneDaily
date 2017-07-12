@@ -33,8 +33,6 @@ public class TuringChatFragment extends BaseFragment implements tmnt.example.one
     EditText mEdInputTextSend;
     @Bind(R.id.img_send)
     ImageView mImgSend;
-    @Bind(R.id.input_text_send_layout)
-    LinearLayout mInputTextSendLayout;
     @Bind(R.id.input_text_layout)
     LinearLayout mInputTextLayout;
 

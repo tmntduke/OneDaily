@@ -35,7 +35,8 @@
         <ImageView
             android:id="@+id/collect_list_empty"
             style="@style/empty_image"
-            android:src="@drawable/ic_moren"/>
+            android:src="@drawable/ic_moren"
+            android:visibility="gone"/>
 
     </FrameLayout>
 </LinearLayout>
