@@ -232,6 +232,21 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
 
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mOneDailyDB != null) {
+            mOneDailyDB.closeDB();
+            mOneDailyDB = null;
+        }
+    }
+
     /**
      * 装填数据
      *

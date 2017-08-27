@@ -144,7 +144,7 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
     @Override
     public void loadData() {
         mDoubanLoading.setVisibility(View.VISIBLE);
-       AnimationDrawable animation= (AnimationDrawable) mDoubanLoading.getBackground();
+        AnimationDrawable animation = (AnimationDrawable) mDoubanLoading.getBackground();
         animation.start();
         presenter.handleData();
     }
@@ -193,5 +193,8 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+        if (mBookAdapter != null) {
+            mBookAdapter = null;
+        }
     }
 }

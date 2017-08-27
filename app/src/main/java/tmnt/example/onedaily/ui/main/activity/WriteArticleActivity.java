@@ -238,6 +238,14 @@ public class WriteArticleActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mEditor != null) {
+            mEditor = null;
+        }
+    }
+
     private Drawable createBitmap(int res, int color) {
         Drawable drawable = DrawableCompat.wrap(ContextCompat.getDrawable(WriteArticleActivity.this, res));
         DrawableCompat.setTint(drawable, ContextCompat.getColor(WriteArticleActivity.this, color));
@@ -278,7 +286,7 @@ public class WriteArticleActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == WriteArticleActivity.this.RESULT_OK) {
             if (requestCode == REQUES_CODE) {
-                mEditor.insertImage("file://"+ImageUtils.getImagePathFromGallery(WriteArticleActivity.this, data),
+                mEditor.insertImage("file://" + ImageUtils.getImagePathFromGallery(WriteArticleActivity.this, data),
                         "image" + DateFormatUtil.nowDate());
 
                 //富文本显示上传的图片

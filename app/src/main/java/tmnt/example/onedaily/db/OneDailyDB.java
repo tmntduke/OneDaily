@@ -56,6 +56,10 @@ public class OneDailyDB {
         return mOneDailyDB;
     }
 
+    public void closeDB() {
+        helper.close();
+    }
+
     public void insertHistory(String history) {
         ContentValues values = new ContentValues();
         values.put(HISTORY, history);

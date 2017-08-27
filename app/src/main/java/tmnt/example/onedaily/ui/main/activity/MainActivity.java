@@ -197,6 +197,14 @@ public class MainActivity extends BaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mOnBookRetrunListener != null) {
+            mOnBookRetrunListener = null;
+        }
+    }
+
     public static void setOnBookRetrunListener(OnBookRetrunListener onBookRetrunListener) {
         mOnBookRetrunListener = onBookRetrunListener;
     }
