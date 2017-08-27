@@ -7,6 +7,7 @@ import tmnt.example.onedaily.bean.zhihu.ZhihuDetailInfo;
 import tmnt.example.onedaily.bean.zhihu.ZhihuInfo;
 
 /**
+ * 知乎日报api申请
  * Created by tmnt on 2017/4/24.
  */
 

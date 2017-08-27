@@ -16,6 +16,7 @@ import tmnt.example.onedaily.bean.book.DoubanBookInfo;
 import tmnt.example.onedaily.mvp.CallBack;
 
 /**
+ * Rxjava操作
  * Created by tmnt on 2017/4/20.
  */
 
@@ -32,6 +33,13 @@ public class RxUilt {
         return INSTANCE;
     }
 
+    /**
+     * 从Observable中获取到数据
+     * 当超时后发送error
+     * @param observable
+     * @param callBack
+     * @param <T>
+     */
     public <T> void getDataForObservable(Observable<T> observable, CallBack<T> callBack) {
 
         observable.timeout(6, TimeUnit.SECONDS)
@@ -49,6 +57,12 @@ public class RxUilt {
                 });
     }
 
+    /**
+     * 过滤重复数据
+     * @param t
+     * @param callBack
+     * @param <T>
+     */
     public <T> void distinctForData(List<T> t, CallBack<List<T>> callBack) {
 
         Observable.from(t)
@@ -69,6 +83,13 @@ public class RxUilt {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    /**
+     * 利用Rxjava线程切换创建数据
+     * @param scheduler 指定子线程
+     * @param operation 在子线程中要进行的操作（申请网络或数据库操作）
+     * @param callBack 数据回调
+     * @param <T>
+     */
     public <T> void createAndResult(Scheduler scheduler, Operation<T> operation, CallBack<T> callBack) {
         Observable.create(new Observable.OnSubscribe<T>() {
             @Override

@@ -1,6 +1,7 @@
 package tmnt.example.onedaily.bean.zhihu;
 
 /**
+ * 知乎轮播图信息
  * Created by tmnt on 2017/4/24.
  */
 

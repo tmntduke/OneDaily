@@ -1,6 +1,7 @@
 package tmnt.example.onedaily.bean.chat;
 
 /**
+ * 聊天类型
  * Created by tmnt on 2017/6/1.
  */
 

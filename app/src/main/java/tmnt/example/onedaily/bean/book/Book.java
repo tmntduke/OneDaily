@@ -10,6 +10,7 @@ import tmnt.example.onedaily.bean.common.Image;
 import tmnt.example.onedaily.bean.common.Rating;
 
 /**
+ * 图书实体
  * Created by tmnt on 2017/4/17.
  */
 

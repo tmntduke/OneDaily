@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
+ * Fragment 基类 提供模板
  * Created by tmnt on 2017/4/11.
  */
 
@@ -25,16 +26,11 @@ public abstract class BaseFragment extends Fragment implements BaseFunc {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = setContentView(inflater, container, savedInstanceState);
-
         initView();
         initOperation();
         loadData();
-
         return view;
-
-
     }
 
     /**

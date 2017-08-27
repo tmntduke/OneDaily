@@ -3,6 +3,7 @@ package tmnt.example.onedaily.bean.zhihu;
 import java.util.List;
 
 /**
+ * 知乎日报详细信息
  * Created by tmnt on 2017/4/24.
  */
 

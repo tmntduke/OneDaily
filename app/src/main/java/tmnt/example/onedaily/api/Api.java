@@ -21,6 +21,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
+ * 封装Retrofit，并提供拦截器
  * Created by tmnt on 2017/4/12.
  */
 public class Api {
@@ -57,7 +58,6 @@ public class Api {
     }
 
     private Retrofit createRetrofit(String baseUrl) {
-
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -69,6 +69,13 @@ public class Api {
         return retrofit;
     }
 
+    /**
+     * 获取返回类型
+     * @param baseUrl
+     * @param clazz 申请API
+     * @param <T>
+     * @return
+     */
     public <T> T getCall(String baseUrl,Class<T> clazz) {
         Retrofit retrofit = createRetrofit(baseUrl);
         return retrofit.create(clazz);

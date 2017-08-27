@@ -11,6 +11,7 @@ import tmnt.example.onedaily.bean.movie.DoubanMovieInfo;
 import tmnt.example.onedaily.bean.book.DoubanBookInfo;
 
 /**
+ * 豆瓣api申请
  * Created by tmnt on 2017/4/13.
  */
 

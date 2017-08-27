@@ -17,6 +17,7 @@ import tmnt.example.onedaily.util.StateBarUtils;
 
 
 /**
+ * Activity基类 提供模板
  * Created by tmnt on 2017/4/11.
  */
 

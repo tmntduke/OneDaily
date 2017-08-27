@@ -45,6 +45,7 @@ import tmnt.example.onedaily.ui.main.activity.CollectListActivity;
 import tmnt.example.onedaily.util.BookApiUtils;
 
 /**
+ * 图书详细信息
  * Created by tmnt on 2017/4/22.
  */
 
@@ -116,14 +117,12 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
 
     @Override
     public void initView() {
-
         setContentView(R.layout.activity_book_details);
         ButterKnife.bind(this);
     }
 
     @Override
     public void initOperation() {
-
         mImgTurn.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putString(BOOK_CATALOG, mBook.getCatalog());
@@ -145,6 +144,11 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
         }
     }
 
+    /**
+     * 取消收藏
+     *
+     * @param book
+     */
     private void changeCollect(Book book) {
         mOneDailyDB.queryCollectBook(book.getId(), new CallBack<Boolean>() {
             @Override
@@ -188,6 +192,9 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
 
     }
 
+    /**
+     * 收藏图书
+     */
     private void collectBook() {
         Log.i(TAG, "collectBook: " + isCollect);
         if (isCollect) {
@@ -225,6 +232,11 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
 
     }
 
+    /**
+     * 装填数据
+     *
+     * @param book
+     */
     private void setData(Book book) {
 //        Glide.with(this).load(book.getImages().getLarge()).into(mImgDetailCover);
 
@@ -245,6 +257,12 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
         });
     }
 
+    /**
+     * 根据不同图书封面改变背景图
+     *
+     * @param book
+     * @param b
+     */
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void set(Book book, Bitmap b) {
         Palette.from(b)
@@ -280,6 +298,10 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
         mTvDetailSummary.setText(book.getSummary());
     }
 
+    /**
+     * 收藏图书或取消后发送通知改变按钮状态
+     * 可以使用EventBus
+     */
     class CollectHandle extends Handler {
         @Override
         public void handleMessage(Message msg) {

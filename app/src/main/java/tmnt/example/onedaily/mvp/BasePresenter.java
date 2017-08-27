@@ -6,6 +6,7 @@ import tmnt.example.onedaily.mvp.IPresenter;
 import tmnt.example.onedaily.mvp.View;
 
 /**
+ * Presenter基类
  * Created by tmnt on 2017/4/12.
  */
 

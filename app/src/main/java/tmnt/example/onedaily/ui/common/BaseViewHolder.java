@@ -24,5 +24,9 @@ public abstract class BaseViewHolder<T> extends RecyclerView.ViewHolder {
      */
     public abstract void setData(T t);
 
+    /**
+     * 操作
+     * @param position
+     */
     public abstract void setOperation(int position);
 }

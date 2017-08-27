@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
+ * 图书封面图片
  * Created by tmnt on 2017/4/17.
  */
 

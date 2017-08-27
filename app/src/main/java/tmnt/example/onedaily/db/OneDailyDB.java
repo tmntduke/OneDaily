@@ -21,6 +21,7 @@ import tmnt.example.onedaily.bean.msg.NoteInfo;
 import tmnt.example.onedaily.mvp.CallBack;
 
 /**
+ * 数据库操作
  * Created by tmnt on 2017/4/23.
  */
 
@@ -208,7 +209,7 @@ public class OneDailyDB {
         }, callBack);
     }
 
-    public void deleteCollect(String id,CallBack<Boolean>callBack) {
+    public void deleteCollect(String id, CallBack<Boolean> callBack) {
         mRxUilt.createAndResult(Schedulers.io(), () -> {
             mDatabase = helper.getWritableDatabase();
             int re = mDatabase.delete(TABLE_COLLECT, "mId=?", new String[]{id});
