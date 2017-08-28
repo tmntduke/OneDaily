@@ -86,7 +86,7 @@ public class MsgFragment extends BaseFragment {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        mOneDailyDB = OneDailyDB.newInstance(getActivity());
+        mOneDailyDB = OneDailyDB.newInstance(getActivity().getApplicationContext());
         noteCount = mOneDailyDB.queryNoteCount();
         collectCount = mOneDailyDB.queryCollectCount();
         mSharedPreferencesUtil = SharedPreferencesUtil.getInstance(getActivity());

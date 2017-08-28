@@ -52,7 +52,7 @@ public class CollectListActivity extends BaseActivity implements View<List<Colle
     public void initData(Bundle savedInstanceState) {
         mCollects = new ArrayList<>();
         mAdapter = new CollectAdapter(mCollects, this);
-        mCollectMsgListModel = new MsgListModel<>(this, MsgListModel.COLLECT_TYPE);
+        mCollectMsgListModel = new MsgListModel<>(getApplicationContext(), MsgListModel.COLLECT_TYPE);
         mCollectMsgPresenter = new MsgPresenter<>(mCollectMsgListModel, this);
         setStatesBar(R.color.colorPrimary);
     }

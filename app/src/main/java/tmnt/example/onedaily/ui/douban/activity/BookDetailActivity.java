@@ -112,7 +112,7 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
         }
 
 
-        mOneDailyDB = OneDailyDB.newInstance(this);
+        mOneDailyDB = OneDailyDB.newInstance(getApplicationContext());
     }
 
     @Override

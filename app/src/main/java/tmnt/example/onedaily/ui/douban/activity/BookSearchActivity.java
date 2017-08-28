@@ -91,7 +91,7 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
         model = new BookModel();
         presenter = new BookPresenter(model, BookSearchActivity.this);
         mHistory = new ArrayList<>();
-        mOneDailyDB = OneDailyDB.newInstance(this);
+        mOneDailyDB = OneDailyDB.newInstance(getApplicationContext());
         mOneDailyDB.queryHistory(new CallBack<List<String>>() {
             @Override
             public void onSuccess(List<String> list) {
@@ -182,6 +182,9 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
         mOneDailyDB.insertHistory(s);
     }
 
+    /**
+     * 点击enter后进行搜索
+     */
     private void requestSearch() {
         model.setQ(mEdSearch.getText().toString());
         presenter.setModel(model);
@@ -211,6 +214,15 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
             isbn.putString(BookFragment.BOOK_ID, BookDetailModel.ISBN_TYPE);
             isbn.putString(BOOK_ISBN, scanResult);
             toActivity(BookDetailActivity.class, isbn);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mOneDailyDB != null) {
+            mOneDailyDB.closeDB();
+            mOneDailyDB = null;
         }
     }
 

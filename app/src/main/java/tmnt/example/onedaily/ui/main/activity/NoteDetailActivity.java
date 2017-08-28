@@ -52,7 +52,7 @@ public class NoteDetailActivity extends BaseActivity {
     public void initData(Bundle savedInstanceState) {
         mIntent = getIntent();
         notePath = mIntent.getParcelableExtra(NoteListActivity.NOTE_PATH);
-        mOneDailyDB = OneDailyDB.newInstance(this);
+        mOneDailyDB = OneDailyDB.newInstance(getApplicationContext());
         setStatesBar(R.color.colorPrimary);
     }
 

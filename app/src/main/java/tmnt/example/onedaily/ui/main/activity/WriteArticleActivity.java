@@ -100,7 +100,7 @@ public class WriteArticleActivity extends BaseActivity {
     public void initData(Bundle savedInstanceState) {
         setStatesBar(R.color.colorPrimary);
         rxUilt = RxUilt.getInstance();
-        mOneDailyDB = OneDailyDB.newInstance(this);
+        mOneDailyDB = OneDailyDB.newInstance(getApplicationContext());
     }
 
     @Override
