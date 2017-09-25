@@ -110,7 +110,7 @@ public class SlideshowView extends FrameLayout {
         }
     }
 
-    public void notifiyData(){
+    public void notifiyData() {
         adapter.notifyDataSetChanged();
     }
 
@@ -173,7 +173,7 @@ public class SlideshowView extends FrameLayout {
     }
 
     private void showImage(int count) {
-        Log.i(TAG, "setSelector: "+count);
+        Log.i(TAG, "setSelector: " + count);
         currentItem = 1;
 
         mViewPager.setCurrentItem(1);

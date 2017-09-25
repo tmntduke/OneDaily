@@ -46,4 +46,9 @@ public class HeaderViewHolder extends BaseViewHolder<List<TopStories>> {
             }
         });
     }
+
+    public void stop() {
+        mSlideshowView.stop();
+        mSlideshowView = null;
+    }
 }

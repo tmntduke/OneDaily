@@ -153,13 +153,16 @@ public class WriteArticleActivity extends BaseActivity {
                 insertLink());
 
         mImgStyle.setOnClickListener(v -> {
+            Drawable drawable = null;
             if (!isClick) {
+                drawable = createBitmap(R.drawable.image_xiezuo_wenzi, R.color.colorPrimary);
                 mStyleContain.setVisibility(View.VISIBLE);
-                mImgStyle.setImageDrawable(createBitmap(R.drawable.image_xiezuo_wenzi, R.color.colorPrimary));
+                mImgStyle.setImageDrawable(drawable);
                 isClick = true;
             } else {
+                drawable = createBitmap(R.drawable.image_xiezuo_wenzi, R.color.write_gray);
                 mStyleContain.setVisibility(View.GONE);
-                mImgStyle.setImageDrawable(createBitmap(R.drawable.image_xiezuo_wenzi, R.color.write_gray));
+                mImgStyle.setImageDrawable(drawable);
                 isClick = false;
             }
         });
@@ -244,6 +247,13 @@ public class WriteArticleActivity extends BaseActivity {
         if (mEditor != null) {
             mEditor = null;
         }
+        if (edTitle != null) {
+            edTitle = null;
+        }
+
+        if (edUrl != null) {
+            edUrl = null;
+        }
     }
 
     private Drawable createBitmap(int res, int color) {
@@ -322,4 +332,6 @@ public class WriteArticleActivity extends BaseActivity {
             file.mkdir();
         }
     }
+
+
 }

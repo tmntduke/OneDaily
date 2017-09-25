@@ -213,5 +213,8 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
     @Override
     public void onDestroy() {
         super.onDestroy();
+        if (mZhihuAdapter != null) {
+            mZhihuAdapter.stop();
+        }
     }
 }
