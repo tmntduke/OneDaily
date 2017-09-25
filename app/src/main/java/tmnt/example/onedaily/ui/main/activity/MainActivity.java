@@ -131,7 +131,7 @@ public class MainActivity extends BaseActivity {
                         toActivity(WriteArticleActivity.class);
                         break;
                     case 3:
-                        if (PremissionUtil.chaeckPermission(MainActivity.this
+                        if (!PremissionUtil.chaeckPermission(MainActivity.this
                                 , "android.permission.READ_PHONE_STATE")) {
                             requestPermission();
                         }

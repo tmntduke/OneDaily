@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 
 /**
@@ -18,7 +19,7 @@ public class PremissionUtil {
 
     @TargetApi(Build.VERSION_CODES.M)
     public static boolean chaeckPermission(Context context, String permission) {
-        int have = ContextCompat.checkSelfPermission(context,permission);
+        int have = ContextCompat.checkSelfPermission(context, permission);
         if (have == PackageManager.PERMISSION_DENIED) {
             return false;
         } else {
@@ -28,6 +29,10 @@ public class PremissionUtil {
 
     public static void requestPermission(Activity activity, String[] permissionss) {
         ActivityCompat.requestPermissions(activity, permissionss, REQUEST_PERMISSION_CODE);
+    }
+
+    public static void requestPermission(Fragment fragment, String[] permissionss) {
+        fragment.requestPermissions(permissionss, REQUEST_PERMISSION_CODE);
     }
 
 }

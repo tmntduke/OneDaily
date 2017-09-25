@@ -1,7 +1,9 @@
 package tmnt.example.onedaily.ui.main.activity;
 
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,6 +26,7 @@ import tmnt.example.onedaily.Rx.RxUilt;
 import tmnt.example.onedaily.mvp.CallBack;
 import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.util.ImageUtils;
+import tmnt.example.onedaily.util.PremissionUtil;
 
 import static tmnt.example.onedaily.ui.common.Common.SPLASH_PATH;
 
@@ -82,7 +85,10 @@ public class SplashActivity extends BaseActivity {
                 .placeholder(R.drawable.img_transition_default)
                 .into(mIvSplash);
 
-        mIvSave.setOnClickListener(v -> saveImage(mBitmap));
+        mIvSave.setOnClickListener(v -> {
+            requestPromission();
+            saveImage(mBitmap);
+        });
 
     }
 
@@ -116,6 +122,28 @@ public class SplashActivity extends BaseActivity {
 
             }
         });
+    }
+
+    private void requestPromission() {
+        if (!PremissionUtil.chaeckPermission(SplashActivity.this
+                , "android.permission.WRITE_EXTERNAL_STORAGE")) {
+            PremissionUtil.requestPermission(this, new String[]{
+                    "android.permission.WRITE_EXTERNAL_STORAGE"
+                    , "android.permission.RECORD_AUDIO"
+                    , "android.permission.ACCESS_NETWORK_STATE"
+                    , "android.permission.READ_PHONE_STATE"
+                    , "android.permission.READ_CONTACTS"
+                    , "android.permission.ACCESS_WIFI_STATE"
+                    , "android.permission.WRITE_SETTINGS"});
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            saveImage(mBitmap);
+        }
     }
 
     private void saveImage(Bitmap bitmap) {
