@@ -37,4 +37,9 @@ public class ZhihuDetailModel implements Model<ZhihuDetailInfo> {
     public void load(String page, CallBack<ZhihuDetailInfo> callBack) {
 
     }
+
+    @Override
+    public void cancel() {
+
+    }
 }

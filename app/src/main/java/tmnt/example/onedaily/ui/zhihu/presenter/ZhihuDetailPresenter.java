@@ -40,4 +40,9 @@ public class ZhihuDetailPresenter extends BasePresenter<ZhihuDetailInfo> {
     public void handleRefresh(String page) {
 
     }
+
+    @Override
+    public void cancel() {
+
+    }
 }

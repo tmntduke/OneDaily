@@ -29,4 +29,9 @@ public class ChatModel implements Model<String> {
     public void load(String page, CallBack<String> callBack) {
 
     }
+
+    @Override
+    public void cancel() {
+
+    }
 }

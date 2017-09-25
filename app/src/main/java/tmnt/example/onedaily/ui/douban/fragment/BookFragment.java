@@ -58,6 +58,7 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
     private List<Book> mBookList;
     private BookAdapter mBookAdapter;
     private BookPresenter presenter;
+    private AnimationDrawable animation;
 
     private static final String BOOK_CATEGORY = "BOOK_CATEGORY";
 
@@ -94,8 +95,6 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
 
     @Override
     public void initOperation() {
-
-        Log.i(TAG, "initOperation: ");
 
         mListBook.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         mBookAdapter = new BookAdapter(mBookList, getActivity());
@@ -144,7 +143,7 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
     @Override
     public void loadData() {
         mDoubanLoading.setVisibility(View.VISIBLE);
-        AnimationDrawable animation = (AnimationDrawable) mDoubanLoading.getBackground();
+        animation = (AnimationDrawable) mDoubanLoading.getBackground();
         animation.start();
         presenter.handleData();
     }
@@ -173,7 +172,6 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
     public void showError(Throwable throwable) {
         Log.i(TAG, "showError: " + throwable.toString());
         mBookEmpty.setVisibility(View.GONE);
-        mImgBookEmpty.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -190,11 +188,33 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG, "onDestroy: start");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.i(TAG, "onStop: start");
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
+        Log.i(TAG, "onDestroyView: start");
         ButterKnife.unbind(this);
         if (mBookAdapter != null) {
             mBookAdapter = null;
+        }
+        if (animation != null) {
+            animation.stop();
+            animation = null;
+        }
+
+        if (presenter != null) {
+            presenter.cancel();
+            Log.i(TAG, "onDestroyView: per");
         }
     }
 }

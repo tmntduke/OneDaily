@@ -54,4 +54,9 @@ public class BookDetailModel implements Model<Book> {
     public void load(String page, CallBack<Book> callBack) {
 
     }
+
+    @Override
+    public void cancel() {
+
+    }
 }

@@ -45,4 +45,9 @@ public class BookDetailPresent extends BasePresenter<Book> {
     public void handleRefresh(String page) {
 
     }
+
+    @Override
+    public void cancel() {
+
+    }
 }

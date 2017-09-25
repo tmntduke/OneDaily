@@ -58,4 +58,10 @@ public class BookPresenter extends BasePresenter<DoubanBookInfo> {
     public void handleRefresh(String page) {
 
     }
+
+    @Override
+    public void cancel() {
+        mModel.cancel();
+    }
+
 }

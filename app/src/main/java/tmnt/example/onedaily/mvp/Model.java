@@ -13,4 +13,6 @@ public interface Model<T> {
 
     void load(String page,CallBack<T> callBack);
 
+    void cancel();
+
 }

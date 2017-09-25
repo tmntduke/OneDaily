@@ -46,11 +46,4 @@ public class HeaderViewHolder extends BaseViewHolder<List<TopStories>> {
             }
         });
     }
-
-    public void stop() {
-        if (mSlideshowView != null) {
-            mSlideshowView.stop();
-            mSlideshowView = null;
-        }
-    }
 }

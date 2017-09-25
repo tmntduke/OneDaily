@@ -42,9 +42,9 @@ public class RxUilt {
      * @param callBack
      * @param <T>
      */
-    public <T> void getDataForObservable(Observable<T> observable, CallBack<T> callBack) {
+    public <T> Subscription getDataForObservable(Observable<T> observable, CallBack<T> callBack) {
 
-        observable.timeout(6, TimeUnit.SECONDS)
+        return observable.timeout(6, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(o -> {

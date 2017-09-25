@@ -40,4 +40,9 @@ public class MsgPresenter<T> extends BasePresenter<List<T>> {
     public void handleRefresh(String page) {
 
     }
+
+    @Override
+    public void cancel() {
+
+    }
 }

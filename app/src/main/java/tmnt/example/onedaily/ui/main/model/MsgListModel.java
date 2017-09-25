@@ -38,6 +38,11 @@ public class MsgListModel<T> implements Model<List<T>> {
     }
 
     @Override
+    public void cancel() {
+
+    }
+
+    @Override
     public void refresh(CallBack callBack) {
 
     }

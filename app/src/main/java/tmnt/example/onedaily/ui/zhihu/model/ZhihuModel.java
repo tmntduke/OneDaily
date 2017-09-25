@@ -36,4 +36,9 @@ public class ZhihuModel implements Model<ZhihuInfo> {
     public void load(String page, CallBack<ZhihuInfo> callBack) {
         mRxUilt.getDataForObservable(mZhihuService.getZhihuBefor(page), callBack);
     }
+
+    @Override
+    public void cancel() {
+
+    }
 }

@@ -128,7 +128,7 @@ public class SlideshowView extends FrameLayout {
     }
 
     public void stop() {
-        if (mSubscription.isUnsubscribed()) {
+        if (!mSubscription.isUnsubscribed()) {
             mSubscription.unsubscribe();
         }
     }

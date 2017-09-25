@@ -20,6 +20,7 @@ import rx.schedulers.Schedulers;
 import tmnt.example.onedaily.Rx.RxUilt;
 import tmnt.example.onedaily.mvp.CallBack;
 import tmnt.example.onedaily.ui.common.Common;
+import tmnt.example.onedaily.ui.main.fragment.MsgFragment;
 
 /**
  * 图像相关工具类

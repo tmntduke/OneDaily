@@ -68,7 +68,7 @@ public class MsgFragment extends BaseFragment {
     private UploadDialogFragment fDialogFragment;
     private SharedPreferencesUtil mSharedPreferencesUtil;
     private String coverPath;
-    private static final String COVER_PATH = Common.ONEDAILY_PATH + File.separator + "oneDaily_cover";
+    public static final String COVER_PATH = Common.ONEDAILY_PATH + File.separator + "oneDaily_cover";
     private static final String COVER_NAME = COVER_PATH + File.separator + DateFormatUtil.dateFomeNomal() + ".jpg";
     private static final int CAMERA_REQUEST_CODE = 11001;
     private static final int IMAGE_REQUEST_CODE = 11002;

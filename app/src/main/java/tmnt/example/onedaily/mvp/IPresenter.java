@@ -13,4 +13,6 @@ public interface IPresenter {
 
     void handleRefresh(String page);
 
+    void cancel();
+
 }

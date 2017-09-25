@@ -136,10 +136,4 @@ public class ZhihuAdapter extends RecyclerView.Adapter {
             count = mStories.size() - 1;
         }
     }
-
-    public void stop() {
-        if (headerViewHolder != null) {
-            headerViewHolder.stop();
-        }
-    }
 }

@@ -31,7 +31,6 @@ public class IOUtil {
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdir();
         }
-
         if (!file.exists()) {
             file.createNewFile();
         }
