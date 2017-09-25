@@ -54,7 +54,7 @@ public class SharedPreferencesUtil {
     }
 
     public void removeData(String key) {
-        if (getData(key) != null){
+        if (getData(key) != null) {
             sEditor.remove(key);
             sEditor.commit();
         }

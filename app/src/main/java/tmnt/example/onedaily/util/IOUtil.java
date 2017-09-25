@@ -2,6 +2,10 @@ package tmnt.example.onedaily.util;
 
 import android.telecom.Call;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
+import com.google.gson.GsonBuilder;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,6 +25,19 @@ import tmnt.example.onedaily.mvp.CallBack;
 public class IOUtil {
 
     private static RxUilt mRxUilt = RxUilt.getInstance();
+
+    public static File createFile(String fileName) throws IOException {
+        File file = new File(fileName);
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdir();
+        }
+
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+
+        return file;
+    }
 
     public static void input(final File file, CallBack<String> callBack) throws IOException {
         InputStream inputStream = new FileInputStream(file);

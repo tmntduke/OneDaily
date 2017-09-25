@@ -1,5 +1,7 @@
 package tmnt.example.onedaily.api;
 
+import com.bumptech.glide.Glide;
+
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import rx.Observable;
@@ -20,4 +22,5 @@ public interface ZhihuService {
 
     @GET("{id}")
     Observable<ZhihuDetailInfo> getZhihuDetail(@Path("id") String id);
+
 }

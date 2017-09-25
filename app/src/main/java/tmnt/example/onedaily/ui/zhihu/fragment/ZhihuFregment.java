@@ -72,6 +72,11 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
     public static final String ZHIHU_TITLE = "zhihu_title";
     private static final String TAG = "ZhihuFregment";
 
+    public static Fragment getInstance() {
+        ZhihuFregment fregment = new ZhihuFregment();
+        return fregment;
+    }
+
     @Override
     protected View setContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_zhihu, container, false);
@@ -131,7 +136,6 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
                 String s = DateFormatUtil.dateFormatForSub(page);
                 page++;
                 mZhihuPresentor.handleLoad(s);
-                Log.i(TAG, "onLoading: " + page);
             }
         });
 
@@ -156,12 +160,10 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
 
     @Override
     public void showData(ZhihuInfo datas) {
-        Log.i(TAG, "showData: " + datas.getTop_stories().size());
         if (datas.getTop_stories() != null && !isTop) {
             mTopStories.clear();
             mTopStoriesCopy.clear();
             mTopStories.addAll(datas.getTop_stories());
-            Log.i(TAG, "showData: top" + mTopStories.size());
             mTopStoriesCopy.addAll(mTopStories);
             isTop = true;
         }
@@ -177,7 +179,6 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
 
     @Override
     public void showLoadData(ZhihuInfo datas) {
-        Log.i(TAG, "showLoadData: " + datas);
         if (datas.getDate() != null) {
             mZhihuAdapter.setDate(datas.getDate(), true);
         }
@@ -193,14 +194,8 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
 
     @Override
     public void showError(Throwable throwable) {
-        Log.i(TAG, "showError: " + throwable.toString());
         mZhihuEmpty.setVisibility(View.VISIBLE);
         mSplZhihu.setVisibility(View.GONE);
-    }
-
-    public static Fragment getInstance() {
-        ZhihuFregment fregment = new ZhihuFregment();
-        return fregment;
     }
 
     @Override
@@ -212,8 +207,14 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
     @Override
     public void onPause() {
         super.onPause();
-        Log.i(TAG, "onPause: ");
         mSharedPreferencesUtil.removeData(NewsViewHolder.DATE);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mZhihuAdapter != null) {
+            mZhihuAdapter.stop();
+        }
+    }
 }

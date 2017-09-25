@@ -12,11 +12,6 @@ import android.util.Log;
 
 public abstract class OnLoadingListener extends RecyclerView.OnScrollListener {
 
-    private int visibleThreshold = 1;
-
-    private int firstVisibleItem;
-    private int visibleItemCount;
-    private int totalItemCount;
     private static boolean isLoadingMore;
     private LinearLayoutManager mLinearLayoutManager;
     private Handler mHandler = new LoadHandle();
@@ -53,16 +48,16 @@ public abstract class OnLoadingListener extends RecyclerView.OnScrollListener {
     public abstract void onLoading(Handler handler);
 
     public static class LoadHandle extends Handler {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case LOAD:
-                    isLoadingMore = true;
-                    break;
-                case LOAD_OVER:
-                    isLoadingMore = false;
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                switch (msg.what) {
+                    case LOAD:
+                        isLoadingMore = true;
+                        break;
+                    case LOAD_OVER:
+                        isLoadingMore = false;
+                }
             }
-        }
     }
 }

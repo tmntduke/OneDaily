@@ -35,4 +35,5 @@
     <string name="collect_book">我的图书</string>
     <string name="tv_refresh">点击刷新</string>
     <string name="turing_chat">聊天</string>
+    <string name="save_image">已保存</string>
 </resources>

@@ -8,9 +8,18 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.provider.Settings;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
+
+import rx.schedulers.Schedulers;
+import tmnt.example.onedaily.Rx.RxUilt;
+import tmnt.example.onedaily.mvp.CallBack;
+import tmnt.example.onedaily.ui.common.Common;
 
 /**
  * 图像相关工具类
@@ -19,6 +28,7 @@ import java.io.InputStream;
 public class ImageUtils {
 
     private static String path;
+    private static String IMAGE_PATH = "oneDaily_image";
 
     /**
      * 进入相机
@@ -85,6 +95,25 @@ public class ImageUtils {
         options.inInputShareable = true;
         path = filename;
         return BitmapFactory.decodeFile(filename, options);
+    }
+
+    /**
+     * 保存bitmap
+     *
+     * @param bitmap
+     * @param callBack
+     */
+    public static void saveBitmap(Bitmap bitmap, CallBack<File> callBack) {
+        String fileName = "oneDaily_splash" + System.currentTimeMillis() + ".jpg";
+        RxUilt.getInstance().createAndResult(Schedulers.io(), () -> {
+            File file = IOUtil.createFile(Common.ONEDAILY_PATH
+                    + File.separator + IMAGE_PATH
+                    + File.separator + fileName);
+            OutputStream outputStream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+            return file;
+        }, callBack);
+
     }
 
     public static String getBitmapPath() {

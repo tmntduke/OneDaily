@@ -3,6 +3,8 @@ package tmnt.example.onedaily.bean.book;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -80,13 +80,10 @@ public class ZhihuAdapter extends RecyclerView.Adapter {
             mTopStories.clear();
 
         } else {
-            Log.i(TAG, "onBindViewHolder: position" + position);
             NewsViewHolder newsViewHolder = (NewsViewHolder) baseViewHolder;
             newsViewHolder.setData(mStories.get(position - 1));
             newsViewHolder.setDate(DateFormatUtil.dateFormatForWeek(date));
-            Log.i(TAG, "onBindViewHolder: " + date);
             if (sameDate != null && sameDate.size() != 0 && position >= 1) {
-                Log.i(TAG, "onBindViewHolder: same" + sameDate.get(position));
                 if (position == 1 || !sameDate.get(position - 2).equals(sameDate.get(position - 1))) {
                     newsViewHolder.setDate(DateFormatUtil.dateFormatForWeek(sameDate.get(position)));
                     newsViewHolder.visiDate();
@@ -126,20 +123,23 @@ public class ZhihuAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public void clearData(){
+    public void clearData() {
         mTopStories.clear();
     }
 
     public void notityData() {
         notifyDataSetChanged();
-        Log.i(TAG, "notityData: noti" + date);
         if (mStories != null && mStories.size() != 0) {
             for (int i = count; i < mStories.size(); i++) {
                 sameDate.put(i, date);
             }
             count = mStories.size() - 1;
-            Log.i(TAG, "notityData: size" + sameDate.size());
-            Log.i(TAG, "notityData: " + mStories.size());
+        }
+    }
+
+    public void stop() {
+        if (headerViewHolder != null) {
+            headerViewHolder.stop();
         }
     }
 }

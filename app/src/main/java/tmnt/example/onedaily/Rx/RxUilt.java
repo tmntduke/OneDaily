@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import rx.Observable;
 import rx.Scheduler;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -36,6 +37,7 @@ public class RxUilt {
     /**
      * 从Observable中获取到数据
      * 当超时后发送error
+     *
      * @param observable
      * @param callBack
      * @param <T>
@@ -59,6 +61,7 @@ public class RxUilt {
 
     /**
      * 过滤重复数据
+     *
      * @param t
      * @param callBack
      * @param <T>
@@ -85,9 +88,10 @@ public class RxUilt {
 
     /**
      * 利用Rxjava线程切换创建数据
+     *
      * @param scheduler 指定子线程
      * @param operation 在子线程中要进行的操作（申请网络或数据库操作）
-     * @param callBack 数据回调
+     * @param callBack  数据回调
      * @param <T>
      */
     public <T> void createAndResult(Scheduler scheduler, Operation<T> operation, CallBack<T> callBack) {
@@ -110,6 +114,25 @@ public class RxUilt {
                         , throwable ->
                                 callBack.onError(throwable)
                 );
+    }
+
+    /**
+     * 延迟操作
+     *
+     * @param callBack
+     * @param <T>
+     */
+    public <T> Subscription delayForData(long time, TimeUnit unit, CallBack callBack) {
+        Observable<Long> observable = Observable.timer(time, unit)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+
+        Subscription subscription = observable.subscribe(aLong ->
+                        callBack.onSuccess(aLong)
+                , throwable ->
+                        callBack.onError(throwable)
+        );
+        return subscription;
     }
 
 }

@@ -167,7 +167,6 @@ public class MsgFragment extends BaseFragment {
 
             @Override
             public void onChoosePhoto(View view) {
-
                 ImageUtils.toGallery(IMAGE_REQUEST_CODE, getActivity());
             }
 
@@ -189,12 +188,10 @@ public class MsgFragment extends BaseFragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.i(TAG, "onActivityResult: start");
         if (requestCode == CAMERA_REQUEST_CODE) {
             mCvMyCover.setImageBitmap(ImageUtils.readBitMap(getActivity(), COVER_NAME));
         } else {
             String p = ImageUtils.getImagePathFromGallery(getActivity(), data);
-            Log.i(TAG, "onActivityResult: " + p);
             mCvMyCover.setImageBitmap(ImageUtils.readBitMap(getActivity(), p));
         }
 
@@ -211,7 +208,6 @@ public class MsgFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.i(TAG, "onResume: start");
         noteCount = mOneDailyDB.queryNoteCount();
         collectCount = mOneDailyDB.queryCollectCount();
         mTvNoteCount.setText(String.valueOf(noteCount));
