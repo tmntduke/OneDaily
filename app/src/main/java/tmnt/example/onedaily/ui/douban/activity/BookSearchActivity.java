@@ -224,6 +224,10 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
             mOneDailyDB.closeDB();
             mOneDailyDB = null;
         }
+
+        if (mEdSearch != null) {
+            mEdSearch = null;
+        }
     }
 
     @Override
@@ -280,4 +284,5 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
     public void showError(Throwable throwable) {
 
     }
+
 }
