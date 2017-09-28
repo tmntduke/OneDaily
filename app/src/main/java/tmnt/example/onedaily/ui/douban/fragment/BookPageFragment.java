@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +24,15 @@ import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.bean.book.Book;
 import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.ui.common.BaseFragment;
+import tmnt.example.onedaily.ui.douban.activity.BookCategoryActivity;
+import tmnt.example.onedaily.ui.douban.activity.BookDetailActivity;
 import tmnt.example.onedaily.ui.douban.activity.BookSearchActivity;
 import tmnt.example.onedaily.ui.douban.adapter.BookPagerAdapter;
 import tmnt.example.onedaily.ui.douban.listener.OnBookRetrunListener;
+import tmnt.example.onedaily.util.SharedPreferencesUtil;
+import tmnt.example.onedaily.util.TabUtils;
+
+import static android.R.id.list;
 
 /**
  * Created by tmnt on 2017/4/18.
@@ -40,6 +49,9 @@ public class BookPageFragment extends BaseFragment implements tmnt.example.oneda
     @Bind(R.id.vp_show)
     ViewPager mVpShow;
     private View mView;
+    private SharedPreferencesUtil mSharedPreferencesUtil;
+    private List<String> cateList;
+    public static String CATEGORY_LIST = "category_list";
 
     @Override
     protected View setContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,7 +63,7 @@ public class BookPageFragment extends BaseFragment implements tmnt.example.oneda
     @Override
     public void initData(Bundle savedInstanceState) {
         //((BaseActivity) getActivity()).setStatesBar(R.color.colorPrimary);
-
+        mSharedPreferencesUtil = SharedPreferencesUtil.getInstance(getActivity());
     }
 
     @Override
@@ -61,22 +73,11 @@ public class BookPageFragment extends BaseFragment implements tmnt.example.oneda
 
     @Override
     public void initOperation() {
-
-        mTabCategory.addTab(mTabCategory.newTab().setText("综合"));
-        mTabCategory.addTab(mTabCategory.newTab().setText("文学"));
-        mTabCategory.addTab(mTabCategory.newTab().setText("流行"));
-        mTabCategory.addTab(mTabCategory.newTab().setText("生活"));
-
-
-        FragmentManager manager = getChildFragmentManager();
-        BookPagerAdapter myAdapter = new BookPagerAdapter(manager, categoryList());
-        mVpShow.setAdapter(myAdapter);
-        mTabCategory.setupWithViewPager(mVpShow);
-        mTabCategory.setTabsFromPagerAdapter(myAdapter);
-        mTabCategory.setTabMode(TabLayout.MODE_FIXED);
-
+        //createBookPage();
         mImgAdd.setOnClickListener(v -> {
-
+            Bundle bundle = new Bundle();
+            bundle.putStringArrayList(CATEGORY_LIST, (ArrayList<String>) cateList);
+            toActivity(BookCategoryActivity.class, bundle);
         });
 
         mImgSearch.setOnClickListener(v -> {
@@ -85,11 +86,30 @@ public class BookPageFragment extends BaseFragment implements tmnt.example.oneda
 
     }
 
+    private void createBookPage() {
+        cateList = categoryList();
+        for (String s : cateList) {
+            mTabCategory.addTab(mTabCategory.newTab().setText(s));
+        }
+
+        FragmentManager manager = getChildFragmentManager();
+        BookPagerAdapter myAdapter = new BookPagerAdapter(manager, cateList);
+        mVpShow.setAdapter(myAdapter);
+        mTabCategory.setupWithViewPager(mVpShow);
+        // mTabCategory.setTabsFromPagerAdapter(myAdapter);
+        TabUtils.dynamicSetTabLayoutMode(mTabCategory);
+    }
+
     @Override
     public void loadData() {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        createBookPage();
+    }
 
     @Override
     public void onDestroyView() {
@@ -108,14 +128,32 @@ public class BookPageFragment extends BaseFragment implements tmnt.example.oneda
     }
 
     private List<String> categoryList() {
-        List<String> list = new ArrayList<>();
-        list.add("综合");
-        list.add("文学");
-        list.add("文化");
-        list.add("生活");
+        List<String> list = null;
+        if (mSharedPreferencesUtil.getData(BookCategoryActivity.BOOK_CATEGORY) == null) {
+            list = new ArrayList<>();
+            list.add("综合");
+            list.add("文学");
+            list.add("文化");
+            list.add("生活");
+            saveCategoryToShares(list);
+        } else {
+            list = getCategoryToShares();
+        }
+
         return list;
     }
 
+    private void saveCategoryToShares(List<String> list) {
+        String categoryJson = new Gson().toJson(list);
+        mSharedPreferencesUtil.putData(BookCategoryActivity.BOOK_CATEGORY, categoryJson);
+    }
+
+    private List<String> getCategoryToShares() {
+        List<String> list = new Gson().fromJson((String) mSharedPreferencesUtil.getData(BookCategoryActivity.BOOK_CATEGORY)
+                , new TypeToken<List<String>>() {
+                }.getType());
+        return list;
+    }
 
     @Override
     public void showData(Book datas) {

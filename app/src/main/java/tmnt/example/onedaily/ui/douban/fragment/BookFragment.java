@@ -150,7 +150,6 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
 
     @Override
     public void showData(DoubanBookInfo datas) {
-        Log.i(TAG, "showData: " + datas.getBooks());
         mBookList.addAll(datas.getBooks());
         mDoubanLoading.setVisibility(View.GONE);
         mBookAdapter.notifyDataSetChanged();
@@ -170,7 +169,6 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
 
     @Override
     public void showError(Throwable throwable) {
-        Log.i(TAG, "showError: " + throwable.toString());
         mBookEmpty.setVisibility(View.GONE);
     }
 
@@ -190,19 +188,17 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.i(TAG, "onDestroy: start");
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        Log.i(TAG, "onStop: start");
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.i(TAG, "onDestroyView: start");
         ButterKnife.unbind(this);
         if (mBookAdapter != null) {
             mBookAdapter = null;
@@ -214,7 +210,6 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
 
         if (presenter != null) {
             presenter.cancel();
-            Log.i(TAG, "onDestroyView: per");
         }
     }
 }

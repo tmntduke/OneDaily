@@ -22,7 +22,7 @@ public class BookApiUtils {
     public static String CultureTag[] = {"历史", "心理学", "哲学", "传记", "文化", "社会学", "艺术", "设计", "政治", "社会", "建筑", "宗教", "电影", "数学", "政治学", "回忆录", "思想", "国学", "中国历史", "音乐", "人文", "戏剧", "人物传记", "绘画", "艺术史", "佛教", "军事", "西方哲学", "近代史", "二战", "自由主义", "考古", "美术"};
     public static String LifeTag[] = {"爱情", "旅行", "生活", "励志", "成长", "心理", "摄影", "女性", "职场", "美食", "教育", "游记", "灵修", "情感", "健康", "手工", "养生", "两性", "人际关系", "家居", "自助游"};
     public static String FinancialTag[] = {"经济学", "管理", "经济", "金融", "商业", "投资", "营销", "创业", "理财", "广告", "股票", "企业史", "策划"};
-    public static String LogicTag[] = {"东野圭吾", "悬疑", "阿加莎·克里斯蒂", "西村京太郎", "推理", "悬疑小说", "伊坂幸太郎",};
+    public static String LogicTag[] = {"东野圭吾", "悬疑", "阿加莎·克里斯蒂", "西村京太郎", "推理", "悬疑小说", "伊坂幸太郎"};
     public static String TechniqueTag[] = {"Android", "python", "Ruby", "PHP", "前端", "数据库", "MongoDB", "Oracle", "Node.js", "爬虫", "Django", "SpringMVC", "c#", "c++", "Java", "Git"};
 
     public static String[] getApiTag(int pos) {
@@ -35,6 +35,16 @@ public class BookApiUtils {
                 return PopularTag;
             case 3:
                 return CultureTag;
+            case 4:
+                return CoderTag;
+            case 5:
+                return LifeTag;
+            case 6:
+                return FinancialTag;
+            case 7:
+                return LogicTag;
+            case 8:
+                return TechniqueTag;
 
         }
         return null;
@@ -61,7 +71,7 @@ public class BookApiUtils {
 
     }
 
-    public static String getAuthor(List<String> list){
+    public static String getAuthor(List<String> list) {
         StringBuilder builder = new StringBuilder();
         int count = list.size();
         for (int i = 0; i < count; i++) {

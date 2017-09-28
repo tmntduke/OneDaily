@@ -52,7 +52,6 @@
             android:layout_height="35dp"
             android:layout_weight="8"
             app:tabIndicatorColor="@color/colorPrimary"
-            app:tabMode="fixed"
             app:tabSelectedTextColor="@color/colorPrimary"
             app:tabTextColor="@color/text_gray">
         </android.support.design.widget.TabLayout>

@@ -9,6 +9,8 @@
     <dimen name="smart_ui_pullable_item_margin">10dp</dimen>
     <dimen name="smart_ui_effective_pull_range">65dp</dimen>
     <dimen name="smart_ui_ignorable_pull_range">5dp</dimen>
-
+    <dimen name="item_margin">8dp</dimen>
+    <dimen name="title_margin">24dp</dimen>
     <dimen name="content_load">40dp</dimen>
+    <dimen name="medium">18sp</dimen>
 </resources>

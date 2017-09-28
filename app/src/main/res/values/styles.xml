@@ -94,4 +94,12 @@
         <item name="android:singleLine">true</item>
         <item name="android:textSize">13sp</item>
     </style>
+
+    <style name="news_channel_sort_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/item_margin</item>
+        <item name="android:textColor">@color/text_gray</item>
+        <item name="android:textSize">@dimen/medium</item>
+    </style>
 </resources>

@@ -35,6 +35,7 @@
                   android:launchMode="singleTask"></activity>
         <activity android:name=".ui.main.activity.NoteDetailActivity"></activity>
         <activity android:name=".ui.main.activity.CollectListActivity"></activity>
+        <activity android:name=".ui.douban.activity.BookCategoryActivity"/>
 
     </application>
 
