@@ -17,6 +17,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
+import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.bean.chat.ChatInfo;
 import tmnt.example.onedaily.ui.common.BaseFragment;
 import tmnt.example.onedaily.ui.turing.adapter.ChatAdapter;
@@ -24,7 +25,7 @@ import tmnt.example.onedaily.ui.turing.adapter.ChatAdapter;
 /**
  * Created by tmnt on 2017/6/1.
  */
-
+@ContentView(R.layout.fragment_turing)
 public class TuringChatFragment extends BaseFragment implements tmnt.example.onedaily.mvp.View<String> {
 
     @Bind(R.id.rv_turing)
@@ -40,12 +41,6 @@ public class TuringChatFragment extends BaseFragment implements tmnt.example.one
     private List<ChatInfo> mChats;
     private ChatAdapter mChatAdapter;
 
-    @Override
-    protected View setContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_turing, container, false);
-        ButterKnife.bind(this, mView);
-        return mView;
-    }
 
     @Override
     public void initData(Bundle savedInstanceState) {

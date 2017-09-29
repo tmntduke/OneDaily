@@ -18,6 +18,7 @@ import java.io.File;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
+import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.db.OneDailyDB;
 import tmnt.example.onedaily.ui.common.BaseFragment;
 import tmnt.example.onedaily.ui.main.activity.CollectListActivity;
@@ -31,7 +32,7 @@ import tmnt.example.onedaily.weight.CircleView.CircleImageView;
 /**
  * Created by tmnt on 2017/5/10.
  */
-
+@ContentView(R.layout.fragment_msg)
 public class MsgFragment extends BaseFragment {
 
     @Bind(R.id.cv_my_cover)
@@ -76,13 +77,6 @@ public class MsgFragment extends BaseFragment {
     private static final String USER_NAME = "user_name";
 
     private static final String TAG = "MsgFragment";
-
-    @Override
-    protected View setContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_msg, container, false);
-        ButterKnife.bind(this, mView);
-        return mView;
-    }
 
     @Override
     public void initData(Bundle savedInstanceState) {

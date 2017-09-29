@@ -21,6 +21,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
+import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.bean.zhihu.Story;
 import tmnt.example.onedaily.bean.zhihu.TopStories;
 import tmnt.example.onedaily.bean.zhihu.ZhihuInfo;
@@ -38,7 +39,7 @@ import tmnt.example.onedaily.util.SharedPreferencesUtil;
 /**
  * Created by tmnt on 2017/4/24.
  */
-
+@ContentView(R.layout.fragment_zhihu)
 public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily.mvp.View<ZhihuInfo> {
 
     @Bind(R.id.rv_zhihu)
@@ -75,13 +76,6 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
     public static Fragment getInstance() {
         ZhihuFregment fregment = new ZhihuFregment();
         return fregment;
-    }
-
-    @Override
-    protected View setContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_zhihu, container, false);
-        ButterKnife.bind(this, view);
-        return view;
     }
 
     @Override

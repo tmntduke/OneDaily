@@ -22,6 +22,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
+import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.ui.douban.adapter.BookCategoryAdapter;
 import tmnt.example.onedaily.ui.douban.adapter.ItemDragHelperCallback;
@@ -34,6 +35,7 @@ import tmnt.example.onedaily.util.SharedPreferencesUtil;
  * Created by tmnt on 2017/9/28.
  */
 
+@ContentView(R.layout.activity_book_category)
 public class BookCategoryActivity extends BaseActivity {
 
     public static String BOOK_CATEGORY = "book_category";
@@ -67,8 +69,6 @@ public class BookCategoryActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        setContentView(R.layout.activity_book_category);
-        ButterKnife.bind(this);
     }
 
     @Override

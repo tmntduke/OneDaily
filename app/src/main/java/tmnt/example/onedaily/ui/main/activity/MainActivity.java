@@ -13,6 +13,7 @@ import java.util.TimerTask;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
+import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.ui.douban.fragment.BookPageFragment;
 import tmnt.example.onedaily.ui.douban.listener.OnBookRetrunListener;
@@ -27,6 +28,7 @@ import tmnt.example.onedaily.weight.BottomNavigation.Controller;
 import tmnt.example.onedaily.weight.BottomNavigation.OnTabItemSelectListener;
 import tmnt.example.onedaily.weight.BottomNavigation.TabItem;
 
+@ContentView(R.layout.activity_main)
 public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity";
@@ -47,8 +49,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
 
         TabItem tabItem = new TabItem.Builder(this)
                 .setDefaultColor(0xFFACACAC)

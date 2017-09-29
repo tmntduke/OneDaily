@@ -21,6 +21,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
+import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.bean.book.Book;
 import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.ui.common.BaseFragment;
@@ -38,6 +39,7 @@ import static android.R.id.list;
  * Created by tmnt on 2017/4/18.
  */
 
+@ContentView(R.layout.fragment_book_page)
 public class BookPageFragment extends BaseFragment implements tmnt.example.onedaily.mvp.View<Book> {
 
     @Bind(R.id.img_search)
@@ -52,13 +54,6 @@ public class BookPageFragment extends BaseFragment implements tmnt.example.oneda
     private SharedPreferencesUtil mSharedPreferencesUtil;
     private List<String> cateList;
     public static String CATEGORY_LIST = "category_list";
-
-    @Override
-    protected View setContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_book_page, container, false);
-        ButterKnife.bind(this, mView);
-        return mView;
-    }
 
     @Override
     public void initData(Bundle savedInstanceState) {

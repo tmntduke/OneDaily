@@ -1,6 +1,7 @@
 package tmnt.example.onedaily.ui.common;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import java.util.concurrent.ThreadPoolExecutor;
 
+import butterknife.ButterKnife;
+import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.util.StateBarUtils;
 
 
@@ -28,6 +31,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseFunc
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(getLayoutId());
+        ButterKnife.bind(this);
         mFragmentManager = getSupportFragmentManager();
         initData(savedInstanceState);
         initView();
@@ -41,9 +46,26 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseFunc
     }
 
     @Override
+    public int getLayoutId() {
+        for (Class c = getClass(); c != Context.class; c = c.getSuperclass()) {
+            ContentView annotation = (ContentView) c.getAnnotation(ContentView.class);
+            if (annotation != null) {
+                return annotation.value();
+            }
+        }
+        return 0;
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         loadData();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
     }
 
     /**
@@ -76,6 +98,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseFunc
         }
         startActivityForResult(intent, requestCode);
     }
+
 
     /**
      * 设置fragment

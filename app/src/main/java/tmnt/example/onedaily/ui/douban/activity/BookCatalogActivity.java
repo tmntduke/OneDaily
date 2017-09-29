@@ -7,6 +7,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
+import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.ui.common.BaseActivity;
 
 /**
@@ -14,6 +15,7 @@ import tmnt.example.onedaily.ui.common.BaseActivity;
  * Created by tmnt on 2017/4/22.
  */
 
+@ContentView(R.layout.activity_book_catalog)
 public class BookCatalogActivity extends BaseActivity {
     @Bind(R.id.tv_catalog_all)
     TextView mTvCatalogAll;
@@ -28,8 +30,6 @@ public class BookCatalogActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        setContentView(R.layout.activity_book_catalog);
-        ButterKnife.bind(this);
     }
 
     @Override

@@ -20,6 +20,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
+import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.bean.book.Book;
 import tmnt.example.onedaily.bean.book.DoubanBookInfo;
 import tmnt.example.onedaily.ui.common.BaseFragment;
@@ -38,6 +39,7 @@ import tmnt.example.onedaily.weight.Refresh.SmartPullableLayout;
  * Created by tmnt on 2017/4/18.
  */
 
+@ContentView(R.layout.fragment_book)
 public class BookFragment extends BaseFragment implements tmnt.example.onedaily.mvp.View<DoubanBookInfo> {
 
     @Bind(R.id.list_book)
@@ -68,13 +70,6 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
     public static final String BOOK_INFO = "info";
 
     private int page;
-
-    @Override
-    protected View setContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_book, container, false);
-        ButterKnife.bind(this, mView);
-        return mView;
-    }
 
     @Override
     public void initData(Bundle savedInstanceState) {

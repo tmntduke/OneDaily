@@ -20,6 +20,7 @@ import java.io.IOException;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
+import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.bean.msg.NoteInfo;
 import tmnt.example.onedaily.db.OneDailyDB;
 import tmnt.example.onedaily.mvp.CallBack;
@@ -29,7 +30,7 @@ import tmnt.example.onedaily.util.IOUtil;
 /**
  * Created by tmnt on 2017/5/11.
  */
-
+@ContentView(R.layout.activity_note_detail)
 public class NoteDetailActivity extends BaseActivity {
     @Bind(R.id.btnBack)
     Button mBtnBack;
@@ -58,8 +59,6 @@ public class NoteDetailActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        setContentView(R.layout.activity_note_detail);
-        ButterKnife.bind(this);
     }
 
     @Override

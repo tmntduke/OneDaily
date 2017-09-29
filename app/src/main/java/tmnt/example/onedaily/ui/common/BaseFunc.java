@@ -28,4 +28,11 @@ public interface BaseFunc {
      */
     void loadData();
 
+    /**
+     * 设置布局
+     *
+     * @return
+     */
+    int getLayoutId();
+
 }

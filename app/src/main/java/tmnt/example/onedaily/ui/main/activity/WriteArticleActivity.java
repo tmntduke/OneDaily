@@ -33,6 +33,7 @@ import butterknife.ButterKnife;
 import jp.wasabeef.richeditor.RichEditor;
 import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.Rx.RxUilt;
+import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.bean.msg.NoteInfo;
 import tmnt.example.onedaily.db.OneDailyDB;
 import tmnt.example.onedaily.mvp.CallBack;
@@ -47,7 +48,7 @@ import tmnt.example.onedaily.util.PremissionUtil;
 /**
  * Created by tmnt on 2017/5/8.
  */
-
+@ContentView(R.layout.activity_article_contribute)
 public class WriteArticleActivity extends BaseActivity {
 
     @Bind(R.id.btn_save)
@@ -105,8 +106,6 @@ public class WriteArticleActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        setContentView(R.layout.activity_article_contribute);
-        ButterKnife.bind(this);
     }
 
     @Override

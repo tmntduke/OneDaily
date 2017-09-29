@@ -14,6 +14,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
+import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.bean.msg.Collect;
 import tmnt.example.onedaily.mvp.View;
 import tmnt.example.onedaily.ui.common.BaseActivity;
@@ -29,6 +30,7 @@ import tmnt.example.onedaily.ui.main.presenter.MsgPresenter;
  * Created by tmnt on 2017/5/12.
  */
 
+@ContentView(R.layout.activity_collect_list)
 public class CollectListActivity extends BaseActivity implements View<List<Collect>> {
 
     @Bind(R.id.btnBack)
@@ -59,8 +61,6 @@ public class CollectListActivity extends BaseActivity implements View<List<Colle
 
     @Override
     public void initView() {
-        setContentView(R.layout.activity_collect_list);
-        ButterKnife.bind(this);
     }
 
     @Override

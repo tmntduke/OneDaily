@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
+import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.bean.zhihu.ZhihuDetailInfo;
 import tmnt.example.onedaily.mvp.View;
 import tmnt.example.onedaily.ui.common.BaseActivity;
@@ -27,7 +28,7 @@ import tmnt.example.onedaily.util.HtmlUtil;
 /**
  * Created by tmnt on 2017/4/28.
  */
-
+@ContentView(R.layout.activity_zhihu_detail)
 public class ZhihuDetailActivity extends BaseActivity implements View<ZhihuDetailInfo> {
     @Bind(R.id.img_zhihu_detail_cover)
     ImageView mImgZhihuDetailCover;
@@ -61,9 +62,6 @@ public class ZhihuDetailActivity extends BaseActivity implements View<ZhihuDetai
 
     @Override
     public void initView() {
-        setContentView(R.layout.activity_zhihu_detail);
-        ButterKnife.bind(this);
-
     }
 
     @Override

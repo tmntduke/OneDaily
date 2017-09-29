@@ -1,5 +1,6 @@
 package tmnt.example.onedaily.ui.common;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import butterknife.ButterKnife;
+import tmnt.example.onedaily.annotation.ContentView;
 
 /**
  * Fragment 基类 提供模板
@@ -28,7 +32,8 @@ public abstract class BaseFragment extends Fragment implements BaseFunc {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         isCreate = true;
-        View view = setContentView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(getLayoutId(), container, false);
+        ButterKnife.bind(this, view);
         initView();
         initOperation();
         return view;
@@ -43,6 +48,17 @@ public abstract class BaseFragment extends Fragment implements BaseFunc {
         } else {
             isVisible = false;
         }
+    }
+
+    @Override
+    public int getLayoutId() {
+        for (Class c = getClass(); c != Fragment.class; c = c.getSuperclass()) {
+            ContentView annotation = (ContentView) c.getAnnotation(ContentView.class);
+            if (annotation != null) {
+                return annotation.value();
+            }
+        }
+        return 0;
     }
 
     private void lazyLoad() {
@@ -60,12 +76,11 @@ public abstract class BaseFragment extends Fragment implements BaseFunc {
         }
     }
 
-    /**
-     * 设置布局
-     *
-     * @return
-     */
-    protected abstract View setContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ButterKnife.unbind(this);
+    }
 
     /**
      * 跳转activity

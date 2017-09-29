@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 import rx.Subscription;
 import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.Rx.RxUilt;
+import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.mvp.CallBack;
 import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.util.ImageUtils;
@@ -31,7 +32,7 @@ import static tmnt.example.onedaily.ui.common.Common.SPLASH_PATH;
 /**
  * Created by tmnt on 2017/9/25.
  */
-
+@ContentView(R.layout.activity_splash)
 public class SplashActivity extends BaseActivity {
     @Bind(R.id.iv_splash)
     ImageView mIvSplash;
@@ -50,9 +51,6 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        setContentView(R.layout.activity_splash);
-        ButterKnife.bind(this);
-
     }
 
     @Override

@@ -32,6 +32,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import tmnt.example.onedaily.R;
+import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.bean.book.Book;
 import tmnt.example.onedaily.bean.msg.Collect;
 import tmnt.example.onedaily.db.OneDailyDB;
@@ -48,7 +49,7 @@ import tmnt.example.onedaily.util.BookApiUtils;
  * 图书详细信息
  * Created by tmnt on 2017/4/22.
  */
-
+@ContentView(R.layout.activity_book_details)
 public class BookDetailActivity extends BaseActivity implements View<Book> {
 
     @Bind(R.id.img_detail_cover)
@@ -117,8 +118,6 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
 
     @Override
     public void initView() {
-        setContentView(R.layout.activity_book_details);
-        ButterKnife.bind(this);
     }
 
     @Override

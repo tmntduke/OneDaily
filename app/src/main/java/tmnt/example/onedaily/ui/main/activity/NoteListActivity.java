@@ -15,6 +15,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
+import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.bean.msg.NoteInfo;
 import tmnt.example.onedaily.mvp.View;
 import tmnt.example.onedaily.ui.common.BaseActivity;
@@ -27,7 +28,7 @@ import tmnt.example.onedaily.util.DividerItemDecoration;
 /**
  * Created by tmnt on 2017/5/11.
  */
-
+@ContentView(R.layout.activity_note_list)
 public class NoteListActivity extends BaseActivity implements View<List<NoteInfo>> {
     @Bind(R.id.btnBack)
     Button mBtnBack;
@@ -56,8 +57,6 @@ public class NoteListActivity extends BaseActivity implements View<List<NoteInfo
 
     @Override
     public void initView() {
-        setContentView(R.layout.activity_note_list);
-        ButterKnife.bind(this);
     }
 
     @Override
