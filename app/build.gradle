@@ -19,6 +19,26 @@ android {
 //        }
     }
 
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/MANIFEST.MF'
+        exclude 'META-INF/MANIFEST'
+        exclude 'META-INF/manifest.mf'
+        exclude 'project.properties'
+        exclude 'proguard-project.txt'
+        exclude 'bin/AndroidManifest.xml'
+        exclude 'libs/android-support-v4.jar'
+        exclude 'AndroidManifest.xml'
+    }
 
     buildTypes {
         release {

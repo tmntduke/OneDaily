@@ -62,6 +62,7 @@ public class BookCategoryActivity extends BaseActivity {
         my.addAll(list);
         more.addAll(createMoreList());
         mSharedPreferencesUtil = SharedPreferencesUtil.getInstance(this);
+        setStatesBar(R.color.colorPrimary);
     }
 
     @Override

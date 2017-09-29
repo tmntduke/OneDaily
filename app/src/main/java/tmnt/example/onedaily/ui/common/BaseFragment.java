@@ -15,22 +15,49 @@ import android.view.ViewGroup;
 
 public abstract class BaseFragment extends Fragment implements BaseFunc {
 
+    private boolean isCreate;
+    private boolean isVisible;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initData(savedInstanceState);
-
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        isCreate = true;
         View view = setContentView(inflater, container, savedInstanceState);
         initView();
         initOperation();
-        loadData();
         return view;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && isCreate) {
+            isVisible = true;
+            lazyLoad();
+        } else {
+            isVisible = false;
+        }
+    }
+
+    private void lazyLoad() {
+        if (!isVisible || !isCreate) {
+            return;
+        }
+        loadData();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (getUserVisibleHint()) {
+            loadData();
+        }
     }
 
     /**
