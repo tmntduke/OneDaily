@@ -25,7 +25,6 @@ public class BookDetailPresent extends BasePresenter<Book> {
         mModel.getNews(new CallBack<Book>() {
             @Override
             public void onSuccess(Book book) {
-                Log.i(TAG, "onSuccess: "+book);
                 mView.showData(book);
             }
 

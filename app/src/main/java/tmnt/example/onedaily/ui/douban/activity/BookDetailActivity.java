@@ -97,7 +97,6 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
         mIntent = getIntent();
         book = mIntent.getStringExtra(BookFragment.BOOK_ID);
         BookDetailModel model = new BookDetailModel();//
-        Log.i(TAG, "initData: " + book);
         model.setType(book);
         if ("id".equals(book)) {
             mBook = mIntent.getParcelableExtra(BookSearchActivity.BOOK);

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">OneDaily</string>
+    <string name="version">v1.0.0</string>
     <string name="book">图书</string>
 
     <!-- SmartPullableLayout -->
@@ -42,4 +43,26 @@
     <string name="more_channel">更多分类</string>
     <string name="channel_manage">分类管理</string>
     <string name="more_toast">最多只能选择8个分类</string>
+    <string name="about">关于</string>
+    <string name="about_msg">
+        1.此app为阅读类app，分三个部分：\n
+        i.仿知乎日报\n
+        ii.使用豆瓣图书API展示图书，提供综合，文学，文化，
+        生活四个类型的图书展示（后续提供更改类型功能）。\n
+        iii.此外还可以搜索图书，有扫条码和输入书名两种方式。\n
+        iV.添加查看笔记。\n\n
+
+        2.使用现在最流行的MVP+RxJvaa+Retrofit。用butterknif注解，使用glide进行图片展示。\n\n
+
+        3.界面风格采用Material Design设计规范.\n\n
+
+        使用到的开源库\n
+
+        RxJava、Retrofit2、okhttp3、Butterknife、Glide、Gson
+
+
+    </string>
+    <string name="tmntduke">tmntduke</string>
+    <string name="desc">知乎+豆瓣</string>
+    <string name="function_desc">功能描述</string>
 </resources>

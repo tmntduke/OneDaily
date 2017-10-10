@@ -194,7 +194,6 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ButterKnife.unbind(this);
         if (mBookAdapter != null) {
             mBookAdapter = null;
         }

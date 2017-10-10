@@ -64,14 +64,14 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
     RecyclerView mRvBookSearch;
     @Bind(R.id.lv_search_history)
     ListView mLvSearchHistory;
+    @Bind(R.id.tv_clear)
+    TextView mTvClear;
 
     private static final int REQUEST_ZXING = 0010;
     private static final String TAG = "BookSearchActivity";
     public static final String BOOK_ID = "id";
     public static final String BOOK = "book";
     public static final String BOOK_ISBN = "isbn";
-    @Bind(R.id.tv_clear)
-    TextView mTvClear;
 
     private Random mRandom;
     private RxUilt mRxUilt;

@@ -21,7 +21,9 @@ import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.db.OneDailyDB;
 import tmnt.example.onedaily.ui.common.BaseFragment;
+import tmnt.example.onedaily.ui.main.activity.AboutActivity;
 import tmnt.example.onedaily.ui.main.activity.CollectListActivity;
+import tmnt.example.onedaily.ui.main.activity.DescActivity;
 import tmnt.example.onedaily.ui.main.activity.NoteListActivity;
 import tmnt.example.onedaily.ui.common.Common;
 import tmnt.example.onedaily.util.DateFormatUtil;
@@ -105,11 +107,11 @@ public class MsgFragment extends BaseFragment {
 
         mCvMyCover.setOnClickListener(v -> showUploadDialog());
 
-//        mRlAbort.setOnClickListener(v -> toActivity());
+        mRlAbort.setOnClickListener(v -> toActivity(AboutActivity.class));
 
         mRlNote.setOnClickListener(v -> toActivity(NoteListActivity.class));
 //
-//        mRlDisposition.setOnClickListener(v -> toActivity());
+        mRlDisposition.setOnClickListener(v -> toActivity(DescActivity.class));
 
         mRlCollect.setOnClickListener(v -> {
             if (collectCount != 0)
