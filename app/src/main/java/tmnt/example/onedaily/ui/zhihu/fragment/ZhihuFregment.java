@@ -1,6 +1,7 @@
 package tmnt.example.onedaily.ui.zhihu.fragment;
 
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -64,6 +65,7 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
     private ZhihuModel model;
     private SharedPreferencesUtil mSharedPreferencesUtil;
     private Handler mHandler;
+    private AnimationDrawable animationDrawable;
 
     private boolean isTop;
     private int page = 0;
@@ -138,10 +140,17 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
             mZhihuPresentor.handleData();
         });
 
+        mZhihuEmpty.setOnClickListener(v -> {
+            loadData();
+        });
+
     }
 
     @Override
     public void loadData() {
+        mZhihuEmpty.setVisibility(View.GONE);
+        animationDrawable = (AnimationDrawable) mZhihuLoading.getBackground();
+        animationDrawable.start();
         mSplZhihu.setRefreshing(true);
         mZhihuPresentor.handleData();
     }
@@ -154,6 +163,7 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
 
     @Override
     public void showData(ZhihuInfo datas) {
+
         if (datas.getTop_stories() != null && !isTop) {
             mTopStories.clear();
             mTopStoriesCopy.clear();
@@ -167,12 +177,16 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
         mStories.clear();
         mStories.addAll(datas.getStories());
         mSplZhihu.setRefreshing(false);
+        hindLoading();
+        mZhihuEmpty.setVisibility(View.GONE);
+        mSplZhihu.setVisibility(View.VISIBLE);
         // mZhihuAdapter.notifyDataSetChanged();
         mZhihuAdapter.notityData();
     }
 
     @Override
     public void showLoadData(ZhihuInfo datas) {
+        hindLoading();
         if (datas.getDate() != null) {
             mZhihuAdapter.setDate(datas.getDate(), true);
         }
@@ -190,12 +204,7 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
     public void showError(Throwable throwable) {
         mZhihuEmpty.setVisibility(View.VISIBLE);
         mSplZhihu.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
+        hindLoading();
     }
 
     @Override
@@ -205,10 +214,24 @@ public class ZhihuFregment extends BaseFragment implements tmnt.example.onedaily
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
         if (mZhihuAdapter != null) {
             mZhihuAdapter.stop();
         }
+
+        if (animationDrawable != null) {
+            animationDrawable.stop();
+        }
+
+        if (mZhihuPresentor != null) {
+            mZhihuPresentor.cancel();
+        }
+    }
+
+
+    private void hindLoading() {
+        animationDrawable.stop();
+        mZhihuLoading.setVisibility(View.GONE);
     }
 }

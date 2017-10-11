@@ -33,12 +33,13 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_turing"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
     <LinearLayout
         android:id="@+id/input_text_layout"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="40dp"
         android:background="#E4E4E4"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -47,18 +48,19 @@
         <EditText
             android:id="@+id/ed_input_text_send"
             android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="40dp"
             android:layout_marginLeft="6dp"
             android:layout_weight="1"
+            android:background="@drawable/search_bar_edit_bg"
             android:hint="说点什么吧……"
             android:maxLines="1"
             android:paddingLeft="5dp"/>
 
-            <ImageView
-                android:id="@+id/img_send"
-                android:layout_width="wrap_content"
-                android:layout_height="38dp"
-                android:src="@drawable/ic_send"/>
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/img_send"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:src="@drawable/ic_send"/>
+    </LinearLayout>
 
 </LinearLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/spl_photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_photo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <FrameLayout android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center">
+
+        <LinearLayout
+            android:id="@+id/photo_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <ImageView
+                android:id="@+id/img_photo_empty"
+                style="@style/empty_image"
+                android:src="@drawable/ic_moren"/>
+
+            <TextView
+                android:id="@+id/tv_photo_empty_refresh"
+                style="@style/empty_refresh"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/photo_loading"
+            android:layout_width="@dimen/content_load"
+            android:layout_height="@dimen/content_load"
+            android:background="@drawable/smart_ui_loading_animation"
+            android:visibility="gone"/>
+
+    </FrameLayout>
+
+</LinearLayout>

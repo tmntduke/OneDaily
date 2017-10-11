@@ -133,10 +133,15 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
                 mListBook.smoothScrollToPosition(0);
             }
         });
+
+        mBookEmpty.setOnClickListener(v -> {
+            loadData();
+        });
     }
 
     @Override
     public void loadData() {
+        mBookEmpty.setVisibility(View.GONE);
         mDoubanLoading.setVisibility(View.VISIBLE);
         animation = (AnimationDrawable) mDoubanLoading.getBackground();
         animation.start();
@@ -164,7 +169,10 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
 
     @Override
     public void showError(Throwable throwable) {
-        mBookEmpty.setVisibility(View.GONE);
+        mBookEmpty.setVisibility(View.VISIBLE);
+        mDoubanLoading.setVisibility(View.GONE);
+        animation.stop();
+        mListBook.setVisibility(View.GONE);
     }
 
     /**

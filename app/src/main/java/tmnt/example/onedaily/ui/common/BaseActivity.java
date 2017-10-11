@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
@@ -31,6 +32,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseFunc
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().requestFeature(
+                Window.FEATURE_CONTENT_TRANSITIONS);
         setContentView(getLayoutId());
         ButterKnife.bind(this);
         mFragmentManager = getSupportFragmentManager();

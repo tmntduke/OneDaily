@@ -10,6 +10,7 @@ import android.provider.Settings;
 import android.view.Window;
 import android.view.WindowManager;
 
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 
@@ -50,5 +51,21 @@ public class SystemUtils {
         i.setType("file/*");
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(i);
+    }
+
+    //隐藏软键盘
+    public static void hideSoftInput(Activity activity) {
+        android.view.View view = activity.getWindow().peekDecorView();
+        InputMethodManager inputmanger = null;
+        try {
+            if (view != null) {
+                inputmanger = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputmanger.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            inputmanger = null;
+        }
     }
 }

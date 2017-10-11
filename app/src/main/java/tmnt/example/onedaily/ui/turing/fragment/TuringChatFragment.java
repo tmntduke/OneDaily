@@ -21,6 +21,7 @@ import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.bean.chat.ChatInfo;
 import tmnt.example.onedaily.ui.common.BaseFragment;
 import tmnt.example.onedaily.ui.turing.adapter.ChatAdapter;
+import tmnt.example.onedaily.util.SystemUtils;
 
 /**
  * Created by tmnt on 2017/6/1.
@@ -63,6 +64,8 @@ public class TuringChatFragment extends BaseFragment implements tmnt.example.one
         mImgSend.setOnClickListener(v -> {
             String send = mEdInputTextSend.getText().toString();
             mChats.add(new ChatInfo(send, ChatAdapter.SENG_TYPE));
+            mEdInputTextSend.setText("");
+            SystemUtils.hideSoftInput(getActivity());
         });
 
     }

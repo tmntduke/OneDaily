@@ -32,7 +32,6 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.i(TAG, "onCreateViewHolder: "+viewType);
         BaseViewHolder baseViewHolder = ViewHolderFactory.create(viewType, mContext, parent);
         return baseViewHolder;
     }

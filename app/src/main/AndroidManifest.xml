@@ -38,6 +38,7 @@
         <activity android:name=".ui.douban.activity.BookCategoryActivity"/>
         <activity android:name=".ui.main.activity.AboutActivity"/>
         <activity android:name=".ui.main.activity.DescActivity"/>
+        <activity android:name=".ui.gank.activity.PhotoDetailActivity"/>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET"/>

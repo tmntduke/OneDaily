@@ -1,5 +1,6 @@
 package tmnt.example.onedaily.ui.douban.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,6 +26,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.Rx.RxUilt;
+import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.bean.book.Book;
 import tmnt.example.onedaily.bean.book.DoubanBookInfo;
 import tmnt.example.onedaily.db.OneDailyDB;
@@ -40,6 +42,7 @@ import tmnt.example.onedaily.ui.douban.presenter.BookPresenter;
 import tmnt.example.onedaily.util.BookApiUtils;
 import tmnt.example.onedaily.util.DistinctUtils;
 import tmnt.example.onedaily.util.DividerItemDecoration;
+import tmnt.example.onedaily.util.SystemUtils;
 import tmnt.example.onedaily.weight.ClearEditText.ClearEditText;
 import tmnt.example.onedaily.weight.Lable.LabelView;
 
@@ -47,7 +50,7 @@ import tmnt.example.onedaily.weight.Lable.LabelView;
  * 搜索图书
  * Created by tmnt on 2017/4/21.
  */
-
+@ContentView(R.layout.activity_search)
 public class BookSearchActivity extends BaseActivity implements View<DoubanBookInfo> {
 
     @Bind(R.id.ed_search)
@@ -110,8 +113,6 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
 
     @Override
     public void initView() {
-        setContentView(R.layout.activity_search);
-        ButterKnife.bind(this);
     }
 
     @Override
@@ -128,7 +129,7 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
             model.setQ(((TextView) v).getText().toString());
             presenter.setModel(model);
             presenter.handleData();
-            hideSoftInput();
+            SystemUtils.hideSoftInput(this);
         });
 
         mTvCancel.setOnClickListener(v -> onBackPressed());
@@ -137,9 +138,8 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
 
         mEdSearch.setOnKeyListener((v, keyCode, event) -> {
             if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                Log.i(TAG, "initOperation: count");
                 requestSearch();
-                hideSoftInput();
+                SystemUtils.hideSoftInput(this);
                 saveHistory(mEdSearch.getText().toString());
                 return true;
             }
@@ -209,7 +209,6 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
         if (resultCode == RESULT_OK) { //RESULT_OK = -1
             Bundle bundle = data.getExtras();
             String scanResult = bundle.getString("result");
-            Log.i(TAG, "onActivityResult: " + scanResult);
             Bundle isbn = new Bundle();
             isbn.putString(BookFragment.BOOK_ID, BookDetailModel.ISBN_TYPE);
             isbn.putString(BOOK_ISBN, scanResult);
@@ -234,15 +233,6 @@ public class BookSearchActivity extends BaseActivity implements View<DoubanBookI
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-    }
-
-    //隐藏软键盘
-    private void hideSoftInput() {
-        android.view.View view = getWindow().peekDecorView();
-        if (view != null) {
-            InputMethodManager inputmanger = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-            inputmanger.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
     }
 
     private void changLable(LabelView view) {

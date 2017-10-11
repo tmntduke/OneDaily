@@ -36,10 +36,8 @@ public abstract class OnLoadingListener extends RecyclerView.OnScrollListener {
         // dy>0 表示向下滑动
         if (lastVisibleItem >= totalItemCount - 4 && dy > 0) {
             if (isLoadingMore) {
-                Log.i(TAG, "onScrolled: loading");
             } else {
                 onLoading(mHandler);
-                Log.i(TAG, "onScrolled: load");
 
             }
         }

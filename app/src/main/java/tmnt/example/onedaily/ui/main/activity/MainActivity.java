@@ -17,6 +17,7 @@ import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.ui.common.BaseActivity;
 import tmnt.example.onedaily.ui.douban.fragment.BookPageFragment;
 import tmnt.example.onedaily.ui.douban.listener.OnBookRetrunListener;
+import tmnt.example.onedaily.ui.gank.fragment.PhotoFragment;
 import tmnt.example.onedaily.ui.main.fragment.MsgFragment;
 import tmnt.example.onedaily.ui.turing.fragment.TuringChatFragment;
 import tmnt.example.onedaily.ui.zhihu.fragment.ZhihuFregment;
@@ -76,8 +77,8 @@ public class MainActivity extends BaseActivity {
         TabItem tabItem3 = new TabItem.Builder(this)
                 .setDefaultColor(0xFFACACAC)
                 .setSelectColor(getResources().getColor(R.color.colorPrimary))
-                .setTest("聊天")
-                .setRes(R.drawable.ic_tab_chat)
+                .setTest("福利")
+                .setRes(R.drawable.ic_fuli)
                 .setTag("notification")
                 .build();
 
@@ -135,9 +136,10 @@ public class MainActivity extends BaseActivity {
                                 , "android.permission.READ_PHONE_STATE")) {
                             requestPermission();
                         }
-                        Fragment chat = TuringChatFragment.getInstance();
+                        //Fragment chat = TuringChatFragment.getInstance();
+                        Fragment photo = PhotoFragment.newInstance();
                         mIndex = index;
-                        toFragment(R.id.main_contain, chat);
+                        toFragment(R.id.main_contain, photo);
                         break;
                     case 4:
                         Fragment msg = MsgFragment.getInstance();
