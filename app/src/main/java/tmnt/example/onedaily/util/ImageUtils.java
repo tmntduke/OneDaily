@@ -107,8 +107,7 @@ public class ImageUtils {
     public static void saveBitmap(Bitmap bitmap, CallBack<File> callBack) {
         String fileName = "oneDaily_splash" + System.currentTimeMillis() + ".jpg";
         RxUilt.getInstance().createAndResult(Schedulers.io(), () -> {
-            File file = IOUtil.createFile(Common.ONEDAILY_PATH
-                    + File.separator + IMAGE_PATH
+            File file = IOUtil.createFile(MsgFragment.COVER_PATH
                     + File.separator + fileName);
             OutputStream outputStream = new FileOutputStream(file);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
