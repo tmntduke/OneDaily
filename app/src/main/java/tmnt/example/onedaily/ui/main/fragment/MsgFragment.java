@@ -1,9 +1,11 @@
 package tmnt.example.onedaily.ui.main.fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,23 +15,38 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
+import com.google.gson.Gson;
+
 import java.io.File;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
+import rx.Subscription;
 import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.annotation.ContentView;
+import tmnt.example.onedaily.bean.share.GetUserInfo;
 import tmnt.example.onedaily.db.OneDailyDB;
+import tmnt.example.onedaily.event.UserLoginEvent;
 import tmnt.example.onedaily.ui.common.BaseFragment;
 import tmnt.example.onedaily.ui.main.activity.AboutActivity;
 import tmnt.example.onedaily.ui.main.activity.CollectListActivity;
 import tmnt.example.onedaily.ui.main.activity.DescActivity;
+import tmnt.example.onedaily.ui.main.activity.LoginActivity;
 import tmnt.example.onedaily.ui.main.activity.NoteListActivity;
 import tmnt.example.onedaily.ui.common.Common;
 import tmnt.example.onedaily.util.DateFormatUtil;
 import tmnt.example.onedaily.util.ImageUtils;
+import tmnt.example.onedaily.util.RxBus;
+import tmnt.example.onedaily.util.ShareUtil;
 import tmnt.example.onedaily.util.SharedPreferencesUtil;
-import tmnt.example.onedaily.weight.CircleView.CircleImageView;
+
+import static tmnt.example.onedaily.ui.common.Common.SPLASH_PATH;
 
 /**
  * Created by tmnt on 2017/5/10.
@@ -71,6 +88,8 @@ public class MsgFragment extends BaseFragment {
     private UploadDialogFragment fDialogFragment;
     private SharedPreferencesUtil mSharedPreferencesUtil;
     private String coverPath;
+    private GetUserInfo usGetUserInfo;
+    private Subscription mSubscription;
     public static final String COVER_PATH = Common.ONEDAILY_PATH + File.separator + "oneDaily_cover";
     private static final String COVER_NAME = COVER_PATH + File.separator + DateFormatUtil.dateFomeNomal() + ".jpg";
     private static final int CAMERA_REQUEST_CODE = 11001;
@@ -87,6 +106,12 @@ public class MsgFragment extends BaseFragment {
         collectCount = mOneDailyDB.queryCollectCount();
         mSharedPreferencesUtil = SharedPreferencesUtil.getInstance(getActivity());
         coverPath = mSharedPreferencesUtil.getData(USER_COVER);
+
+        mSubscription = RxBus.getInstance()
+                .toObservable(UserLoginEvent.class)
+                .subscribe(userLoginEvent -> {
+                    createUserInfo(userLoginEvent.mGetUserInfo);
+                });
     }
 
     @Override
@@ -129,10 +154,11 @@ public class MsgFragment extends BaseFragment {
         mTvMyName.setOnClickListener(v -> {
             if (mTvMyName.getText().toString().equals(getString(R.string.user_login))) {
                 //login
+                toActivity(LoginActivity.class);
             }
         });
 
-//        mBtnExit.setOnClickListener(v ->);
+        mBtnExit.setOnClickListener(v -> ShareUtil.logout(usGetUserInfo.getType(), getActivity()));
 
     }
 
@@ -208,11 +234,42 @@ public class MsgFragment extends BaseFragment {
         collectCount = mOneDailyDB.queryCollectCount();
         mTvNoteCount.setText(String.valueOf(noteCount));
         mTvCollectCount.setText(String.valueOf(collectCount));
+        String user = mSharedPreferencesUtil.getData(Common.USER_INFO);
+        if (!TextUtils.isEmpty(user)) {
+            createUserInfo(user);
+        } else {
+            mBtnExit.setVisibility(View.GONE);
+        }
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
+    private void createUserInfo(String user) {
+        usGetUserInfo = new Gson().fromJson(user, GetUserInfo.class);
+        mTvMyName.setText(usGetUserInfo.getNickName());
+        String cover = mSharedPreferencesUtil.getData(USER_COVER);
+        mBtnExit.setVisibility(View.VISIBLE);
+        if (TextUtils.isEmpty(cover)) {
+            Glide.with(getActivity())
+                    .load(usGetUserInfo.getIcon())
+                    .into(mCvMyCover);
+        } else {
+            Glide.with(this)
+                    .load(cover)
+                    .listener(new RequestListener<String, GlideDrawable>() {
+                        @Override
+                        public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                            Glide.with(getActivity())
+                                    .load(usGetUserInfo.getIcon())
+                                    .into(mCvMyCover);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                            return false;
+                        }
+                    })
+                    .into(mCvMyCover);
+        }
+
     }
 }

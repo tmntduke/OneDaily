@@ -44,13 +44,12 @@
                 android:layout_height="75dp"
                 android:background="@color/white"
                 android:orientation="horizontal">
-                <tmnt.example.onedaily.weight.CircleView.CircleImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/cv_my_cover"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:scaleType="fitXY"
                     android:src="@drawable/image"/>
 
                 <TextView
@@ -61,8 +60,7 @@
                     android:layout_marginLeft="20dp"
                     android:text="@string/user_login"
                     android:textColor="@color/text_gray"
-                    android:textSize="16sp"
-                    tools:text="tmnt"/>
+                    android:textSize="16sp"/>
             </LinearLayout>
 
 
@@ -171,13 +169,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/exit_bg"
                 android:text="@string/my_exit"
+                android:textColor="@color/colorPrimary"
                 android:visibility="gone"
-                android:textColor="@color/colorPrimary"/>
+                tools:visibility="visible"/>
 
         </LinearLayout>
     </ScrollView>

@@ -18,6 +18,8 @@ public interface Common {
 
     String ONEDAILY_PATH = Environment.getExternalStorageDirectory().getPath() + File.separator + "oneDaily";
 
-    String SPLASH_PATH="https://unsplash.it/400/800/?random";
+    String SPLASH_PATH = "https://unsplash.it/400/800/?random";
+
+    String USER_INFO = "user_info";
 
 }
