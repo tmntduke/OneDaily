@@ -2,6 +2,7 @@ package tmnt.example.onedaily.ui.main.fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SwitchCompat;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -33,6 +35,7 @@ import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.bean.share.GetUserInfo;
 import tmnt.example.onedaily.db.OneDailyDB;
 import tmnt.example.onedaily.event.UserLoginEvent;
+import tmnt.example.onedaily.event.UserLogoutEvent;
 import tmnt.example.onedaily.ui.common.BaseFragment;
 import tmnt.example.onedaily.ui.main.activity.AboutActivity;
 import tmnt.example.onedaily.ui.main.activity.CollectListActivity;
@@ -70,8 +73,6 @@ public class MsgFragment extends BaseFragment {
     TextView mTvCollectCount;
     @Bind(R.id.rl_collect)
     RelativeLayout mRlCollect;
-    @Bind(R.id.sw_notification)
-    SwitchCompat mSwNotification;
     @Bind(R.id.rl_notification)
     RelativeLayout mRlNotification;
     @Bind(R.id.rl_disposition)
@@ -89,7 +90,8 @@ public class MsgFragment extends BaseFragment {
     private SharedPreferencesUtil mSharedPreferencesUtil;
     private String coverPath;
     private GetUserInfo usGetUserInfo;
-    private Subscription mSubscription;
+    private Subscription mSubscriptionLogin;
+    private Subscription mSubscriptionLogout;
     public static final String COVER_PATH = Common.ONEDAILY_PATH + File.separator + "oneDaily_cover";
     private static final String COVER_NAME = COVER_PATH + File.separator + DateFormatUtil.dateFomeNomal() + ".jpg";
     private static final int CAMERA_REQUEST_CODE = 11001;
@@ -107,12 +109,19 @@ public class MsgFragment extends BaseFragment {
         mSharedPreferencesUtil = SharedPreferencesUtil.getInstance(getActivity());
         coverPath = mSharedPreferencesUtil.getData(USER_COVER);
 
-        mSubscription = RxBus.getInstance()
+        mSubscriptionLogin = RxBus.getInstance()
                 .toObservable(UserLoginEvent.class)
                 .subscribe(userLoginEvent -> {
                     createUserInfo(userLoginEvent.mGetUserInfo);
                 });
+
+        mSubscriptionLogout = RxBus.getInstance()
+                .toObservable(UserLogoutEvent.class)
+                .subscribe(userLoginEvent -> {
+                    logout();
+                });
     }
+
 
     @Override
     public void initView() {
@@ -143,14 +152,6 @@ public class MsgFragment extends BaseFragment {
                 toActivity(CollectListActivity.class);
         });
 
-        mSwNotification.setOnCheckedChangeListener(((buttonView, isChecked) -> {
-            if (isChecked) {
-
-            } else {
-
-            }
-        }));
-
         mTvMyName.setOnClickListener(v -> {
             if (mTvMyName.getText().toString().equals(getString(R.string.user_login))) {
                 //login
@@ -160,6 +161,7 @@ public class MsgFragment extends BaseFragment {
 
         mBtnExit.setOnClickListener(v -> ShareUtil.logout(usGetUserInfo.getType(), getActivity()));
 
+        mRlNotification.setOnClickListener(v -> sendEmail());
     }
 
     @Override
@@ -242,6 +244,21 @@ public class MsgFragment extends BaseFragment {
         }
     }
 
+    private void sendEmail() {
+        Intent data = new Intent(Intent.ACTION_SENDTO);
+        data.setData(Uri.parse("tmntduke@hotmail.com"));
+        startActivity(data);
+    }
+
+    private void logout() {
+        mTvMyName.setText(getString(R.string.user_login));
+        Glide.with(getActivity())
+                .load(R.drawable.image)
+                .into(mCvMyCover);
+        mBtnExit.setVisibility(View.GONE);
+        Toast.makeText(getActivity(), getString(R.string.user_logout), Toast.LENGTH_SHORT).show();
+    }
+
     private void createUserInfo(String user) {
         usGetUserInfo = new Gson().fromJson(user, GetUserInfo.class);
         mTvMyName.setText(usGetUserInfo.getNickName());
@@ -270,6 +287,17 @@ public class MsgFragment extends BaseFragment {
                     })
                     .into(mCvMyCover);
         }
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mSubscriptionLogin != null && !mSubscriptionLogin.isUnsubscribed()) {
+            mSubscriptionLogin.unsubscribe();
+        }
+
+        if (mSubscriptionLogout != null && !mSubscriptionLogout.isUnsubscribed()) {
+            mSubscriptionLogout.unsubscribe();
+        }
     }
 }

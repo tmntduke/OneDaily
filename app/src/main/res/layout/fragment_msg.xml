@@ -119,13 +119,7 @@
 
                 <TextView
                     style="@style/my_title"
-                    android:text="@string/my_notification"/>
-
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/sw_notification"
-                    style="@style/my_count"
-                    android:theme="@style/SCBSwitch"
-                />
+                    android:text="@string/send_email"/>
 
                 <include layout="@layout/divier_view"
                          android:layout_width="wrap_content"

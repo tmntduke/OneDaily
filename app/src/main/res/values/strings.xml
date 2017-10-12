@@ -66,4 +66,6 @@
     <string name="desc">知乎+豆瓣</string>
     <string name="function_desc">功能描述</string>
     <string name="no_more">没有更多了</string>
+    <string name="send_email">意见反馈</string>
+    <string name="user_logout">登出成功</string>
 </resources>

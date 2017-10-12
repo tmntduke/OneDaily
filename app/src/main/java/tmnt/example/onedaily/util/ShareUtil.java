@@ -17,6 +17,7 @@ import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.bean.share.GetUserInfo;
 import tmnt.example.onedaily.bean.share.ShareInfo;
 import tmnt.example.onedaily.event.UserLoginEvent;
+import tmnt.example.onedaily.event.UserLogoutEvent;
 import tmnt.example.onedaily.ui.common.Common;
 
 
@@ -83,6 +84,7 @@ public class ShareUtil {
         if (paPlatform.isAuthValid()) {
             paPlatform.removeAccount(true);
             SharedPreferencesUtil.getInstance(context).removeData(Common.USER_INFO);
+            RxBus.getInstance().post(new UserLogoutEvent());
         }
     }
 
