@@ -35,15 +35,20 @@ import tmnt.example.onedaily.R;
 import tmnt.example.onedaily.annotation.ContentView;
 import tmnt.example.onedaily.bean.book.Book;
 import tmnt.example.onedaily.bean.msg.Collect;
+import tmnt.example.onedaily.bean.share.ShareInfo;
 import tmnt.example.onedaily.db.OneDailyDB;
 import tmnt.example.onedaily.mvp.CallBack;
 import tmnt.example.onedaily.mvp.View;
 import tmnt.example.onedaily.ui.common.BaseActivity;
+import tmnt.example.onedaily.ui.common.Common;
 import tmnt.example.onedaily.ui.douban.fragment.BookFragment;
 import tmnt.example.onedaily.ui.douban.model.BookDetailModel;
 import tmnt.example.onedaily.ui.douban.presenter.BookDetailPresent;
 import tmnt.example.onedaily.ui.main.activity.CollectListActivity;
+import tmnt.example.onedaily.ui.main.activity.LoginActivity;
 import tmnt.example.onedaily.util.BookApiUtils;
+import tmnt.example.onedaily.util.ShareUtil;
+import tmnt.example.onedaily.util.SharedPreferencesUtil;
 
 /**
  * 图书详细信息
@@ -88,6 +93,7 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
     private boolean isCollect;
     private BookDetailPresent mDetailPresent;
     private CollectHandle mCollectHandle = new CollectHandle();
+    private SharedPreferencesUtil mSharedPreferencesUtil;
     public static final String BOOK_CATALOG = "book_catalog";
     private static final String TAG = "BookDetailActivity";
     private static final int CHANGE_COLLECT = 2013;
@@ -96,6 +102,7 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
     public void initData(Bundle savedInstanceState) {
         mIntent = getIntent();
         book = mIntent.getStringExtra(BookFragment.BOOK_ID);
+        mSharedPreferencesUtil = SharedPreferencesUtil.getInstance(this);
         BookDetailModel model = new BookDetailModel();//
         model.setType(book);
         if ("id".equals(book)) {
@@ -127,9 +134,13 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
             toActivity(BookCatalogActivity.class, bundle);
         });
 
-        mImgShare.setOnClickListener(v -> {
-
-        });
+//        mImgShare.setOnClickListener(v -> {
+//            if (TextUtils.isEmpty(mSharedPreferencesUtil.getData(Common.USER_INFO))) {
+//                toActivity(LoginActivity.class);
+//            } else {
+//                shareBook();
+//            }
+//        });
 
         mImgCollect.setOnClickListener(v -> collectBook());
     }
@@ -226,8 +237,16 @@ public class BookDetailActivity extends BaseActivity implements View<Book> {
                 }
             });
         }
+    }
 
-
+    private void shareBook() {
+        ShareInfo info = new ShareInfo();
+        info.setSite("豆瓣");
+        info.setSiteUrl("https://www.douban.com/");
+        info.setTitle(mBook.getTitle());
+        info.setTitleUrl(mBook.getAlt());
+        info.setText(mBook.getTitle() + "不错");
+        ShareUtil.share(info, this);
     }
 
     @Override

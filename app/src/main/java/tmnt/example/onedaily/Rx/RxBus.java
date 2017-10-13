@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-package tmnt.example.onedaily.util;
+package tmnt.example.onedaily.Rx;
 
 import rx.Observable;
 import rx.subjects.PublishSubject;

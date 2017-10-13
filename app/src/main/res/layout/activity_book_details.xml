@@ -27,8 +27,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="25dp"
-                    android:src="@drawable/ic_book_share"/>
-
+                    android:src="@drawable/ic_book_share"
+                    android:visibility="gone"/>
 
 
                 <android.support.v7.widget.CardView

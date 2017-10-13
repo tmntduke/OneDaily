@@ -3,7 +3,7 @@ package tmnt.example.onedaily.util;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -13,7 +13,7 @@ import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
-import tmnt.example.onedaily.R;
+import tmnt.example.onedaily.Rx.RxBus;
 import tmnt.example.onedaily.bean.share.GetUserInfo;
 import tmnt.example.onedaily.bean.share.ShareInfo;
 import tmnt.example.onedaily.event.UserLoginEvent;
@@ -36,6 +36,7 @@ public class ShareUtil {
 
         Platform platform = ShareSDK.getPlatform(loginType);
 //回调信息，可以在这里获取基本的授权返回的信息，但是注意如果做提示和UI操作要传到主线程handler里去执行
+        platform.SSOSetting(true);
 
         if (platform.isAuthValid()) {
 
@@ -114,6 +115,23 @@ public class ShareUtil {
         oks.setSite(info.getSite());
 // siteUrl是分享此内容的网站地址，仅在QQ空间使用
         oks.setSiteUrl(info.getSiteUrl());
+        oks.setCallback(new PlatformActionListener() {
+            @Override
+            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+                Toast.makeText(context, "分享成功", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(Platform platform, int i, Throwable throwable) {
+                Toast.makeText(context, "分享失败", Toast.LENGTH_SHORT).show();
+                throwable.printStackTrace();
+            }
+
+            @Override
+            public void onCancel(Platform platform, int i) {
+
+            }
+        });
 
 // 启动分享GUI
         oks.show(context);
