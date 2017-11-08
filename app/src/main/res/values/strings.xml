@@ -68,4 +68,5 @@
     <string name="no_more">没有更多了</string>
     <string name="send_email">意见反馈</string>
     <string name="user_logout">登出成功</string>
+    <string name="haveno_email">没有邮件应用</string>
 </resources>

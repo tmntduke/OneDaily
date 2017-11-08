@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import tmnt.example.onedaily.annotation.ContentView;
@@ -98,5 +99,14 @@ public abstract class BaseFragment extends Fragment implements BaseFunc {
             intent.putExtras(bundle);
         }
         startActivity(intent);
+    }
+
+    /**
+     * 显示Toast
+     *
+     * @param msg
+     */
+    protected void showToast(String msg) {
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
 }

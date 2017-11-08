@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
@@ -122,6 +123,16 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseFunc
      */
     protected void toFragment(int contain, Fragment fragment) {
         mFragmentManager.beginTransaction().replace(contain, fragment).commit();
+    }
+
+
+    /**
+     * 显示Toast
+     *
+     * @param msg
+     */
+    protected void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     /**

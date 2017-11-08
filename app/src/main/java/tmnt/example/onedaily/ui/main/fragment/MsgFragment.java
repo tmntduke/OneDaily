@@ -1,6 +1,8 @@
 package tmnt.example.onedaily.ui.main.fragment;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +21,7 @@ import com.bumptech.glide.request.target.Target;
 import com.google.gson.Gson;
 
 import java.io.File;
+import java.util.List;
 
 import butterknife.Bind;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -238,6 +241,12 @@ public class MsgFragment extends BaseFragment {
     private void sendEmail() {
         Intent data = new Intent(Intent.ACTION_SENDTO);
         data.setData(Uri.parse("tmntduke@hotmail.com"));
+        PackageManager packageManager = getActivity().getPackageManager();
+        List<ResolveInfo> applist = packageManager.queryIntentActivities(data, 0);
+        if (applist == null || applist.isEmpty()) {
+            showToast(getString(R.string.haveno_email));
+            return;
+        }
         startActivity(data);
     }
 
