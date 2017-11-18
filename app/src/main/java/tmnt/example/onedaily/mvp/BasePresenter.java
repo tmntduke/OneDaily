@@ -20,6 +20,7 @@ public abstract class BasePresenter<T> implements IPresenter {
         mView = view;
     }
 
+
     public void setModel(Model<T> model) {
         mModel = model;
     }
