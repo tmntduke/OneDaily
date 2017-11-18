@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/tmntduke/OneDaily.png)](https://travis-ci.org/tmntduke/OneDaily)
 > 此app仅供学习参考，不作为商业用途，数据来源知乎和豆瓣
 
 ## OneDaily(还没想好一个好听的名字)
