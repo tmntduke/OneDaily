@@ -8,7 +8,7 @@ sudo: false         # 开启基于容器的Travis CI任务，让编译效率更�
 android:            # 配置信息
   components:
     - tools
-    - build-tools-23
+    - build-tools-25.0.0
     - android-23
     - extra-android-m2repository     # Android Support Repository
     - extra-android-support          # Support Library
@@ -28,7 +28,7 @@ deploy:              # 部署
   provider: releases # 部署到GitHub Release，除此之外，Travis CI还支持发布到fir.im、AWS、Google App Engine等
   api_key:           # 填写GitHub的token （Settings -> Personal access tokens -> Generate new token）
     secure: 5636bbb5f28c5fecb9487413fef27316ad5114b1
-  file: app/build/outputs/apk/buff.apk   # 部署文件路径
+  file: app/build/outputs/apk/app-release.apk   # 部署文件路径
   skip_cleanup: true     # 设置为true以跳过清理,不然apk文件就会被清理
   on:     # 发布时机
     tags: true       # tags设置为true表示只有在有tag的情况下才部署
