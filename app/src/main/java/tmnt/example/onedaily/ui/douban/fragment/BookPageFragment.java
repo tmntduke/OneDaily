@@ -50,14 +50,13 @@ public class BookPageFragment extends BaseFragment implements tmnt.example.oneda
     ImageView mImgAdd;
     @Bind(R.id.vp_show)
     ViewPager mVpShow;
-    private View mView;
+
     private SharedPreferencesUtil mSharedPreferencesUtil;
     private List<String> cateList;
     public static String CATEGORY_LIST = "category_list";
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        //((BaseActivity) getActivity()).setStatesBar(R.color.colorPrimary);
         mSharedPreferencesUtil = SharedPreferencesUtil.getInstance(getActivity());
     }
 

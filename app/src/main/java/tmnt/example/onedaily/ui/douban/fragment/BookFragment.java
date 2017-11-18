@@ -65,8 +65,6 @@ public class BookFragment extends BaseFragment implements tmnt.example.onedaily.
     private static final String BOOK_CATEGORY = "BOOK_CATEGORY";
 
     public static final String BOOK_ID = "id";
-
-    private static final String TAG = "BookFragment";
     public static final String BOOK_INFO = "info";
 
     private int page;
