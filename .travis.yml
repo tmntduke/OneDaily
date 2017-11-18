@@ -16,6 +16,7 @@ before_install:
 
 script:
 - "./gradlew assembleRelease"
+
 deploy:
   provider: releases
   api_key:

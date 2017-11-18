@@ -8,3 +8,5 @@
 /captures
 richeditor/build/tmp/
 id_rsa.pub
+gradle.properties
+
