@@ -56,13 +56,16 @@ public class ClearEditText extends AppCompatEditText implements View.OnTouchList
         final Drawable wrappedDrawable = DrawableCompat.wrap(drawable); //Wrap the drawable so that it can be tinted pre Lollipop
         DrawableCompat.setTint(wrappedDrawable, getCurrentHintTextColor());
         mClearTextIcon = wrappedDrawable;
-        mClearTextIcon.setBounds(0, 0, (int) (mClearTextIcon.getIntrinsicHeight() * 0.3f), (int) (mClearTextIcon.getIntrinsicHeight() * 0.3f));
+        mClearTextIcon.setBounds(0, 0, (int) (mClearTextIcon.getIntrinsicHeight() * 0.3f)
+                , (int) (mClearTextIcon.getIntrinsicHeight() * 0.3f));
         search = ContextCompat.getDrawable(context, R.drawable.ic_book_search);
 
         scan = ContextCompat.getDrawable(context, R.drawable.ic_book_scan);
-        scan.setBounds(0, 0, (int) (scan.getMinimumWidth() * 0.3f), (int) (scan.getMinimumHeight() * 0.3f));
+        scan.setBounds(0, 0, (int) (scan.getMinimumWidth() * 0.3f)
+                , (int) (scan.getMinimumHeight() * 0.3f));
 
-        search.setBounds(0, 0, (int) (search.getMinimumWidth() * 0.3f), (int) (search.getMinimumHeight() * 0.3f));
+        search.setBounds(0, 0, (int) (search.getMinimumWidth() * 0.3f)
+                , (int) (search.getMinimumHeight() * 0.3f));
         setCompoundDrawables(search, null, null, null);
         setCompoundDrawablePadding(DensityUtils.dp2px(context, 4));
         setClearIconVisible(false);

@@ -1,0 +1,13 @@
+language: android
+
+sudo: false
+
+android:
+  components:
+  - build-tools-25.0.0
+  - android-23
+  - extra-android-m2repository
+  - extra-android-support
+
+script:
+  - "./gradlew assembleRelease"

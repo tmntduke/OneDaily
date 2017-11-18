@@ -86,6 +86,7 @@ public class MsgFragment extends BaseFragment {
     private GetUserInfo usGetUserInfo;
     private Subscription mSubscriptionLogin;
     private Subscription mSubscriptionLogout;
+
     public static final String COVER_PATH = Common.ONEDAILY_PATH + File.separator + "oneDaily_cover";
     private static final String COVER_NAME = COVER_PATH + File.separator + DateFormatUtil.dateFomeNomal() + ".jpg";
     private static final int CAMERA_REQUEST_CODE = 11001;
@@ -281,7 +282,8 @@ public class MsgFragment extends BaseFragment {
                         }
 
                         @Override
-                        public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                        public boolean onResourceReady(GlideDrawable resource, String model
+                                , Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
                             return false;
                         }
                     })
