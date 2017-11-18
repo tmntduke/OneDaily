@@ -12,7 +12,8 @@ android:
   - extra-android-support
 
 before_install:
-- chmod +x gradlew
+ - chmod +x gradlew
+
 script:
 - "./gradlew assembleRelease"
 deploy:
@@ -23,5 +24,5 @@ deploy:
   skip_cleanup: true
   on:
     repo: tmntduke/OneDaily
-     tags: true
+    tags: true
 
