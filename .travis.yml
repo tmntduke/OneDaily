@@ -17,5 +17,8 @@ deploy:
   api_key:
     secure: WBBMMwMwjMo9ehTRiRNVRj8HhRRrLnJRrUAzWdtD7+dikuewprDZzsL63klyFztGkgHbxuftDHuRonAIvncG8K0W929sX3GVK4djmb3uMXz1K0NMSoxruwxpT3Bt0ATpBb/lYG+lDcVsLy+CN4R0G0U4jPPW35lF8xvFFlF+fHRDdxhWp+anLaRktG/158KY7zPVT5qHkZj78FMCyp2VDzp7ryFmqJfy2FevDP9Ugpmm3urIBGJJ6yTpl2jmQjCTXuUCXZZlfcnkCXJ0dd7/nREHm8IZwK8/Cz375kwMuZJ73shELVq6FZfMwxqigcOLiFYniuj+KyB5ONBIAvBKMggtOCtTOUeT1GWL3eioY1n1A/5gG2Blbjs7NIPCZs3jN1WcE2thV6nkWazn/8d2caooRoXZOgrrqt8NU2KSeHrp6iG2SM82oxRfLuY8tGj9zM0K7qX3EFQH8YfyOXbMzY8dqvPdUR07MkEuPfcACeK10nNqdyzW6HiV9xSDz//3JQKG39/3pv1ENf7xrTVE7vE/+l7JR8YZtzWdjld0ESUOWBsG1GfRUvmDqiCDtkcX7aPMeuuCoXbYGycNe00xcnlKHSiHoO35nQuKxAESt9SI107StxKN2TSyNGqYcMZ5zHxWhMxenPsgijUXllA3vKSu3o7oJouglULtr/HzNMw=
   file: app/build/outputs/apk/app-release.apk
+  skip_cleanup: true
   on:
     repo: tmntduke/OneDaily
+     tags: true
+
