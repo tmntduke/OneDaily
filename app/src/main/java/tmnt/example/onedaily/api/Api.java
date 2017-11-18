@@ -33,8 +33,6 @@ public class Api {
 
     private String baseUrl;
 
-    private static final String TAG = "Api";
-
     public static Api getInstance() {
         return ourInstance;
 
