@@ -6,7 +6,6 @@
 .DS_Store
 /build
 /captures
-/.travis.yml
 .externalNativeBuild
 app/src/main/java/tmnt/example/onedaily/ui/turing/activity/
 app/src/main/java/tmnt/example/onedaily/ui/turing/presenter/
@@ -41,3 +40,4 @@ richeditor/build/intermediates/shaders/
 richeditor/build/intermediates/symbols/
 richeditor/build/intermediates/transforms/
 richeditor/build/tmp/
+id_rsa.pub

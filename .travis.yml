@@ -13,6 +13,7 @@ android:            # 配置信息
     - extra-android-m2repository     # Android Support Repository
     - extra-android-support          # Support Library
 
+
 before_install:
  - chmod +x gradlew  # 改变gradlew的访问权限
 
