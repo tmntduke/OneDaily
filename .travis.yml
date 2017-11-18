@@ -1,34 +1,21 @@
-language: android   # 声明构建语言环境
+language: android
 jdk: oraclejdk8
-notifications:      # 每次构建的时候是否通知，如果不想收到通知邮箱（个人感觉邮件贼烦），那就设置false吧
+notifications:
   email: false
-
-sudo: false         # 开启基于容器的Travis CI任务，让编译效率更高。
-
-android:            # 配置信息
+sudo: false
+android:
   components:
-    - tools
-    - build-tools-25.0.0
-    - android-23
-    - extra-android-m2repository     # Android Support Repository
-    - extra-android-support          # Support Library
-
-
-before_install:
- - chmod +x gradlew  # 改变gradlew的访问权限
-
-script:              # 执行:下面的命令
-  - ./gradlew assembleRelease
-
-before_deploy:       # 部署之前
-  # 使用 mv 命令进行修改apk文件的名字
-  - mv app/build/outputs/apk/app-release.apk app/build/outputs/apk/buff.apk
-
-deploy:              # 部署
-  provider: releases # 部署到GitHub Release，除此之外，Travis CI还支持发布到fir.im、AWS、Google App Engine等
-  api_key:           # 填写GitHub的token （Settings -> Personal access tokens -> Generate new token）
-    secure: 1cf5e5a77389ff5484f152ee2a2ed860366675df
-  file: app/build/outputs/apk/app-release.apk   # 部署文件路径
-  skip_cleanup: true     # 设置为true以跳过清理,不然apk文件就会被清理
-  on:     # 发布时机
-    tags: true       # tags设置为true表示只有在有tag的情况下才部署
+  - tools
+  - build-tools-25.0.0
+  - android-23
+  - extra-android-m2repository
+  - extra-android-support
+script:
+- "./gradlew assembleRelease"
+deploy:
+  provider: releases
+  api_key:
+    secure: WBBMMwMwjMo9ehTRiRNVRj8HhRRrLnJRrUAzWdtD7+dikuewprDZzsL63klyFztGkgHbxuftDHuRonAIvncG8K0W929sX3GVK4djmb3uMXz1K0NMSoxruwxpT3Bt0ATpBb/lYG+lDcVsLy+CN4R0G0U4jPPW35lF8xvFFlF+fHRDdxhWp+anLaRktG/158KY7zPVT5qHkZj78FMCyp2VDzp7ryFmqJfy2FevDP9Ugpmm3urIBGJJ6yTpl2jmQjCTXuUCXZZlfcnkCXJ0dd7/nREHm8IZwK8/Cz375kwMuZJ73shELVq6FZfMwxqigcOLiFYniuj+KyB5ONBIAvBKMggtOCtTOUeT1GWL3eioY1n1A/5gG2Blbjs7NIPCZs3jN1WcE2thV6nkWazn/8d2caooRoXZOgrrqt8NU2KSeHrp6iG2SM82oxRfLuY8tGj9zM0K7qX3EFQH8YfyOXbMzY8dqvPdUR07MkEuPfcACeK10nNqdyzW6HiV9xSDz//3JQKG39/3pv1ENf7xrTVE7vE/+l7JR8YZtzWdjld0ESUOWBsG1GfRUvmDqiCDtkcX7aPMeuuCoXbYGycNe00xcnlKHSiHoO35nQuKxAESt9SI107StxKN2TSyNGqYcMZ5zHxWhMxenPsgijUXllA3vKSu3o7oJouglULtr/HzNMw=
+  file: app/build/outputs/apk/app-release.apk
+  on:
+    repo: tmntduke/OneDaily
