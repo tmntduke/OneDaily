@@ -10,6 +10,9 @@ android:
   - android-23
   - extra-android-m2repository
   - extra-android-support
+
+before_install:
+- chmod +x gradlew
 script:
 - "./gradlew assembleRelease"
 deploy:
